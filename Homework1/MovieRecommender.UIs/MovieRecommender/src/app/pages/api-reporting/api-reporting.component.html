@@ -1,0 +1,76 @@
+<h2 class="content-block">API Reporting</h2>
+
+<div class="content-block dx-card responsive-paddings">
+  <div>
+    <div>
+      <dx-pie-chart title="Number of requests" palette="bright" [dataSource]="numberOfRequestsReport"
+        (onPointClick)="pointClickHandler($event)" (onLegendClick)="legendClickHandler($event)">
+        <dxi-series argumentField="api" valueField="numberOfRequests">
+          <dxo-label [visible]="true">
+            <dxo-connector [visible]="true" [width]="1"></dxo-connector>
+          </dxo-label>
+        </dxi-series>
+        <dxo-size [width]="500"></dxo-size>
+        <dxo-export [enabled]="true"></dxo-export>
+      </dx-pie-chart>
+    </div>
+  </div>
+</div>
+
+<div class="content-block dx-card responsive-paddings">
+  <dx-chart id="chart" title="Average Latency" [dataSource]="apiPerformanceReport">
+    <dxo-common-series-settings type="bar" argumentField="api">
+    </dxo-common-series-settings>
+    <dxi-series name="Average Latency" valueField="meanLatency" color="#0066ff"> </dxi-series>
+    <dxo-argument-axis>
+    </dxo-argument-axis>
+  </dx-chart>
+</div>
+
+<div class="content-block dx-card responsive-paddings">
+  <dx-chart id="chart" title="Total requests vs NOT ok requests" [dataSource]="apiPerformanceReport">
+    <dxo-common-series-settings type="bar" argumentField="api">
+    </dxo-common-series-settings>
+    <dxi-series name="Number of requests" valueField="numberOfRequests" color="#009900"> </dxi-series>
+    <dxi-series name="Number of NOT ok requests" valueField="numberOfNotOkResponses" color="#ff0000"> </dxi-series>
+    <dxo-argument-axis>
+    </dxo-argument-axis>
+  </dx-chart>
+</div>
+
+<div class="content-block dx-card responsive-paddings">
+  <h2 class="content-block">Requests</h2>
+  <dx-data-grid #targetDataGrid class="dx-card wide-card" [dataSource]="dataSource" [showBorders]="false"
+    [focusedRowEnabled]="true" [focusedRowIndex]="0" [columnAutoWidth]="true" [columnHidingEnabled]="true">
+
+    <dxo-paging [pageSize]="10"></dxo-paging>
+    <dxo-pager [showPageSizeSelector]="true" [showInfo]="true"></dxo-pager>
+    <dxo-filter-row [visible]="true"></dxo-filter-row>
+
+    <dxi-column dataField="provider" caption="Provider">
+      <dxo-lookup [dataSource]="providers">
+      </dxo-lookup>
+    </dxi-column>
+    <dxi-column dataField="httpMethod" caption="Http Method">
+      <dxo-lookup [dataSource]="httpMethods">
+      </dxo-lookup>
+    </dxi-column>
+    <dxi-column dataField="statusCode" caption="Status">
+    </dxi-column>
+    <dxi-column dataField="latency" caption="Latency (ms)">
+    </dxi-column>
+    <dxo-master-detail [enabled]="true" template="detail"></dxo-master-detail>
+    <div *dxTemplate="let request of 'detail'">
+      <div>Endpoint:</div>
+      <textarea readonly cols="200" rows="1">{{request.data.endpoint}}</textarea>
+      <div>Request Content: </div>
+      <textarea readonly cols="200" rows="3">{{request.data.requestContent | json}}</textarea>
+      <div>Response Content: </div>
+      <textarea readonly cols="200" rows="10">{{request.data.responseContent | json}}</textarea>
+    </div>
+  </dx-data-grid>
+</div>
+
+<dx-load-panel #loadPanel shadingColor="rgba(0,0,0,0.4)" [(visible)]="loadingVisible" [showIndicator]="true"
+  [showPane]="true" [shading]="true" [closeOnOutsideClick]="false">
+</dx-load-panel>

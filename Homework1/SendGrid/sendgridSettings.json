@@ -1,0 +1,8 @@
+﻿{
+  "SendGridConfig": {
+    "ApiKey": "",
+    "WebApiEndpoint": "https://api.sendgrid.com/v3/mail/send",
+    "SenderEmailAddress": "watchster.integration@gmail.com",
+    "BaseSubject": "[Movie Recommender] - Top 10 Movie Recommendations"
+  }
+}

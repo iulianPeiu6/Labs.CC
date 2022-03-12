@@ -1,0 +1,11 @@
+﻿{
+  "YoutubeConfig": {
+    "ApiKey": "",
+    "WebApiEndpoint": {
+      "SearchV3": "https://www.googleapis.com/youtube/v3/search"
+    },
+    "WebUiEndpoint": {
+      "Watch": "https://www.youtube.com/watch"
+    }
+  }
+}
