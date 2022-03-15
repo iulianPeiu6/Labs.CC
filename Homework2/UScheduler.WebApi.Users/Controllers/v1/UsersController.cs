@@ -1,10 +1,8 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.JsonPatch;
 using Microsoft.AspNetCore.Mvc;
-using System.IdentityModel.Tokens.Jwt;
 using System.Net.Mime;
 using System.Security.Claims;
-using UScheduler.WebApi.Users.Data.Entities;
 using UScheduler.WebApi.Users.Interfaces;
 using UScheduler.WebApi.Users.Models;
 using UScheduler.WebApi.Users.Statics;

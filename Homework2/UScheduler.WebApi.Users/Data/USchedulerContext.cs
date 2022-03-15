@@ -1,6 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
-using System.Reflection.Metadata;
 using UScheduler.WebApi.Users.Data.Entities;
 
 namespace UScheduler.WebApi.Users.Data
