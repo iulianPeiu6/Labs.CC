@@ -12,8 +12,8 @@ using UScheduler.WebApi.Users.Data;
 namespace UScheduler.WebApi.Users.Data.Migrations
 {
     [DbContext(typeof(USchedulerContext))]
-    [Migration("20220312220544_001.InitialCreate")]
-    partial class _001InitialCreate
+    [Migration("20220315010017_001.InitiaCreate")]
+    partial class _001InitiaCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -53,7 +53,7 @@ namespace UScheduler.WebApi.Users.Data.Migrations
 
                     b.Property<string>("Email")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("HashedPassword")
                         .IsRequired()
@@ -64,11 +64,19 @@ namespace UScheduler.WebApi.Users.Data.Migrations
 
                     b.Property<string>("UserName")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(32)
+                        .HasColumnType("nvarchar(32)");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("AccountSettingsId");
+                    b.HasIndex("AccountSettingsId")
+                        .IsUnique();
+
+                    b.HasIndex("Email")
+                        .IsUnique();
+
+                    b.HasIndex("UserName")
+                        .IsUnique();
 
                     b.ToTable("Users");
                 });
@@ -76,8 +84,8 @@ namespace UScheduler.WebApi.Users.Data.Migrations
             modelBuilder.Entity("UScheduler.WebApi.Users.Data.Entities.User", b =>
                 {
                     b.HasOne("UScheduler.WebApi.Users.Data.Entities.AccountSettings", "AccountSettings")
-                        .WithMany()
-                        .HasForeignKey("AccountSettingsId")
+                        .WithOne()
+                        .HasForeignKey("UScheduler.WebApi.Users.Data.Entities.User", "AccountSettingsId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 

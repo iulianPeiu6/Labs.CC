@@ -1,35 +1,30 @@
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.DependencyInjection;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
-using UScheduler.WebApi.Users.Data;
-using UScheduler.WebApi.Users.Interfaces;
-using UScheduler.WebApi.Users.Options;
-using UScheduler.WebApi.Users.Services;
+using UScheduler.WebApi.Gateway.Options;
+using Polly;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 
-builder.Services.AddControllers()
-    .AddNewtonsoftJson();
+builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-builder.Services.AddScoped<IUsersService, UsersService>();
-builder.Services.AddScoped<ICryptography, CryptographyService>();
-builder.Services.AddScoped<IDataValidator, DataValidator>();
-builder.Services.AddScoped<IAuthenticationService, AuthenticationService>();
+builder.Services.AddHttpClient("UsersService", config =>
+{
+    config.BaseAddress = new Uri(builder.Configuration["Services:UsersService"]);
+}).AddTransientHttpErrorPolicy(p => p.WaitAndRetryAsync(5, _ => TimeSpan.FromMilliseconds(500)));
 
-builder.Services.AddDbContext<USchedulerContext>(
-                options => options.UseSqlServer(builder.Configuration.GetConnectionString("UsersDB")));
+builder.Services.AddHttpClient("WorkspacesService", config =>
+{
+    config.BaseAddress = new Uri(builder.Configuration["Services:WorkspacesService"]);
+}).AddTransientHttpErrorPolicy(p => p.WaitAndRetryAsync(5, _ => TimeSpan.FromMilliseconds(500)));
+
 
 builder.Services.Configure<AuthenticationConfiguration>(options => builder.Configuration.Bind("Authentication", options));
-
-builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
 var key = Encoding.ASCII.GetBytes(builder.Configuration.GetSection("Authentication:Key").Value);
 
@@ -60,6 +55,7 @@ builder.Services.AddAuthorization(options =>
 
     options.DefaultPolicy = defaultAuthorizationPolicyBuilder.Build();
 });
+
 
 var app = builder.Build();
 

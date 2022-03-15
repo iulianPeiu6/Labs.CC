@@ -1,0 +1,913 @@
+{
+	"info": {
+		"_postman_id": "eb887ed0-6336-45e7-975d-9274b0509bb2",
+		"name": "UScheduler",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Users",
+			"item": [
+				{
+					"name": "GetUser_404NotFound",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://localhost:7080/api/v1/Users/ee4b8712-b5f2-4c5f-46f5-08da0486b7ed",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "7080",
+							"path": [
+								"api",
+								"v1",
+								"Users",
+								"ee4b8712-b5f2-4c5f-46f5-08da0486b7ed"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GetUser_200Ok",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://localhost:7080/api/v1/Users/8c0924ab-2b7a-4346-7917-08da061f4ec3",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "7080",
+							"path": [
+								"api",
+								"v1",
+								"Users",
+								"8c0924ab-2b7a-4346-7917-08da061f4ec3"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GetUsers_200Ok",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://localhost:7080/api/v1/Users",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "7080",
+							"path": [
+								"api",
+								"v1",
+								"Users"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "CreateUser_400BadRequest",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"userName\": \"test\",\r\n  \"email\": \"invalid_email\",\r\n  \"password\": \"some password\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://localhost:7080/api/v1/Users",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "7080",
+							"path": [
+								"api",
+								"v1",
+								"Users"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "CreateUser_400BadRequest_2",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"userName\": \"test\",\r\n  \"email\": \"iulianpeiu6@gmail.com\",\r\n  \"password\": \"\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://localhost:7080/api/v1/Users",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "7080",
+							"path": [
+								"api",
+								"v1",
+								"Users"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "CreateUser_409Conflict",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"userName\": \"test\",\r\n  \"email\": \"iulianpeiu6@gmail.com\",\r\n  \"password\": \"some_password\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://localhost:7080/api/v1/Users",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "7080",
+							"path": [
+								"api",
+								"v1",
+								"Users"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "CreateUser_201Created",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"userName\": \"iulian.peiu\",\r\n  \"email\": \"iulianpeiu62@gmail.com\",\r\n  \"password\": \"iulianpeiu62@gmail.com\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://localhost:7080/api/v1/Users",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "7080",
+							"path": [
+								"api",
+								"v1",
+								"Users"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "AuthenticateUser_200Ok",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"userName\": \"iulian.peiu\",\r\n  \"email\": \"iulianpeiu6@gmail.com\",\r\n  \"password\": \"iulianpeiu6@gmail.com\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://localhost:7080/api/v1/Users/Authenticate",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "7080",
+							"path": [
+								"api",
+								"v1",
+								"Users",
+								"Authenticate"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "AuthenticateUser_401Unauthorized",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"userName\": \"iulian.peiu\",\r\n    \"email\": \"iulianpeiu6@gmail.com\",\r\n    \"password\": \"wrong_password\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://localhost:7080/api/v1/Users/Authenticate",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "7080",
+							"path": [
+								"api",
+								"v1",
+								"Users",
+								"Authenticate"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "UpdateUser_404NotFound",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1laWQiOiI4YzA5MjRhYi0yYjdhLTQzNDYtNzkxNy0wOGRhMDYxZjRlYzMiLCJuYW1lIjoiaXVsaWFuLnBlaXUiLCJlbWFpbCI6Iml1bGlhbnBlaXU2QGdtYWlsLmNvbSIsImV4cCI6MTY0NzM5MjU1MCwiaXNzIjoiOEVqQUoxejA4WWNPZGZwRGNBeXBOY3VEZjhJdnlnYmwiLCJhdWQiOiJVU2NoZWR1bGVyIn0.JFJGaAhlFC2b7vDvJuSNK9ANmyNOV7-b4aYF8O_TtAU",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"userName\": \"iulian.peiu.2\",\r\n  \"email\": \"iulian.peiu@gmail.com\",\r\n  \"password\": \"iulian.peiu@gmail.com\",\r\n  \"accountSettings\": {\r\n      \"SendNotificationOnEmail\": false,\r\n      \"emailForNotification\": \"iulian.peiu@gmail.com\"\r\n  }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://localhost:7080/api/v1/Users/8c0924ab-2b7a-4346-7917-08da061f4ec2",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "7080",
+							"path": [
+								"api",
+								"v1",
+								"Users",
+								"8c0924ab-2b7a-4346-7917-08da061f4ec2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "UpdateUser_400BadRequest",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1laWQiOiI4YzA5MjRhYi0yYjdhLTQzNDYtNzkxNy0wOGRhMDYxZjRlYzMiLCJuYW1lIjoiaXVsaWFuLnBlaXUiLCJlbWFpbCI6Iml1bGlhbnBlaXU2QGdtYWlsLmNvbSIsImV4cCI6MTY0NzM5MjU1MCwiaXNzIjoiOEVqQUoxejA4WWNPZGZwRGNBeXBOY3VEZjhJdnlnYmwiLCJhdWQiOiJVU2NoZWR1bGVyIn0.JFJGaAhlFC2b7vDvJuSNK9ANmyNOV7-b4aYF8O_TtAU",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"userName\": \"iulian.peiu\",\r\n  \"email\": \"invalid_email\",\r\n  \"password\": \"iulian.peiu@gmail.com\",\r\n  \"accountSettings\": {\r\n      \"SendNotificationOnEmail\": false,\r\n      \"emailForNotification\": \"iulian.peiu@gmail.com\"\r\n  }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://localhost:7080/api/v1/Users/8c0924ab-2b7a-4346-7917-08da061f4ec3",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "7080",
+							"path": [
+								"api",
+								"v1",
+								"Users",
+								"8c0924ab-2b7a-4346-7917-08da061f4ec3"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "UpdateUser_200Ok",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1laWQiOiI4YzA5MjRhYi0yYjdhLTQzNDYtNzkxNy0wOGRhMDYxZjRlYzMiLCJuYW1lIjoiaXVsaWFuLnBlaXUiLCJlbWFpbCI6Iml1bGlhbnBlaXU2QGdtYWlsLmNvbSIsImV4cCI6MTY0NzM5MjU1MCwiaXNzIjoiOEVqQUoxejA4WWNPZGZwRGNBeXBOY3VEZjhJdnlnYmwiLCJhdWQiOiJVU2NoZWR1bGVyIn0.JFJGaAhlFC2b7vDvJuSNK9ANmyNOV7-b4aYF8O_TtAU",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"userName\": \"iulian.peiu.2\",\r\n  \"email\": \"iulianpeiu6@gmail.com\",\r\n  \"password\": \"iulianpeiu6@gmail.com\",\r\n  \"accountSettings\": {\r\n      \"SendNotificationOnEmail\": false,\r\n      \"emailForNotification\": \"iulian.peiu@gmail.com\"\r\n  }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://localhost:7080/api/v1/Users/058930a3-1fa3-485c-a18a-08da0494539f",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "7080",
+							"path": [
+								"api",
+								"v1",
+								"Users",
+								"058930a3-1fa3-485c-a18a-08da0494539f"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "UpdateUser_200Ok",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1laWQiOiI4YzA5MjRhYi0yYjdhLTQzNDYtNzkxNy0wOGRhMDYxZjRlYzMiLCJuYW1lIjoiaXVsaWFuLnBlaXUiLCJlbWFpbCI6Iml1bGlhbnBlaXU2QGdtYWlsLmNvbSIsImV4cCI6MTY0NzM5MjU1MCwiaXNzIjoiOEVqQUoxejA4WWNPZGZwRGNBeXBOY3VEZjhJdnlnYmwiLCJhdWQiOiJVU2NoZWR1bGVyIn0.JFJGaAhlFC2b7vDvJuSNK9ANmyNOV7-b4aYF8O_TtAU",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "[\r\n    {  \r\n        \"op\": \"replace\",\r\n        \"path\": \"/userName\",\r\n        \"value\": \"iulian.peiu.new\"\r\n    }\r\n]",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://localhost:7080/api/v1/Users/8c0924ab-2b7a-4346-7917-08da061f4ec3",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "7080",
+							"path": [
+								"api",
+								"v1",
+								"Users",
+								"8c0924ab-2b7a-4346-7917-08da061f4ec3"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "UpdateUser_400BadRequest",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1laWQiOiI4YzA5MjRhYi0yYjdhLTQzNDYtNzkxNy0wOGRhMDYxZjRlYzMiLCJuYW1lIjoiaXVsaWFuLnBlaXUiLCJlbWFpbCI6Iml1bGlhbnBlaXU2QGdtYWlsLmNvbSIsImV4cCI6MTY0NzM5MjU1MCwiaXNzIjoiOEVqQUoxejA4WWNPZGZwRGNBeXBOY3VEZjhJdnlnYmwiLCJhdWQiOiJVU2NoZWR1bGVyIn0.JFJGaAhlFC2b7vDvJuSNK9ANmyNOV7-b4aYF8O_TtAU",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "[\r\n    {  \r\n        \"op\": \"replace\",\r\n        \"path\": \"/userName\",\r\n        \"value\": \"\"\r\n    },\r\n    {  \r\n        \"op\": \"replace\",\r\n        \"path\": \"/password\",\r\n        \"value\": \"newPassword\"\r\n    }\r\n]",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://localhost:7080/api/v1/Users/8c0924ab-2b7a-4346-7917-08da061f4ec3",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "7080",
+							"path": [
+								"api",
+								"v1",
+								"Users",
+								"8c0924ab-2b7a-4346-7917-08da061f4ec3"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "UpdateUser_404NotFound",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1laWQiOiI4YzA5MjRhYi0yYjdhLTQzNDYtNzkxNy0wOGRhMDYxZjRlYzMiLCJuYW1lIjoiaXVsaWFuLnBlaXUiLCJlbWFpbCI6Iml1bGlhbnBlaXU2QGdtYWlsLmNvbSIsImV4cCI6MTY0NzM5MjU1MCwiaXNzIjoiOEVqQUoxejA4WWNPZGZwRGNBeXBOY3VEZjhJdnlnYmwiLCJhdWQiOiJVU2NoZWR1bGVyIn0.JFJGaAhlFC2b7vDvJuSNK9ANmyNOV7-b4aYF8O_TtAU",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "[\r\n    {  \r\n        \"op\": \"replace\",\r\n        \"path\": \"/userName\",\r\n        \"value\": \"iulian.peiu.b\"\r\n    },\r\n    {  \r\n        \"op\": \"replace\",\r\n        \"path\": \"/password\",\r\n        \"value\": \"newPassword\"\r\n    }\r\n]",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://localhost:7080/api/v1/Users/96c71259-9153-4971-5e55-08da05206833",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "7080",
+							"path": [
+								"api",
+								"v1",
+								"Users",
+								"96c71259-9153-4971-5e55-08da05206833"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "UpdateUser_409Conflict",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1laWQiOiI4YzA5MjRhYi0yYjdhLTQzNDYtNzkxNy0wOGRhMDYxZjRlYzMiLCJuYW1lIjoiaXVsaWFuLnBlaXUiLCJlbWFpbCI6Iml1bGlhbnBlaXU2QGdtYWlsLmNvbSIsImV4cCI6MTY0NzM5MjU1MCwiaXNzIjoiOEVqQUoxejA4WWNPZGZwRGNBeXBOY3VEZjhJdnlnYmwiLCJhdWQiOiJVU2NoZWR1bGVyIn0.JFJGaAhlFC2b7vDvJuSNK9ANmyNOV7-b4aYF8O_TtAU",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "[\r\n    {  \r\n        \"op\": \"replace\",\r\n        \"path\": \"/userName\",\r\n        \"value\": \"iulian.peiu\"\r\n    },\r\n    {  \r\n        \"op\": \"replace\",\r\n        \"path\": \"/password\",\r\n        \"value\": \"newPassword\"\r\n    }\r\n]",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://localhost:7080/api/v1/Users/8c0924ab-2b7a-4346-7917-08da061f4ec3",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "7080",
+							"path": [
+								"api",
+								"v1",
+								"Users",
+								"8c0924ab-2b7a-4346-7917-08da061f4ec3"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "DeleteUser_404Notfound",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1laWQiOiI4YzA5MjRhYi0yYjdhLTQzNDYtNzkxNy0wOGRhMDYxZjRlYzMiLCJuYW1lIjoiaXVsaWFuLnBlaXUiLCJlbWFpbCI6Iml1bGlhbnBlaXU2QGdtYWlsLmNvbSIsImV4cCI6MTY0NzM5MjU1MCwiaXNzIjoiOEVqQUoxejA4WWNPZGZwRGNBeXBOY3VEZjhJdnlnYmwiLCJhdWQiOiJVU2NoZWR1bGVyIn0.JFJGaAhlFC2b7vDvJuSNK9ANmyNOV7-b4aYF8O_TtAU",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "https://localhost:7080/api/v1/Users/ee4b8712-b5f2-4c5f-46f5-08da0486b7ed",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "7080",
+							"path": [
+								"api",
+								"v1",
+								"Users",
+								"ee4b8712-b5f2-4c5f-46f5-08da0486b7ed"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "DeleteUser_400BadRequest",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1laWQiOiI4YzA5MjRhYi0yYjdhLTQzNDYtNzkxNy0wOGRhMDYxZjRlYzMiLCJuYW1lIjoiaXVsaWFuLnBlaXUiLCJlbWFpbCI6Iml1bGlhbnBlaXU2QGdtYWlsLmNvbSIsImV4cCI6MTY0NzM5MjU1MCwiaXNzIjoiOEVqQUoxejA4WWNPZGZwRGNBeXBOY3VEZjhJdnlnYmwiLCJhdWQiOiJVU2NoZWR1bGVyIn0.JFJGaAhlFC2b7vDvJuSNK9ANmyNOV7-b4aYF8O_TtAU",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "https://localhost:7080/api/v1/Users/bad_guid_format",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "7080",
+							"path": [
+								"api",
+								"v1",
+								"Users",
+								"bad_guid_format"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "DeleteUser_401Unauthorized",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "https://localhost:7080/api/v1/Users/ee4b8712-b5f2-4c5f-46f5-08da0486b7ed",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "7080",
+							"path": [
+								"api",
+								"v1",
+								"Users",
+								"ee4b8712-b5f2-4c5f-46f5-08da0486b7ed"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "DeleteUser_200Ok",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1laWQiOiI4YzA5MjRhYi0yYjdhLTQzNDYtNzkxNy0wOGRhMDYxZjRlYzMiLCJuYW1lIjoiaXVsaWFuLnBlaXUiLCJlbWFpbCI6Iml1bGlhbnBlaXU2QGdtYWlsLmNvbSIsImV4cCI6MTY0NzM5MjU1MCwiaXNzIjoiOEVqQUoxejA4WWNPZGZwRGNBeXBOY3VEZjhJdnlnYmwiLCJhdWQiOiJVU2NoZWR1bGVyIn0.JFJGaAhlFC2b7vDvJuSNK9ANmyNOV7-b4aYF8O_TtAU",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "https://localhost:7080/api/v1/Users/ee4b8712-b5f2-4c5f-46f5-08da0486b7ed",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "7080",
+							"path": [
+								"api",
+								"v1",
+								"Users",
+								"ee4b8712-b5f2-4c5f-46f5-08da0486b7ed"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Workspaces",
+			"item": [
+				{
+					"name": "GetWorkspacesByOwnerId_200Ok",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://localhost:7114/api/v1/Workspaces/GroupedByOwners/3FA85F64-5717-4562-B3FC-2C963F66AFA6",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "7114",
+							"path": [
+								"api",
+								"v1",
+								"Workspaces",
+								"GroupedByOwners",
+								"3FA85F64-5717-4562-B3FC-2C963F66AFA6"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "CreateWorkspace_400BadRequest",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"title\": \"Test title Workspace\",\r\n  \"description\": \"Test description Workspace\",\r\n  \"owner\": \"invalid_guid_format\",\r\n  \"accessType\": \"Public\",\r\n  \"colabUsersIds\": [\r\n    \"\"\r\n  ],\r\n  \"workspaceType\": \"Public\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://localhost:7114/api/v1/Workspaces",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "7114",
+							"path": [
+								"api",
+								"v1",
+								"Workspaces"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "CreateWorkspace_201Created",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"title\": \"Test title Workspace\",\r\n  \"description\": \"Test description Workspace\",\r\n  \"owner\": \"3fa85f64-5717-4562-b3fc-2c963f66afa6\",\r\n  \"accessType\": \"string\",\r\n  \"colabUsersIds\": [\r\n    \"3fa85f64-5717-4562-b3fc-2c963f66afa6\"\r\n  ],\r\n  \"workspaceType\": \"Public\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://localhost:7114/api/v1/Workspaces",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "7114",
+							"path": [
+								"api",
+								"v1",
+								"Workspaces"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "UpdateWorkspace_200Ok",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"title\": \"New Test title Workspace\",\r\n  \"description\": \"New Test description Workspace\",\r\n  \"owner\": \"3fa85f64-5717-4562-b3fc-2c963f66afa6\",\r\n  \"accessType\": \"Public\",\r\n  \"workspaceType\": \"Public\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://localhost:7114/api/v1/Workspaces/3fa85f64-5717-4562-b3fc-2c963f66afa6",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "7114",
+							"path": [
+								"api",
+								"v1",
+								"Workspaces",
+								"3fa85f64-5717-4562-b3fc-2c963f66afa6"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "UpdateWorkspace_404NotFound",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"title\": \"New Test title Workspace\",\r\n  \"description\": \"New Test description Workspace\",\r\n  \"owner\": \"3fa85f64-5717-4562-b3fc-2c963f66afa6\",\r\n  \"accessType\": \"Public\",\r\n  \"workspaceType\": \"Public\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://localhost:7114/api/v1/Workspaces/3fa85f64-5717-4562-b3fc-2c963f66afa5",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "7114",
+							"path": [
+								"api",
+								"v1",
+								"Workspaces",
+								"3fa85f64-5717-4562-b3fc-2c963f66afa5"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "UpdateWorkspace_200Ok Copy",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "[\r\n    {  \r\n        \"op\": \"replace\",\r\n        \"path\": \"/title\",\r\n        \"value\": \"new title from patch 2\"\r\n    },\r\n    {  \r\n        \"op\": \"replace\",\r\n        \"path\": \"/accessType\",\r\n        \"value\": \"Public\"\r\n    }\r\n]",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://localhost:7114/api/v1/Workspaces/6508d2ab-3df1-4694-c647-08da060f7e11",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "7114",
+							"path": [
+								"api",
+								"v1",
+								"Workspaces",
+								"6508d2ab-3df1-4694-c647-08da060f7e11"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "DeleteWorkspace_404NotFound",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "https://localhost:7114/api/v1/Workspaces/576C91F5-FC94-46C7-E989-08DA060D327A",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "7114",
+							"path": [
+								"api",
+								"v1",
+								"Workspaces",
+								"576C91F5-FC94-46C7-E989-08DA060D327A"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "DeleteWorkspace_400BadRequest",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "https://localhost:7114/api/v1/Workspaces/invalid_guid",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "7114",
+							"path": [
+								"api",
+								"v1",
+								"Workspaces",
+								"invalid_guid"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "DeleteWorkspace_200Ok",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "https://localhost:7114/api/v1/Workspaces/3fa85f64-5717-4562-b3fc-2c963f66afa6",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "7114",
+							"path": [
+								"api",
+								"v1",
+								"Workspaces",
+								"3fa85f64-5717-4562-b3fc-2c963f66afa6"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}

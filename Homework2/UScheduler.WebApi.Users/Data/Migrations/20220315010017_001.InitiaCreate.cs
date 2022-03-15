@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace UScheduler.WebApi.Users.Data.Migrations
 {
-    public partial class _001InitialCreate : Migration
+    public partial class _001InitiaCreate : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -27,8 +27,8 @@ namespace UScheduler.WebApi.Users.Data.Migrations
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    UserName = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Email = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    UserName = table.Column<string>(type: "nvarchar(32)", maxLength: 32, nullable: false),
+                    Email = table.Column<string>(type: "nvarchar(450)", nullable: false),
                     RegistrationDate = table.Column<DateTime>(type: "datetime2", nullable: false),
                     HashedPassword = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     AccountSettingsId = table.Column<Guid>(type: "uniqueidentifier", nullable: false)
@@ -47,7 +47,20 @@ namespace UScheduler.WebApi.Users.Data.Migrations
             migrationBuilder.CreateIndex(
                 name: "IX_Users_AccountSettingsId",
                 table: "Users",
-                column: "AccountSettingsId");
+                column: "AccountSettingsId",
+                unique: true);
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Users_Email",
+                table: "Users",
+                column: "Email",
+                unique: true);
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Users_UserName",
+                table: "Users",
+                column: "UserName",
+                unique: true);
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)

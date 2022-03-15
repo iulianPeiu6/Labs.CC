@@ -1,7 +1,5 @@
 ﻿using Microsoft.AspNetCore.JsonPatch;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Logging;
-using UScheduler.WebApi.Workspaces.Data.Entities;
 using UScheduler.WebApi.Workspaces.Interfaces;
 using UScheduler.WebApi.Workspaces.Models;
 using UScheduler.WebApi.Workspaces.Statics;

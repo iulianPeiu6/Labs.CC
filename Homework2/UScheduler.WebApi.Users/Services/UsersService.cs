@@ -214,6 +214,7 @@ namespace UScheduler.WebApi.Users.Services
                             Email = user.Email,
                             RegistrationDate = user.RegistrationDate,
                             AccountSettingsId = user.AccountSettingsId,
+                            HashedPassword = user.HashedPassword,
                             AccountSettings = settings
                         })
                     .SingleOrDefaultAsync(c => c.Id == id);
