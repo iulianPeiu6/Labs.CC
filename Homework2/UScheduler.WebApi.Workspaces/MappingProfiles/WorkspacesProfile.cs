@@ -11,6 +11,7 @@ namespace UScheduler.WebApi.Workspaces.MappingProfiles
             CreateMap<Workspace, WorkspaceDto>();
             CreateMap<WorkspaceDto, Workspace>();
             CreateMap<CreateWorkspaceModel, WorkspaceDto>();
+            CreateMap<CreateWorkspaceModel, Workspace>();
             CreateMap<UpdateWorkspaceModel, Workspace>();
         }
     }

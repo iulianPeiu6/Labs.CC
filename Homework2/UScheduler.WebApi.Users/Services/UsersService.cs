@@ -280,7 +280,6 @@ namespace UScheduler.WebApi.Users.Services
                 }
                 context.Users.Remove(user);
                 await context.SaveChangesAsync();
-                logger?.LogError($"User with id '{id}'found in database");
                 return (true, null);
             }
             catch (Exception ex)
