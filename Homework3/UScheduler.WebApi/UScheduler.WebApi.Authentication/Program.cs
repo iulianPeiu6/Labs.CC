@@ -2,7 +2,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Hosting;
 using System;
 
-namespace UScheduler.WebApi.Workspaces
+namespace UScheduler.WebApi.Authentication
 {
     public class Program
     {
@@ -13,7 +13,7 @@ namespace UScheduler.WebApi.Workspaces
 
         public static IHostBuilder CreateHostBuilder(string[] args)
         {
-            var port = Environment.GetEnvironmentVariable("PORT") ?? "44371";
+            var port = Environment.GetEnvironmentVariable("PORT") ?? "8080";
             var url = $"http://0.0.0.0:{port}";
 
             return Host.CreateDefaultBuilder(args)

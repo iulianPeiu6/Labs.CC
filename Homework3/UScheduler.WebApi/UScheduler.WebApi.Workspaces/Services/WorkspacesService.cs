@@ -16,16 +16,16 @@ namespace UScheduler.WebApi.Workspaces.Services
 {
     public class WorkspacesService : IWorkspacesService
     {
-        private readonly WorkspacesContext context;
+        private readonly IWorkspaceRepository repository;
         private readonly ILogger<WorkspacesService> logger;
         private readonly IMapper mapper;
 
         public WorkspacesService(
-            WorkspacesContext context,
+            IWorkspaceRepository repository,
             ILogger<WorkspacesService> logger,
             IMapper mapper)
         {
-            this.context = context;
+            this.repository = repository;
             this.logger = logger;
             this.mapper = mapper;
         }
@@ -35,9 +35,7 @@ namespace UScheduler.WebApi.Workspaces.Services
             try
             {
                 var workspace = mapper.Map<Workspace>(createWorkspaceModel);
-                var response = await context.Workspaces.AddAsync(workspace);
-                workspace = response.Entity;
-                await context.SaveChangesAsync();
+                workspace = repository.Add(workspace);
                 var result = mapper.Map<WorkspaceDto>(workspace);
                 return (true, result, null);
             }
@@ -52,9 +50,9 @@ namespace UScheduler.WebApi.Workspaces.Services
         {
             try
             {
-                var workspaces = await context.Workspaces
-                    .Where(w => w.Owner == owner)
-                    .ToListAsync();
+                var workspaces = repository
+                    .Query(w => w.Owner == owner)
+                    .ToList();
 
                 var result = mapper.Map<IEnumerable<WorkspaceDto>>(workspaces);
                 return (true, result, null);
@@ -70,8 +68,7 @@ namespace UScheduler.WebApi.Workspaces.Services
         {
             try
             {
-                var workspace = await context.Workspaces
-                    .SingleOrDefaultAsync(w => w.Id == id);
+                var workspace = repository.GetById(id);
 
                 if (workspace == null)
                 {
@@ -84,8 +81,7 @@ namespace UScheduler.WebApi.Workspaces.Services
                 workspace.AccessType = updateWorkspaceModel.AccessType;
                 workspace.WorkspaceType = updateWorkspaceModel.WorkspaceType;
 
-                context.Workspaces.Update(workspace);
-                await context.SaveChangesAsync();
+                repository.Update(id, workspace);
 
                 var result = mapper.Map<WorkspaceDto>(workspace);
                 return (true, result, null);
@@ -101,8 +97,7 @@ namespace UScheduler.WebApi.Workspaces.Services
         {
             try
             {
-                var workspace = await context.Workspaces
-                    .SingleOrDefaultAsync(w => w.Id == id);
+                var workspace = repository.GetById(id);
 
                 if (workspace == null)
                 {
@@ -111,8 +106,7 @@ namespace UScheduler.WebApi.Workspaces.Services
 
                 patchDoc.ApplyTo(workspace);
 
-                context.Workspaces.Update(workspace);
-                await context.SaveChangesAsync();
+                repository.Update(id, workspace);
 
                 var result = mapper.Map<WorkspaceDto>(workspace);
                 return (true, result, null);
@@ -128,16 +122,14 @@ namespace UScheduler.WebApi.Workspaces.Services
         {
             try
             {
-                var workspace = await context.Workspaces
-                    .SingleOrDefaultAsync(w => w.Id == id);
+                var workspace = repository.GetById(id);
 
                 if (workspace == null)
                 {
                     return (false, ErrorMessage.WorkspaceNotFound);
                 }
 
-                context.Remove(workspace);
-                await context.SaveChangesAsync();
+                repository.Delete(id);
 
                 return (true, null);
             }

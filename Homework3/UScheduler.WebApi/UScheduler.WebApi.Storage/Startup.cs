@@ -1,16 +1,18 @@
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.HttpsPolicy;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
 using System;
-using UScheduler.WebApi.Workspaces.Data;
-using UScheduler.WebApi.Workspaces.Interfaces;
-using UScheduler.WebApi.Workspaces.Services;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 
-namespace UScheduler.WebApi.Workspaces
+namespace UScheduler.WebApi.Storage
 {
     public class Startup
     {
@@ -25,17 +27,13 @@ namespace UScheduler.WebApi.Workspaces
         public void ConfigureServices(IServiceCollection services)
         {
 
-            services.AddControllers()
-                .AddNewtonsoftJson();
-
+            services.AddControllers();
             services.AddSwaggerGen(c =>
             {
-                c.SwaggerDoc("v1", new OpenApiInfo { Title = "UScheduler.WebApi.Workspaces", Version = "v1" });
+                c.SwaggerDoc("v1", new OpenApiInfo { Title = "UScheduler.WebApi.Storage", Version = "v1" });
             });
-
-            services.AddScoped<IWorkspacesService, WorkspacesService>();
-            services.AddScoped<IWorkspaceRepository, WorkspaceRepository>();
-            services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
+            services.Configure<CloudStorageOptions>(
+                Configuration.GetSection("GoogleCloudStorage"));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -45,7 +43,7 @@ namespace UScheduler.WebApi.Workspaces
             {
                 app.UseDeveloperExceptionPage();
                 app.UseSwagger();
-                app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "UScheduler.WebApi.Workspaces v1"));
+                app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "UScheduler.WebApi.Storage v1"));
             }
 
             app.UseHttpsRedirection();
