@@ -11,29 +11,29 @@ namespace UScheduler.WebApi.Users.Services
 {
     public class DataValidator : IDataValidator
     {
-        private readonly UsersContext context;
+        private readonly IUserRepository repository;
 
-        public DataValidator(UsersContext context)
+        public DataValidator(IUserRepository repository)
         {
-            this.context = context;
+            this.repository = repository;
         }
 
         public async Task<(bool Success, string Error)> ValidateCreateUserModelAsync(CreateUserModel createUserModel)
         {
             ValidateFormat(createUserModel);
 
-            var emailIsTaken = await context.Users
-                .Where(u => u.Email == createUserModel.Email)
-                .AnyAsync();
+            var emailIsTaken = repository
+                .Query(u => u.Email == createUserModel.Email)
+                .Count() > 0;
 
             if (emailIsTaken)
             {
                 return (false, ErrorMessage.EmailIsAlreadyUsed);
             }
 
-            var userNameIsTaken = await context.Users
-                .Where(u => u.UserName == createUserModel.UserName)
-                .AnyAsync();
+            var userNameIsTaken = repository
+                .Query(u => u.UserName == createUserModel.UserName)
+                .Count() > 0;
 
             if (userNameIsTaken)
             {
@@ -47,27 +47,26 @@ namespace UScheduler.WebApi.Users.Services
         {
             ValidateFormat(updateUserModel);
 
-            var userExists = await context.Users
-                .Where(u => u.Id == id)
-                .AnyAsync();
+            var userExists = repository
+                .GetById(id) != null;
 
             if (!userExists)
             {
                 return (false, ErrorMessage.UserNotFound);
             }
 
-            var emailIsTaken = await context.Users
-                .Where(u => u.Email == updateUserModel.Email && u.Id != id)
-                .AnyAsync();
+            var emailIsTaken = repository
+                .Query(u => u.Email == updateUserModel.Email)
+                .Count() > 0;
 
             if (emailIsTaken)
             {
                 return (false, ErrorMessage.EmailIsAlreadyUsed);
             }
 
-            var userNameIsTaken = await context.Users
-                .Where(u => u.UserName == updateUserModel.UserName && u.Id != id)
-                .AnyAsync();
+            var userNameIsTaken = repository
+                .Query(u => u.UserName == updateUserModel.UserName)
+                .Count() > 0;
 
             if (userNameIsTaken)
             {
@@ -81,18 +80,18 @@ namespace UScheduler.WebApi.Users.Services
         {
             ValidateFormat(user);
 
-            var emailIsTaken = await context.Users
-                .Where(u => u.Email == user.Email && u.Id != id)
-                .AnyAsync();
+            var emailIsTaken = repository
+                .Query(u => u.Email == user.Email && u.Id != id)
+                .Count() > 0;
 
             if (emailIsTaken)
             {
                 return (false, ErrorMessage.EmailIsAlreadyUsed);
             }
 
-            var userNameIsTaken = await context.Users
-                .Where(u => u.UserName == user.UserName && u.Id != id)
-                .AnyAsync();
+            var userNameIsTaken =repository
+                .Query(u => u.UserName == user.UserName && u.Id != id)
+                .Count() > 0;
 
             if (userNameIsTaken)
             {

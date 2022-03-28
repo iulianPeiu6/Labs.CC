@@ -11,18 +11,18 @@ namespace UScheduler.WebApi.Users.Services
 {
     public class UsersService : IUsersService
     {
-        private readonly UsersContext context;
+        private readonly IUserRepository repository;
         private readonly ILogger<UsersService> logger;
         private readonly IMapper mapper;
         private readonly IDataValidator validator;
 
         public UsersService(
-            UsersContext context,
+            IUserRepository repository,
             ILogger<UsersService> logger,
             IMapper mapper,
             IDataValidator validator)
         {
-            this.context = context;
+            this.repository = repository;
             this.logger = logger;
             this.mapper = mapper;
             this.validator = validator;
@@ -34,21 +34,7 @@ namespace UScheduler.WebApi.Users.Services
             {
                 logger?.LogDebug("Qerying all users from database");
 
-                var users = await context.Users
-                    .Join(
-                        context.AccountSettings,
-                        user => user.AccountSettingsId,
-                        settings => settings.Id,
-                        (user, settings) => new User
-                        {
-                            Id = user.Id,
-                            UserName = user.UserName,
-                            Email = user.Email,
-                            RegistrationDate = user.RegistrationDate,
-                            AccountSettingsId = user.AccountSettingsId,
-                            AccountSettings = settings
-                        })
-                    .ToListAsync();
+                var users = repository.GetAll().ToList();
 
                 logger?.LogInformation($"{users.Count} user(s) found in database");
                 var result = mapper.Map<IEnumerable<User>, IEnumerable<DisplayUserModel>>(users);
@@ -67,21 +53,7 @@ namespace UScheduler.WebApi.Users.Services
             {
                 logger?.LogDebug($"Qerying user by id '{id}' from database");
 
-                var user = await context.Users
-                    .Join(
-                        context.AccountSettings,
-                        user => user.AccountSettingsId,
-                        settings => settings.Id,
-                        (user, settings) => new User
-                        {
-                            Id = user.Id,
-                            UserName = user.UserName,
-                            Email = user.Email,
-                            RegistrationDate = user.RegistrationDate,
-                            AccountSettingsId = user.AccountSettingsId,
-                            AccountSettings = settings
-                        })
-                    .SingleOrDefaultAsync(u => u.Id == id);
+                var user = repository.GetById(id);
 
                 if (user == null)
                 {
@@ -119,9 +91,7 @@ namespace UScheduler.WebApi.Users.Services
                     EmailForNotification = createUserModel.Email,
                     SendNotificationOnEmail = false
                 };
-                var response = await context.Users.AddAsync(user);
-                await context.SaveChangesAsync();
-                var createdUser = response.Entity;
+                var createdUser = repository.Add(user);
                 var result = mapper.Map<User, DisplayUserModel>(createdUser);
 
                 return (true, result, string.Empty);
@@ -149,9 +119,7 @@ namespace UScheduler.WebApi.Users.Services
                 var user = mapper.Map<UpdateUserModel, User>(updateUserModel);
                 user.Id = id;
                 user.HashedPassword = updateUserModel.HashedPassword;
-                var response = context.Users.Update(user);
-                await context.SaveChangesAsync();
-                var createdUser = response.Entity;
+                var createdUser = repository.Update(id, user);
                 var result = mapper.Map<User, DisplayUserModel>(createdUser);
                 return (true, result, string.Empty);
             }
@@ -168,22 +136,7 @@ namespace UScheduler.WebApi.Users.Services
             {
                 logger?.LogDebug($"Partially updating user with id {id} in database");
 
-                var user = await context.Users
-                    .Join(
-                        context.AccountSettings,
-                        user => user.AccountSettingsId,
-                        settings => settings.Id,
-                        (user, settings) => new User
-                        {
-                            Id = user.Id,
-                            UserName = user.UserName,
-                            Email = user.Email,
-                            RegistrationDate = user.RegistrationDate,
-                            AccountSettingsId = user.AccountSettingsId,
-                            HashedPassword = user.HashedPassword,
-                            AccountSettings = settings
-                        })
-                    .SingleOrDefaultAsync(c => c.Id == id);
+                var user = repository.GetById(id);
 
                 if (user == null)
                 {
@@ -199,8 +152,7 @@ namespace UScheduler.WebApi.Users.Services
                     return (false, null, validatedResult.Error);
                 }
 
-                context.Users.Update(user);
-                await context.SaveChangesAsync();
+                repository.Update(id, user);
                 var result = mapper.Map<User, DisplayUserModel>(user);
                 return (true, result, string.Empty);
             }
@@ -216,13 +168,12 @@ namespace UScheduler.WebApi.Users.Services
             try
             {
                 logger?.LogDebug($"Delete user by id '{id}' from database");
-                var user = await context.Users.SingleOrDefaultAsync(c => c.Id == id);
+                var user = repository.GetById(id);
                 if (user == null)
                 {
                     return (false, ErrorMessage.UserNotFound);
                 }
-                context.Users.Remove(user);
-                await context.SaveChangesAsync();
+                repository.Delete(id);
                 return (true, string.Empty);
             }
             catch (Exception ex)

@@ -29,11 +29,7 @@ namespace UScheduler.WebApi.Users
             });
             services.AddScoped<IUsersService, UsersService>();
             services.AddScoped<IDataValidator, DataValidator>();
-
-            services.AddSingleton(sp => GetSqlServerConnectionString());
-
-            //services.AddDbContext<UsersContext>(
-            //                options => options.UseSqlServer(Configuration.GetConnectionString("UsersDB")));
+            services.AddScoped<IUserRepository, UserRepository>();
 
             services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
         }
@@ -58,35 +54,6 @@ namespace UScheduler.WebApi.Users
             {
                 endpoints.MapControllers();
             });
-
-            InitializeDatabase(app);
-        }
-
-        private void InitializeDatabase(IApplicationBuilder app)
-        {
-            using (var scope = app?.ApplicationServices?.GetService<IServiceScopeFactory>()?.CreateScope())
-            {
-                scope?.ServiceProvider.GetRequiredService<UsersContext>().Database.Migrate();
-            }
-        }
-
-        public static SqlConnectionStringBuilder GetSqlServerConnectionString()
-        {
-            var connectionString = new SqlConnectionStringBuilder()
-            {
-                DataSource = Environment.GetEnvironmentVariable("DB_HOST"),
-                UserID = Environment.GetEnvironmentVariable("DB_USER"),
-                Password = Environment.GetEnvironmentVariable("DB_PASS"),
-                InitialCatalog = Environment.GetEnvironmentVariable("DB_NAME"),
-                Encrypt = false,
-                Pooling = true,
-                MaxPoolSize = 5,
-                MinPoolSize = 0,
-                ConnectTimeout = 15,
-                TrustServerCertificate = true
-            };
-
-            return connectionString;
         }
     }
 }
