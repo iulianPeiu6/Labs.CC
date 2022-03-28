@@ -23,7 +23,7 @@ namespace UScheduler.WebApi.Storage.Controllers
         public StorageController(IOptions<CloudStorageOptions> config)
         {
             this.config = config.Value;
-            var googleCredentials = GoogleCredential.FromFile("uscheduler-345313-91a35f638c58.json");
+            var googleCredentials = GoogleCredential.FromFile(this.config.SecretsFilePath);
             storage = StorageClient.Create(googleCredentials);
         }
 
