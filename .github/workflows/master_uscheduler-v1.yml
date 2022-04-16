@@ -25,13 +25,13 @@ jobs:
         run: |
           npm install
           npm run build --prod
-        working-directory: .
+        working-directory: ./Homework4/UScheduler.Ui/Web/UScheduler
 
       - name: Upload artifact for deployment job
         uses: actions/upload-artifact@v2
         with:
           name: node-app
-          path: .
+          path: ./Homework4/UScheduler.Ui/Web/UScheduler
 
   deploy:
     runs-on: ubuntu-latest
@@ -52,4 +52,4 @@ jobs:
         with:
           app-name: 'uscheduler-v1'
           publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_0EA095B8676546C4A01201D66FC7716B }}
-          package: ./dist/uscheduler
+          package: ./Homework4/UScheduler.Ui/Web/UScheduler/dist/uscheduler
