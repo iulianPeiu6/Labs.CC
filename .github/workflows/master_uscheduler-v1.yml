@@ -23,7 +23,7 @@ jobs:
 
       - name: Add auth config
         run: |
-          echo ${{ secrets.AUTH_CONFIG }} > ./Homework4/UScheduler.Ui/Web/UScheduler/auth-config.json
+          ${{ secrets.AUTH_CONFIG }} > ./Homework4/UScheduler.Ui/Web/UScheduler/auth-config.json
 
       - name: npm install, build, and test
         run: |
