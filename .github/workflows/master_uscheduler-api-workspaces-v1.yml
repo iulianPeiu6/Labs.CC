@@ -34,7 +34,7 @@ jobs:
         uses: actions/upload-artifact@v2
         with:
           name: .net-app
-          path: ./Homework4/UScheduler.WebApi/UScheduler.WebApi.Workspaces/${{env.DOTNET_ROOT}}
+          path: ./Homework4/UScheduler.WebApi/UScheduler.WebApi.Workspaces
 
   deploy:
     runs-on: ubuntu-latest
