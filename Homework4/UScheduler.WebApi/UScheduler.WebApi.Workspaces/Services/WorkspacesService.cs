@@ -35,6 +35,9 @@ namespace UScheduler.WebApi.Workspaces.Services
             try
             {
                 var workspace = mapper.Map<Workspace>(createWorkspaceModel);
+                workspace.UpdatedBy = createWorkspaceModel.CreatedBy;
+                workspace.CreatedAt = DateTime.UtcNow;
+                workspace.UpdatedAt = DateTime.UtcNow;
                 var response = await context.Workspaces.AddAsync(workspace);
                 workspace = response.Entity;
                 await context.SaveChangesAsync();
@@ -48,7 +51,7 @@ namespace UScheduler.WebApi.Workspaces.Services
             }
         }
 
-        public async Task<(bool IsSuccess, IEnumerable<WorkspaceDto> Workspaces, string Error)> GetOwnerWorkspacesAsync(Guid owner)
+        public async Task<(bool IsSuccess, IEnumerable<WorkspaceDto> Workspaces, string Error)> GetOwnerWorkspacesAsync(string owner)
         {
             try
             {
@@ -80,9 +83,9 @@ namespace UScheduler.WebApi.Workspaces.Services
 
                 workspace.Title = updateWorkspaceModel.Title;
                 workspace.Description = updateWorkspaceModel.Description;
-                workspace.Owner = updateWorkspaceModel.Owner;
                 workspace.AccessType = updateWorkspaceModel.AccessType;
-                workspace.WorkspaceType = updateWorkspaceModel.WorkspaceType;
+                workspace.UpdatedBy = updateWorkspaceModel.UpdatedBy;
+                workspace.UpdatedAt = DateTime.UtcNow;
 
                 context.Workspaces.Update(workspace);
                 await context.SaveChangesAsync();
@@ -97,7 +100,7 @@ namespace UScheduler.WebApi.Workspaces.Services
             }
         }
 
-        public async Task<(bool IsSuccess, WorkspaceDto Workspace, string Error)> PartiallyUpdateWorkspaceAsync(Guid id, JsonPatchDocument<Workspace> patchDoc)
+        public async Task<(bool IsSuccess, WorkspaceDto Workspace, string Error)> PartiallyUpdateWorkspaceAsync(Guid id, JsonPatchDocument<Workspace> patchDoc, string updatedBy)
         {
             try
             {
@@ -110,6 +113,8 @@ namespace UScheduler.WebApi.Workspaces.Services
                 }
 
                 patchDoc.ApplyTo(workspace);
+                workspace.UpdatedBy = updatedBy;
+                workspace.UpdatedAt = DateTime.UtcNow;
 
                 context.Workspaces.Update(workspace);
                 await context.SaveChangesAsync();

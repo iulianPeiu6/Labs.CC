@@ -1,4 +1,4 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Mvc;
 
 namespace UScheduler.WebApi.Workspaces.Models
 {
@@ -8,10 +8,8 @@ namespace UScheduler.WebApi.Workspaces.Models
 
         public string Description { get; set; }
 
-        public Guid Owner { get; set; }
-
         public string AccessType { get; set; }
 
-        public string WorkspaceType { get; set; }
+        public string UpdatedBy { get; set; }
     }
 }

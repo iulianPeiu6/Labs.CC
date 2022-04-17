@@ -25,8 +25,11 @@ namespace UScheduler.WebApi.Workspaces.IntegrationTests.WorkspacesControllerTest
 
             // Act
             var requestContent = new StringContent(JsonConvert.SerializeObject(patchDoc), Encoding.UTF8, "application/json-patch+json");
-            var response = await testClient.PatchAsync($"api/v1/Workspaces/{id}", requestContent);
-            var responseContent = await response.Content.ReadAsStringAsync();
+            var request = new HttpRequestMessage(HttpMethod.Patch, $"api/v1/Workspaces/{id}");
+            request.Headers.Add("UpdatedBy", "owner-new-003@email.com");
+            request.Content = requestContent;
+            var response = await testClient.SendAsync(request);
+            await response.Content.ReadAsStringAsync();
 
             // Asert
             response.StatusCode.Should().Be(HttpStatusCode.NotFound);
@@ -40,13 +43,16 @@ namespace UScheduler.WebApi.Workspaces.IntegrationTests.WorkspacesControllerTest
             var patchDoc = new JsonPatchDocument<Workspace>();
             patchDoc.Replace(w => w.Title, "Workspace - 002 - Patch - Updated");
             patchDoc.Replace(w => w.Description, "Workspace - 002 - Patch - Updated");
-            patchDoc.Replace(w => w.Owner, Guid.Parse("508bb148-f2eb-4a61-8a1b-f16a38eda698"));
+            patchDoc.Replace(w => w.Owner, "owner-new-003@email.com");
             patchDoc.Replace(w => w.AccessType, "Private");
-            patchDoc.Add(w => w.ColabUsersIds, "efc9ad1f-1c51-4406-ab96-e50556849054");
+            patchDoc.Add(w => w.Colabs, "owner-new-004@email.com");
 
             // Act
             var requestContent = new StringContent(JsonConvert.SerializeObject(patchDoc), Encoding.UTF8, "application/json-patch+json");
-            var response = await testClient.PatchAsync($"api/v1/Workspaces/{id}", requestContent);
+            var request = new HttpRequestMessage(HttpMethod.Patch, $"api/v1/Workspaces/{id}");
+            request.Headers.Add("UpdatedBy", "owner-new-003@email.com");
+            request.Content = requestContent;
+            var response = await testClient.SendAsync(request);
             var responseContent = await response.Content.ReadAsStringAsync();
             var updatedWorkspace = System.Text.Json.JsonSerializer.Deserialize<WorkspaceDto>(
                 responseContent,
@@ -56,11 +62,36 @@ namespace UScheduler.WebApi.Workspaces.IntegrationTests.WorkspacesControllerTest
             response.StatusCode.Should().Be(HttpStatusCode.OK);
             updatedWorkspace.Should().NotBeNull();
             updatedWorkspace?.Id.Should().Be(Guid.Parse("367c9423-0d7a-49d5-8376-5619804271bf"));
-            updatedWorkspace?.Owner.Should().Be(Guid.Parse("508bb148-f2eb-4a61-8a1b-f16a38eda698"));
+            updatedWorkspace?.Owner.Should().Be("owner-new-003@email.com");
             updatedWorkspace?.Title.Should().Be("Workspace - 002 - Patch - Updated");
             updatedWorkspace?.Description.Should().Be("Workspace - 002 - Patch - Updated");
             updatedWorkspace?.AccessType.Should().Be("Private");
-            updatedWorkspace?.ColabUsersIds.Should().Contain("efc9ad1f-1c51-4406-ab96-e50556849054");
+            updatedWorkspace?.Colabs.Should().Contain("owner-new-004@email.com");
+            updatedWorkspace?.UpdatedBy.Should().Contain("owner-new-003@email.com");
+            updatedWorkspace?.UpdatedAt.Should().BeCloseTo(DateTime.UtcNow, new TimeSpan(0, 0, 59));
+        }
+
+        [Test]
+        public async Task Given_ValidWorkspaceIdWithUpdatedByHeaderMissingt_When_PartialUpdatedWorkspaceIsCalled_Then_Return500InternalServerErrorAsync()
+        {
+            // Arange
+            var id = Guid.Parse("367c9423-0d7a-49d5-8376-5619804271bf");
+            var patchDoc = new JsonPatchDocument<Workspace>();
+            patchDoc.Replace(w => w.Title, "Workspace - 002 - Patch - Updated");
+            patchDoc.Replace(w => w.Description, "Workspace - 002 - Patch - Updated");
+            patchDoc.Replace(w => w.Owner, "owner-new-003@email.com");
+            patchDoc.Replace(w => w.AccessType, "Private");
+            patchDoc.Add(w => w.Colabs, "owner-new-004@email.com");
+
+            // Act
+            var requestContent = new StringContent(JsonConvert.SerializeObject(patchDoc), Encoding.UTF8, "application/json-patch+json");
+            var request = new HttpRequestMessage(HttpMethod.Patch, $"api/v1/Workspaces/{id}");
+            request.Content = requestContent;
+            var response = await testClient.SendAsync(request);
+            await response.Content.ReadAsStringAsync();
+
+            // Asert
+            response.StatusCode.Should().Be(HttpStatusCode.InternalServerError);
         }
     }
 }

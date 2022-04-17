@@ -33,17 +33,17 @@ namespace UScheduler.WebApi.Workspaces.Data
                 builder.Property(w => w.WorkspaceType)
                     .IsRequired();
 
-                var colabUsersIdsComparer = new ValueComparer<List<string>>(
+                var colabsComparer = new ValueComparer<List<string>>(
                     (c1, c2) => c1.SequenceEqual(c2),
                     c => c.Aggregate(0, (a, v) => HashCode.Combine(a, v.GetHashCode())),
                     c => c.ToList());
 
-                builder.Property(w => w.ColabUsersIds)
+                builder.Property(w => w.Colabs)
                     .HasConversion(
                         p => JsonConvert.SerializeObject(p),
                         p => JsonConvert.DeserializeObject<List<string>>(p))
                     .Metadata
-                    .SetValueComparer(colabUsersIdsComparer); ;
+                    .SetValueComparer(colabsComparer);
             });
         }
     }

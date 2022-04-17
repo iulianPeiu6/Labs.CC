@@ -20,20 +20,23 @@ namespace UScheduler.WebApi.Workspaces.IntegrationTests.WorkspacesControllerTest
             // Arange
             var workspace = new CreateWorkspaceModel
             {
-                Owner = Guid.Parse("e27387c0-d043-4a74-861c-f9a274774974"),
+                Owner = "owner-001@email.com",
                 Title = "Workspace - 005",
                 Description = "Workspace - 005",
                 AccessType = "Private",
-                ColabUsersIds = new List<string>()
+                Colabs = new List<string>()
                 {
-                    "e27387c0-d043-4a74-861c-f9a274774974"
+                    "owner-001@email.com"
                 },
                 WorkspaceType = "Basic"
             };
 
             // Act
             var requestContent = new StringContent(JsonSerializer.Serialize(workspace), Encoding.UTF8, "application/json");
-            var response = await testClient.PostAsync("api/v1/Workspaces", requestContent);
+            var request = new HttpRequestMessage(HttpMethod.Post, "api/v1/Workspaces");
+            request.Headers.Add("CreatedBy", "owner-001@email.com");
+            request.Content = requestContent;
+            var response = await testClient.SendAsync(request);
             var responseContent = await response.Content.ReadAsStringAsync();
             var createdWorkspace = JsonSerializer.Deserialize<WorkspaceDto>(
                 responseContent,
@@ -47,8 +50,12 @@ namespace UScheduler.WebApi.Workspaces.IntegrationTests.WorkspacesControllerTest
             createdWorkspace?.Title.Should().Be(workspace.Title);
             createdWorkspace?.Description.Should().Be(workspace.Description);
             createdWorkspace?.AccessType.Should().Be(workspace.AccessType);
-            createdWorkspace?.ColabUsersIds.Should().Contain(workspace.ColabUsersIds);
+            createdWorkspace?.Colabs.Should().Contain(workspace.Colabs);
             createdWorkspace?.WorkspaceType.Should().Be(workspace.WorkspaceType);
+            createdWorkspace?.CreatedBy.Should().Be("owner-001@email.com");
+            createdWorkspace?.CreatedAt.Should().BeCloseTo(DateTime.UtcNow, new TimeSpan(0, 0, 59));
+            createdWorkspace?.UpdatedBy.Should().Be("owner-001@email.com");
+            createdWorkspace?.UpdatedAt.Should().BeCloseTo(DateTime.UtcNow, new TimeSpan(0, 0, 59));
         }
     }
 }
