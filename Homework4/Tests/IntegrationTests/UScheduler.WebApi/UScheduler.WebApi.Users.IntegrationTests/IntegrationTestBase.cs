@@ -65,7 +65,7 @@ namespace UScheduler.WebApi.Users.IntegrationTests
                 Id = Guid.Parse("4b04a881-ce69-4787-b25a-76460a639f3f"),
                 UserName = "username-001",
                 Email = "email.001@email.com",
-                RegistrationDate = DateTime.Now,
+                RegistrationDate = DateTime.UtcNow,
                 HashedPassword = "AABBCCDD981A=",
                 AccountSettings = new AccountSettings()
                 {
@@ -79,7 +79,7 @@ namespace UScheduler.WebApi.Users.IntegrationTests
                 Id = Guid.Parse("5ac72a84-e32c-4a75-a696-af1f54bdd35c"),
                 UserName = "username-002",
                 Email = "email.002@email.com",
-                RegistrationDate = DateTime.Now,
+                RegistrationDate = DateTime.UtcNow,
                 HashedPassword = "AABBCCDD981B=",
                 AccountSettings = new AccountSettings()
                 {
@@ -93,7 +93,7 @@ namespace UScheduler.WebApi.Users.IntegrationTests
                 Id = Guid.Parse("8dae4f26-7404-4dc8-9d20-03aab065f7cd"),
                 UserName = "username-003",
                 Email = "email.003@email.com",
-                RegistrationDate = DateTime.Now,
+                RegistrationDate = DateTime.UtcNow,
                 HashedPassword = "AABBCCDD981B=",
                 AccountSettings = new AccountSettings()
                 {
@@ -107,7 +107,7 @@ namespace UScheduler.WebApi.Users.IntegrationTests
                 Id = Guid.Parse("2b0f8ed4-0e9d-489f-b003-e34fa24a8f8a"),
                 UserName = "username-004",
                 Email = "email.004@email.com",
-                RegistrationDate = DateTime.Now,
+                RegistrationDate = DateTime.UtcNow,
                 HashedPassword = "AABBCCDD981B=",
                 AccountSettings = new AccountSettings()
                 {

@@ -1,4 +1,4 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
 
 namespace UScheduler.WebApi.Workspaces.Models
@@ -9,12 +9,14 @@ namespace UScheduler.WebApi.Workspaces.Models
 
         public string Description { get; set; }
 
-        public Guid Owner { get; set; }
+        public string Owner { get; set; }
 
         public string AccessType { get; set; }
 
-        public List<string> ColabUsersIds { get; set; }
+        public List<string> Colabs { get; set; }
 
         public string WorkspaceType { get; set; }
+
+        public string CreatedBy { get; set; }
     }
 }
