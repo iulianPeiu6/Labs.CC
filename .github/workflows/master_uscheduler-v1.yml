@@ -21,9 +21,12 @@ jobs:
         with:
           node-version: '16.x'
 
-      - name: Add auth config
+      - name: Add auth config          
         run: |
-          ${{ secrets.AUTH_CONFIG }} > ./Homework4/UScheduler.Ui/Web/UScheduler/auth-config.json
+            echo $AUTH_CONFIG > ./Homework4/UScheduler.Ui/Web/UScheduler/auth-config.json
+        shell: bash
+        env:
+          AUTH_CONFIG : ${{ secrets.AUTH_CONFIG }}
 
       - name: npm install, build, and test
         run: |
