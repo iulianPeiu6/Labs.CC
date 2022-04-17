@@ -19,7 +19,13 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "UScheduler.WebApi.Workspace
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "UScheduler.WebApi.Workspaces.IntegrationTests", "Tests\IntegrationTests\UScheduler.WebApi\UScheduler.WebApi.Workspaces.IntegrationTests\UScheduler.WebApi.Workspaces.IntegrationTests.csproj", "{30CB737F-5CE6-4552-ACFE-A8358CE691E7}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UScheduler.WebApi.Gateway", "UScheduler.WebApi\UScheduler.WebApi.Gateway\UScheduler.WebApi.Gateway.csproj", "{D62A8975-237E-4F2F-9765-164B4E173A0E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "UScheduler.WebApi.Gateway", "UScheduler.WebApi\UScheduler.WebApi.Gateway\UScheduler.WebApi.Gateway.csproj", "{D62A8975-237E-4F2F-9765-164B4E173A0E}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "UScheduler.Common", "UScheduler.Common", "{28FD46C8-E880-4C53-B39B-EE4263831A29}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UScheduler.Common.SecretsManager", "UScheduler.Common\UScheduler.Common.SecretsManager\UScheduler.Common.SecretsManager.csproj", "{3599374A-A754-48DA-8342-F08C5DFBA978}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UScheduler.Common.ConfigurationBinder", "UScheduler.Common\UScheduler.Common.ConfigurationBinder\UScheduler.Common.ConfigurationBinder.csproj", "{0DA6C2E4-0673-4DCB-8CFC-70B0AB231C47}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -47,6 +53,14 @@ Global
 		{D62A8975-237E-4F2F-9765-164B4E173A0E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D62A8975-237E-4F2F-9765-164B4E173A0E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D62A8975-237E-4F2F-9765-164B4E173A0E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3599374A-A754-48DA-8342-F08C5DFBA978}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3599374A-A754-48DA-8342-F08C5DFBA978}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3599374A-A754-48DA-8342-F08C5DFBA978}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3599374A-A754-48DA-8342-F08C5DFBA978}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0DA6C2E4-0673-4DCB-8CFC-70B0AB231C47}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0DA6C2E4-0673-4DCB-8CFC-70B0AB231C47}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0DA6C2E4-0673-4DCB-8CFC-70B0AB231C47}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0DA6C2E4-0673-4DCB-8CFC-70B0AB231C47}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -59,6 +73,8 @@ Global
 		{94B48E72-5B97-4AA1-A9D7-B440B58441D2} = {3BA49910-88E0-447C-8E81-51F90584D790}
 		{30CB737F-5CE6-4552-ACFE-A8358CE691E7} = {8C20A3DB-D732-4B19-81B5-EC5FA4E04422}
 		{D62A8975-237E-4F2F-9765-164B4E173A0E} = {3BA49910-88E0-447C-8E81-51F90584D790}
+		{3599374A-A754-48DA-8342-F08C5DFBA978} = {28FD46C8-E880-4C53-B39B-EE4263831A29}
+		{0DA6C2E4-0673-4DCB-8CFC-70B0AB231C47} = {28FD46C8-E880-4C53-B39B-EE4263831A29}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {CAACEDFC-8C3D-432D-A38B-CEE42129A0DD}
