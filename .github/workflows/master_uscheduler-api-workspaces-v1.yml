@@ -32,7 +32,7 @@ jobs:
         
       - name: List created files
         run: tree
-        working-directory: ./Homework4/UScheduler.WebApi/UScheduler.WebApi.Workspaces
+        working-directory: ${{env.DOTNET_ROOT}}
         
       - name: Upload artifact for deployment job
         uses: actions/upload-artifact@v2
