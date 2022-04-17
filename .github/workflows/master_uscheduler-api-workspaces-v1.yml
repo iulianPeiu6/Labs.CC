@@ -30,14 +30,11 @@ jobs:
         run: dotnet publish -c Release -o ${{env.DOTNET_ROOT}}
         working-directory: ./Homework4/UScheduler.WebApi/UScheduler.WebApi.Workspaces
         
-      - name: Zip artifact for deployment
-        run: zip release.zip ./Homework4/UScheduler.WebApi/UScheduler.WebApi.Workspaces/${{env.DOTNET_ROOT}}/* -r
-        
       - name: Upload artifact for deployment job
         uses: actions/upload-artifact@v2
         with:
           name: .net-app
-          path: release.zip
+          path: ./Homework4/UScheduler.WebApi/UScheduler.WebApi.Workspaces/${{env.DOTNET_ROOT}}
 
   deploy:
     runs-on: ubuntu-latest
@@ -51,9 +48,6 @@ jobs:
         uses: actions/download-artifact@v2
         with:
           name: .net-app
-          
-      - name: unzip artifact for deployment
-        run: unzip release.zip
 
       - name: Deploy to Azure Web App
         id: deploy-to-webapp
