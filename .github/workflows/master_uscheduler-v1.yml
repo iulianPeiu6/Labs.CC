@@ -52,4 +52,4 @@ jobs:
         with:
           app-name: 'uscheduler-v1'
           publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_0EA095B8676546C4A01201D66FC7716B }}
-          package: ./Homework4/UScheduler.Ui/Web/UScheduler/dist/uscheduler
+          package: ./dist/uscheduler
