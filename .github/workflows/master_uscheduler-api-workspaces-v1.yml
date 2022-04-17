@@ -56,4 +56,4 @@ jobs:
           app-name: 'uscheduler-api-workspaces-v1'
           slot-name: 'Production'
           publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_424A9AB34C374CC193CBE7B06E8726F2 }}
-          package: ./Homework4/UScheduler.WebApi/UScheduler.WebApi.Workspaces/${{env.DOTNET_ROOT}}
+          package: .
