@@ -34,11 +34,10 @@ namespace UScheduler.WebApi.Workspaces.Controllers.v1
         }
 
         [HttpGet]
-        public async Task<IActionResult> GetWorkspacesByOwnerIdAsync([FromQuery] Guid ownerId)
+        public async Task<IActionResult> GetWorkspacesByOwnerAsync([FromQuery] string owner)
         {
-            var value = await _secretsManager.GetSecretAsync("test");
-            logger?.LogDebug($"Handeling GET request on api/v1/Workspaces?ownerId={ownerId}");
-            var result = await provider.GetOwnerWorkspacesAsync(ownerId);
+            logger?.LogDebug($"Handeling GET request on api/v1/Workspaces?owner={owner}");
+            var result = await provider.GetOwnerWorkspacesAsync(owner);
 
             if (result.IsSuccess)
             {
@@ -49,9 +48,12 @@ namespace UScheduler.WebApi.Workspaces.Controllers.v1
         }
 
         [HttpPost]
-        public async Task<IActionResult> CreateWorkspaceAsync([FromBody] CreateWorkspaceModel workspace)
+        public async Task<IActionResult> CreateWorkspaceAsync([FromBody] CreateWorkspaceModel workspace, [FromHeader] string createdBy)
         {
             logger?.LogDebug("Handeling POST request on api/v1/Workspaces");
+
+            workspace.CreatedBy = createdBy;
+
             var result = await provider.CreateWorkspaceAsync(workspace);
 
             if (result.IsSuccess)
@@ -63,9 +65,12 @@ namespace UScheduler.WebApi.Workspaces.Controllers.v1
         }
 
         [HttpPut("{id}")]
-        public async Task<IActionResult> UpdateAsync(Guid id, [FromBody] UpdateWorkspaceModel workspace)
+        public async Task<IActionResult> UpdateAsync(Guid id, [FromBody] UpdateWorkspaceModel workspace, [FromHeader] string updatedBy)
         {
             logger?.LogDebug($"Handeling PUT request on api/v1/Workspaces/{id}");
+
+            workspace.UpdatedBy = updatedBy;
+
             var result = await provider.FullUpdateWorkspaceAsync(id, workspace);
 
             if (result.IsSuccess)
@@ -88,7 +93,12 @@ namespace UScheduler.WebApi.Workspaces.Controllers.v1
 
             if (patchDoc != null)
             {
-                var result = await provider.PartiallyUpdateWorkspaceAsync(id, patchDoc);
+                Request.Headers.TryGetValue("UpdatedBy", out var updatedBy);
+                if (string.IsNullOrEmpty(updatedBy))
+                {
+                    return StatusCode(StatusCodes.Status500InternalServerError, new { message = ErrorMessage.UpdatedByHeaderValueIsMissing });
+                }
+                var result = await provider.PartiallyUpdateWorkspaceAsync(id, patchDoc, updatedBy);
 
                 if (result.IsSuccess)
                 {

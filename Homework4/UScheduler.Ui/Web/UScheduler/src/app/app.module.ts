@@ -8,6 +8,9 @@ import { UnauthenticatedContentModule } from './unauthenticated-content';
 import { AppRoutingModule } from './app-routing.module';
 import { AuthModule } from '@auth0/auth0-angular';
 import { environment as env } from 'src/environments/environment';
+import { CreateWorkspaceModule } from './shared/components/create-workspace/create-workspace.component';
+import { WorkspacesService } from './shared/services/workspaces.service';
+import { HttpClient, HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -15,19 +18,22 @@ import { environment as env } from 'src/environments/environment';
   ],
   imports: [
     BrowserModule,
+    HttpClientModule,
     SideNavOuterToolbarModule,
     SideNavInnerToolbarModule,
     SingleCardModule,
     FooterModule,
     UnauthenticatedContentModule,
     AppRoutingModule,
+    CreateWorkspaceModule,
     AuthModule.forRoot({
       ... env.auth
     })
   ],
   providers: [
     ScreenService,
-    AppInfoService
+    AppInfoService,
+    WorkspacesService
   ],
   bootstrap: [AppComponent]
 })

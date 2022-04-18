@@ -1,0 +1,7 @@
+{
+  "/api/*": {
+      "target": "https://uscheduler-v1.azurewebsites.net",
+      "secure": true,
+      "logLevel": "debug"
+  }
+}
