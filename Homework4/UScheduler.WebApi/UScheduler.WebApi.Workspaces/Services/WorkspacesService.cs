@@ -37,7 +37,9 @@ namespace UScheduler.WebApi.Workspaces.Services
                 var workspace = mapper.Map<Workspace>(createWorkspaceModel);
                 workspace.UpdatedBy = createWorkspaceModel.CreatedBy;
                 workspace.CreatedAt = DateTime.UtcNow;
-                workspace.UpdatedAt = DateTime.UtcNow;
+                workspace.UpdatedAt = workspace.CreatedAt;
+                workspace.Owner = createWorkspaceModel.CreatedBy;
+                workspace.Colabs = new List<string>() { createWorkspaceModel.CreatedBy };
                 var response = await context.Workspaces.AddAsync(workspace);
                 workspace = response.Entity;
                 await context.SaveChangesAsync();

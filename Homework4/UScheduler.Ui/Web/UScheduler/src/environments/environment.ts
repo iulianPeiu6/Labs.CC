@@ -6,5 +6,6 @@ export const environment = {
     domain: authConfig.domain,
     clientId: authConfig.clientId,
     redirectUri: window.location.origin
-  }
+  },
+  apiEndpoint: "https://localhost:5001/"
 };

@@ -6,6 +6,7 @@ import { ProfileComponent } from './pages/profile/profile.component';
 import { TasksComponent } from './pages/tasks/tasks.component';
 import { DxDataGridModule, DxFormModule } from 'devextreme-angular';
 import { CommonModule } from '@angular/common';
+import { CreateWorkspaceComponent } from './shared/components/create-workspace/create-workspace.component';
 
 const routes: Routes = [
   {
@@ -21,6 +22,11 @@ const routes: Routes = [
   {
     path: 'home',
     component: HomeComponent,
+    canActivate: [ AuthGuardService ]
+  },
+  {
+    path: 'workspaces/new',
+    component: CreateWorkspaceComponent,
     canActivate: [ AuthGuardService ]
   },
   {
