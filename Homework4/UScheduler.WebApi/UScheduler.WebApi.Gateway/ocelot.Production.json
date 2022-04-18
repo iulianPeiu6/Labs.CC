@@ -5,7 +5,7 @@
       "DownstreamScheme": "https",
       "DownstreamHostAndPorts": [
         {
-          "Host": "localhost",
+          "Host": "uscheduler-api-workspaces-v1.azurewebsites.net",
           "Port": "7114"
         }
       ],
@@ -32,7 +32,7 @@
       "DownstreamScheme": "https",
       "DownstreamHostAndPorts": [
         {
-          "Host": "localhost",
+          "Host": "uscheduler-api-workspaces-v1.azurewebsites.net",
           "Port": "7114"
         }
       ],
@@ -61,7 +61,7 @@
       "DownstreamScheme": "https",
       "DownstreamHostAndPorts": [
         {
-          "Host": "localhost",
+          "Host": "uscheduler-api-workspaces-v1.azurewebsites.net",
           "Port": "7114"
         }
       ],
