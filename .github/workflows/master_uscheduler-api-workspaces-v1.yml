@@ -30,10 +30,6 @@ jobs:
         run: dotnet publish -c Release -o ${{env.DOTNET_ROOT}}
         working-directory: ./Homework4/UScheduler.WebApi/UScheduler.WebApi.Workspaces
         
-      - name: List created files
-        run: tree
-        working-directory: ${{env.DOTNET_ROOT}}
-        
       - name: Upload artifact for deployment job
         uses: actions/upload-artifact@v2
         with:
