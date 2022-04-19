@@ -15,7 +15,7 @@ namespace UScheduler.WebApi.Workspaces
             Host.CreateDefaultBuilder(args)
                 .ConfigureAppConfiguration((context, builder) =>
                 {
-                    builder.UseServiceManager();
+                    //builder.UseServiceManager();
                 })
                 .ConfigureWebHostDefaults(webBuilder =>
                 {
