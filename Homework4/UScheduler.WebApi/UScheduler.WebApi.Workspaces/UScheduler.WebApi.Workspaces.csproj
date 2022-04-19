@@ -46,4 +46,8 @@
     <Folder Include="Data\Migrations\" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\..\UScheduler.Common\UScheduler.Common.SecretsManager\UScheduler.Common.SecretsManager.csproj" />
+  </ItemGroup>
+
 </Project>

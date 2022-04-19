@@ -6,6 +6,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
 using System;
+using UScheduler.Common.SecretsManager;
 using UScheduler.WebApi.Workspaces.Data;
 using UScheduler.WebApi.Workspaces.Interfaces;
 using UScheduler.WebApi.Workspaces.Services;
@@ -35,6 +36,8 @@ namespace UScheduler.WebApi.Workspaces
 
             services.AddScoped<IWorkspacesService, WorkspacesService>();
             services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
+
+            services.AddServiceManager();
 
             services.AddDbContext<WorkspacesContext>(
                             options => options.UseSqlServer(Configuration.GetConnectionString("WorkspacesDB")));

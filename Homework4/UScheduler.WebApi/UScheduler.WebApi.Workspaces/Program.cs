@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Hosting;
+using UScheduler.Common.SecretsManager;
 
 namespace UScheduler.WebApi.Workspaces
 {
@@ -12,6 +13,10 @@ namespace UScheduler.WebApi.Workspaces
 
         public static IHostBuilder CreateHostBuilder(string[] args) =>
             Host.CreateDefaultBuilder(args)
+                .ConfigureAppConfiguration((context, builder) =>
+                {
+                    builder.UseServiceManager();
+                })
                 .ConfigureWebHostDefaults(webBuilder =>
                 {
                     webBuilder.UseStartup<Startup>();
