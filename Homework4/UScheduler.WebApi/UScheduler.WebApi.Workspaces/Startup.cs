@@ -37,8 +37,6 @@ namespace UScheduler.WebApi.Workspaces
             services.AddScoped<IWorkspacesService, WorkspacesService>();
             services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
-            services.AddServiceManager();
-
             services.AddDbContext<WorkspacesContext>(
                             options => options.UseSqlServer(Configuration.GetConnectionString("WorkspacesDB")));
         }

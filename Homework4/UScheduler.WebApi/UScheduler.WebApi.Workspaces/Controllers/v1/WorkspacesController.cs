@@ -21,16 +21,13 @@ namespace UScheduler.WebApi.Workspaces.Controllers.v1
     {
         private readonly IWorkspacesService provider;
         private readonly ILogger<WorkspacesController> logger;
-        private readonly ISecretsManager _secretsManager;
 
         public WorkspacesController(
             IWorkspacesService provider,
-            ILogger<WorkspacesController> logger, 
-            ISecretsManager secretsManager)
+            ILogger<WorkspacesController> logger)
         {
             this.provider = provider;
             this.logger = logger;
-            _secretsManager = secretsManager;
         }
 
         [HttpGet]
