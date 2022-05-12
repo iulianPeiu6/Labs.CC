@@ -64,7 +64,7 @@ jobs:
         id: deploy-to-webapp
         uses: azure/webapps-deploy@v2
         with:
-          app-name: 'uscheduler-ui'
+          app-name: 'uscheduler-eu'
           slot-name: 'Production'
           publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_B5048B2FA8F84BF991FEF391366B46D7 }}
           package: ./Project/UScheduler.Ui/Web/UScheduler/dist/uscheduler
