@@ -28,7 +28,8 @@
       },
       "AddHeadersToRequest": {
         "CreatedBy": "Claims[https://localhost:5001/email] > value"
-      }
+      },
+      "SwaggerKey": "workspaces"
     },
     {
       "DownstreamPathTemplate": "/api/v1/Workspaces/{id}",
@@ -57,7 +58,8 @@
       "AuthenticationOptions": {
         "AuthenticationProviderKey": "BaseAuthProvider",
         "AllowedScopes": []
-      }
+      },
+      "SwaggerKey": "workspaces"
     },
     {
       "DownstreamPathTemplate": "/api/v1/Workspaces?owner={owner}",
@@ -84,7 +86,20 @@
       "AuthenticationOptions": {
         "AuthenticationProviderKey": "BaseAuthProvider",
         "AllowedScopes": []
-      }
+      },
+      "SwaggerKey": "workspaces"
+    }
+  ],
+  "SwaggerEndPoints": [
+    {
+      "Key": "workspaces",
+      "Config": [
+        {
+          "Name": "UScheduler.WebApi.Workspaces",
+          "Version": "v1",
+          "Url": "https://localhost:7114/swagger/v1/swagger.json"
+        }
+      ]
     }
   ]
 }

@@ -29,7 +29,8 @@
       },
       "AddHeadersToRequest": {
         "CreatedBy": "Claims[https://uscheduler-api-gateway.azurewebsites.net/email] > value"
-      }
+      },
+      "SwaggerKey": "workspaces"
     },
     {
       "DownstreamPathTemplate": "/api/v1/Workspaces/{id}",
@@ -59,7 +60,8 @@
       "AuthenticationOptions": {
         "AuthenticationProviderKey": "BaseAuthProvider",
         "AllowedScopes": []
-      }
+      },
+      "SwaggerKey": "workspaces"
     },
     {
       "DownstreamPathTemplate": "/api/v1/Workspaces?owner={owner}",
@@ -87,10 +89,20 @@
       "AuthenticationOptions": {
         "AuthenticationProviderKey": "BaseAuthProvider",
         "AllowedScopes": []
-      }
+      },
+      "SwaggerKey": "workspaces"
     }
   ],
-  "GlobalConfiguration": {
-    "BaseUrl": "https://uscheduler-api-gateway.azurewebsites.net/"
-  }
+  "SwaggerEndPoints": [
+    {
+      "Key": "workspaces",
+      "Config": [
+        {
+          "Name": "UScheduler.WebApi.Workspaces",
+          "Version": "v1",
+          "Url": "https://localhost:7114/swagger/v1/swagger.json"
+        }
+      ]
+    }
+  ]
 }

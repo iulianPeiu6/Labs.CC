@@ -24,9 +24,10 @@ namespace UScheduler.WebApi.Workspaces
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-
             services.AddControllers()
                 .AddNewtonsoftJson();
+
+            services.AddEndpointsApiExplorer();
 
             services.AddSwaggerGen(c =>
             {
@@ -46,9 +47,10 @@ namespace UScheduler.WebApi.Workspaces
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
-                app.UseSwagger();
-                app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "UScheduler.WebApi.Workspaces v1"));
             }
+
+            app.UseSwagger();
+            app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "UScheduler.WebApi.Workspaces v1"));
 
             app.UseHttpsRedirection();
 
