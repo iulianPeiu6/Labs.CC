@@ -100,7 +100,7 @@
         {
           "Name": "UScheduler.WebApi.Workspaces",
           "Version": "v1",
-          "Url": "https://localhost:7114/swagger/v1/swagger.json"
+          "Url": "https://uscheduler-api-workspaces.azurewebsites.net/swagger/v1/swagger.json"
         }
       ]
     }
