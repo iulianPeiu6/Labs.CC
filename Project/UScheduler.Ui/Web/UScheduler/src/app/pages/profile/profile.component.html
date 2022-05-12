@@ -1,0 +1,19 @@
+<div *ngIf="auth.user$ | async as user">
+  <h2 class="content-block">Profile</h2>
+
+  <div class="content-block dx-card responsive-paddings">
+    <div class="form-avatar">
+      <img [src]="user?.picture"/>
+    </div>
+    <span>"ToEdit: Add description"</span>
+  </div>
+
+  <div class="content-block dx-card responsive-paddings">
+    <dx-form
+      [formData]="user"
+      [readOnly]="true"
+      labelLocation="top"
+      [colCountByScreen]="colCountByScreen">
+    </dx-form>
+  </div>
+</div>

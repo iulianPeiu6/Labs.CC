@@ -1,0 +1,48 @@
+<h2 class="content-block">New Workspace</h2>
+<div class="content-block dx-card responsive-paddings">
+  <form (submit)="createWorkspace($event)">
+    <dx-form
+      [formData]="workspace"
+      labelLocation="left">
+
+      <dxi-item 
+        dataField="title">
+        <dxi-validation-rule
+            type="required"
+            message="Title is required">
+        </dxi-validation-rule>
+      </dxi-item>
+      
+      <dxi-item 
+        dataField="description"
+        editorType="dxTextArea">
+      </dxi-item>
+    
+      <dxi-item
+        dataField="accessLevel"
+        editorType="dxSelectBox"
+        [editorOptions]="{ dataSource: accessLevels }">
+        <dxi-validation-rule
+          type="required"
+          message="Access is required">
+        </dxi-validation-rule>
+      </dxi-item>
+
+      <dxi-item
+        dataField="workspaceTemplate"
+        editorType="dxSelectBox"
+        [editorOptions]="{ dataSource: workspaceTemplates }">
+        <dxi-validation-rule
+          type="required"
+          message="Template is required">
+        </dxi-validation-rule>
+      </dxi-item>
+
+      <dxi-item 
+            itemType="button"
+            [buttonOptions]="{ text: 'Create Workspace', type: 'success', useSubmitBehavior: true}">
+      </dxi-item>
+
+    </dx-form>
+  </form>
+</div>

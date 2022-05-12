@@ -1,0 +1,90 @@
+﻿{
+  "Routes": [
+    {
+      "DownstreamPathTemplate": "/api/v1/Workspaces",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": "7114"
+        }
+      ],
+      "RateLimitOptions": {
+        "ClientWhitelist": [
+
+        ],
+        "EnableRateLimiting": false,
+        "Period": "5s",
+        "PeriodTimespan": 1,
+        "Limit": 1
+      },
+      "UpstreamPathTemplate": "/api/v1/Workspaces",
+      "UpstreamHttpMethod": [
+        "POST"
+      ],
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "BaseAuthProvider",
+        "AllowedScopes": []
+      },
+      "AddHeadersToRequest": {
+        "CreatedBy": "Claims[https://localhost:5001/email] > value"
+      }
+    },
+    {
+      "DownstreamPathTemplate": "/api/v1/Workspaces/{id}",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": "7114"
+        }
+      ],
+      "RateLimitOptions": {
+        "ClientWhitelist": [
+
+        ],
+        "EnableRateLimiting": false,
+        "Period": "5s",
+        "PeriodTimespan": 1,
+        "Limit": 1
+      },
+      "UpstreamPathTemplate": "/api/v1/Workspaces/{id}",
+      "UpstreamHttpMethod": [
+        "PUT",
+        "PATCH",
+        "DELETE"
+      ],
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "BaseAuthProvider",
+        "AllowedScopes": []
+      }
+    },
+    {
+      "DownstreamPathTemplate": "/api/v1/Workspaces?owner={owner}",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": "7114"
+        }
+      ],
+      "RateLimitOptions": {
+        "ClientWhitelist": [
+
+        ],
+        "EnableRateLimiting": false,
+        "Period": "5s",
+        "PeriodTimespan": 1,
+        "Limit": 1
+      },
+      "UpstreamPathTemplate": "/api/v1/Workspaces?owner={owner}",
+      "UpstreamHttpMethod": [
+        "GET"
+      ],
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "BaseAuthProvider",
+        "AllowedScopes": []
+      }
+    }
+  ]
+}

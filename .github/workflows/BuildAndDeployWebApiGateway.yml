@@ -1,13 +1,14 @@
 # Docs for the Azure Web Apps Deploy action: https://github.com/Azure/webapps-deploy
 # More GitHub Actions for Azure: https://github.com/Azure/actions
 
-name: Build and deploy - uscheduler-api-gateway-v1
+name: Build and deploy - uscheduler-api-gateway
 
 on:
-  workflow_run:
-    workflows: [Build and deploy - uscheduler-api-workspaces-v1]
-    types:
-      - completed
+  push:
+    branches:
+      - 'master'
+    paths:
+      - 'Project/UScheduler.WebApi/UScheduler.WebApi.Gateway/**'
 
 jobs:
   build:
@@ -24,17 +25,17 @@ jobs:
 
       - name: Build with dotnet
         run: dotnet build --configuration Release
-        working-directory: ./Homework4
+        working-directory: ./Project
 
       - name: dotnet publish
-        run: dotnet publish -c Release -o ${{env.DOTNET_ROOT}}/uscheduler-api-gateway-v1
-        working-directory: ./Homework4/UScheduler.WebApi/UScheduler.WebApi.Gateway
+        run: dotnet publish -c Release -o ${{env.DOTNET_ROOT}}/uscheduler-api-gateway
+        working-directory: ./Project/UScheduler.WebApi/UScheduler.WebApi.Gateway
 
       - name: Upload artifact for deployment job
         uses: actions/upload-artifact@v2
         with:
           name: .net-app
-          path: ${{env.DOTNET_ROOT}}/uscheduler-api-gateway-v1
+          path: ${{env.DOTNET_ROOT}}/uscheduler-api-gateway
 
   deploy:
     runs-on: ubuntu-latest
@@ -53,7 +54,7 @@ jobs:
         id: deploy-to-webapp
         uses: azure/webapps-deploy@v2
         with:
-          app-name: 'uscheduler-api-gateway-v1'
+          app-name: 'uscheduler-api-gateway'
           slot-name: 'Production'
-          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_2F236F4F99684118A76C04C8F7C4A184 }}
+          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_DB627DFE30C341BEA39A116E6F50DE8F }}
           package: .

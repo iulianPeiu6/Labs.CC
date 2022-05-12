@@ -1,0 +1,96 @@
+﻿{
+  "Routes": [
+    {
+      "DownstreamPathTemplate": "/api/v1/Workspaces",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "uscheduler-api-workspaces.azurewebsites.net",
+          "Port": "443"
+        }
+      ],
+      "RateLimitOptions": {
+        "ClientWhitelist": [
+
+        ],
+        "EnableRateLimiting": false,
+        "Period": "5s",
+        "PeriodTimespan": 1,
+        "Limit": 1
+      },
+      "UpstreamPathTemplate": "/api/v1/Workspaces",
+      "UpstreamHttpMethod": [
+        "POST"
+      ],
+      "DangerousAcceptAnyServerCertificateValidator": true,
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "BaseAuthProvider",
+        "AllowedScopes": []
+      },
+      "AddHeadersToRequest": {
+        "CreatedBy": "Claims[https://uscheduler-api-gateway.azurewebsites.net/email] > value"
+      }
+    },
+    {
+      "DownstreamPathTemplate": "/api/v1/Workspaces/{id}",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "uscheduler-api-workspaces.azurewebsites.net",
+          "Port": "443"
+        }
+      ],
+      "RateLimitOptions": {
+        "ClientWhitelist": [
+
+        ],
+        "EnableRateLimiting": false,
+        "Period": "5s",
+        "PeriodTimespan": 1,
+        "Limit": 1
+      },
+      "UpstreamPathTemplate": "/api/v1/Workspaces/{id}",
+      "UpstreamHttpMethod": [
+        "PUT",
+        "PATCH",
+        "DELETE"
+      ],
+      "DangerousAcceptAnyServerCertificateValidator": true,
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "BaseAuthProvider",
+        "AllowedScopes": []
+      }
+    },
+    {
+      "DownstreamPathTemplate": "/api/v1/Workspaces?owner={owner}",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "uscheduler-api-workspaces.azurewebsites.net",
+          "Port": "443"
+        }
+      ],
+      "RateLimitOptions": {
+        "ClientWhitelist": [
+
+        ],
+        "EnableRateLimiting": false,
+        "Period": "5s",
+        "PeriodTimespan": 1,
+        "Limit": 1
+      },
+      "UpstreamPathTemplate": "/api/v1/Workspaces?owner={owner}",
+      "UpstreamHttpMethod": [
+        "GET"
+      ],
+      "DangerousAcceptAnyServerCertificateValidator": true,
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "BaseAuthProvider",
+        "AllowedScopes": []
+      }
+    }
+  ],
+  "GlobalConfiguration": {
+    "BaseUrl": "https://uscheduler-api-gateway.azurewebsites.net/"
+  }
+}
