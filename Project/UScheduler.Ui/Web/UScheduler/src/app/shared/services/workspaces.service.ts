@@ -39,7 +39,6 @@ export class WorkspacesService {
 
     let response$ = this.http.post<Workspace>('/api/v1/Workspaces', workspaceToCreate, { headers: headers});
     let response = await lastValueFrom(response$);
-
     console.log(response);
 
     return response;

@@ -8,7 +8,7 @@ on:
       types: [opened, synchronize, reopened]
 name: Sonar Scan
 jobs:
-  sonarcloud:
+  sonarscan:
     runs-on: windows-latest
     steps:
       - name: Set up JDK 11
