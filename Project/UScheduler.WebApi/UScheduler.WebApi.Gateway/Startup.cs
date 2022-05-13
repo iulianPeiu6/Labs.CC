@@ -53,9 +53,9 @@ namespace UScheduler.WebApi.Gateway
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
-                app.UseSwagger();
             }
-            
+
+            app.UseSwagger();
             app.UseSwaggerForOcelotUI(opt =>
             {
                 opt.PathToSwaggerGenerator = "/swagger/docs";
