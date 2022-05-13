@@ -7,7 +7,6 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
 using Ocelot.DependencyInjection;
 using Ocelot.Middleware;
-using Ocelot.Values;
 
 namespace UScheduler.WebApi.Gateway
 {
@@ -43,7 +42,7 @@ namespace UScheduler.WebApi.Gateway
             });
 
             services.AddOcelot(Configuration);
-            
+
             services.AddSwaggerForOcelot(Configuration);
         }
 
