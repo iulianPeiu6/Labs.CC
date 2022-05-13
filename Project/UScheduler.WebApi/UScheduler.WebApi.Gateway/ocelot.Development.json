@@ -100,6 +100,16 @@
           "Url": "https://localhost:7114/swagger/v1/swagger.json"
         }
       ]
+    },
+    {
+      "Key": "boards",
+      "Config": [
+        {
+          "Name": "UScheduler.WebApi.Workspaces",
+          "Version": "v1",
+          "Url": "https://localhost:44313/swagger/v1/swagger.json"
+        }
+      ]
     }
   ]
 }
