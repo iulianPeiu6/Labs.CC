@@ -14,17 +14,20 @@ namespace UScheduler.WebApi.Boards.Services
     public class BoardsService : IBoardsService
     {
         private readonly IBoardsRepository _repository;
+        private readonly IWorkspacesAdapter _workspacesAdapter;
         private readonly IMapper _mapper;
         private readonly ILogger<BoardsService> _logger;
 
         public BoardsService(
             IBoardsRepository repository, 
             IMapper mapper, 
-            ILogger<BoardsService> logger)
+            ILogger<BoardsService> logger,
+            IWorkspacesAdapter workspacesAdapter)
         {
             _repository = repository;
             _mapper = mapper;
             _logger = logger;
+            _workspacesAdapter = workspacesAdapter;
         }
 
         public async Task<(bool IsSuccess, BoardDto Board, string Error)> GetBoardAsync(Guid boardId)
@@ -68,7 +71,11 @@ namespace UScheduler.WebApi.Boards.Services
         {
             try
             {
-                //assert workspace exists
+                var (workspaceExists, error) = await _workspacesAdapter.WorkspaceExists(model.WorkspaceId);
+                if (!workspaceExists)
+                {
+                    return (false, null, error);
+                }
 
                 var currentTime = DateTime.UtcNow;
                 var board = _mapper.Map<Board>(model);

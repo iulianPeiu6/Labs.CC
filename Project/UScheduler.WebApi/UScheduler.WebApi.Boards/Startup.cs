@@ -6,6 +6,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
+using UScheduler.WebApi.Boards.Adapters;
 using UScheduler.WebApi.Boards.Data;
 using UScheduler.WebApi.Boards.Interfaces;
 using UScheduler.WebApi.Boards.Repositories;
@@ -37,6 +38,8 @@ namespace UScheduler.WebApi.Boards
             services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
             services.AddScoped<IBoardsRepository, BoardsRepository>();
             services.AddScoped<IBoardsService, BoardsService>();
+
+            services.AddHttpClient<IWorkspacesAdapter, WorkspacesAdapter>();
 
             services.AddDbContext<BoardsContext>(options =>
             {
