@@ -71,6 +71,7 @@ namespace UScheduler.WebApi.Boards.Services
         {
             try
             {
+                //not working yet since there is no suitable endpoint for this check
                 var (workspaceExists, error) = await _workspacesAdapter.WorkspaceExists(model.WorkspaceId);
                 if (!workspaceExists)
                 {
