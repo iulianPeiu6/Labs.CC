@@ -1,9 +1,16 @@
+using System;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
+using UScheduler.WebApi.Boards.Adapters;
+using UScheduler.WebApi.Boards.Data;
+using UScheduler.WebApi.Boards.Interfaces;
+using UScheduler.WebApi.Boards.Repositories;
+using UScheduler.WebApi.Boards.Services;
 
 namespace UScheduler.WebApi.Boards
 {
@@ -20,10 +27,23 @@ namespace UScheduler.WebApi.Boards
         public void ConfigureServices(IServiceCollection services)
         {
 
-            services.AddControllers();
+            services.AddControllers()
+                .AddNewtonsoftJson();
+
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "UScheduler.WebApi.Boards", Version = "v1" });
+            });
+
+            services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
+            services.AddScoped<IBoardsRepository, BoardsRepository>();
+            services.AddScoped<IBoardsService, BoardsService>();
+
+            services.AddHttpClient<IWorkspacesAdapter, WorkspacesAdapter>();
+
+            services.AddDbContext<BoardsContext>(options =>
+            {
+                options.UseSqlServer(Configuration.GetConnectionString("BoardsDB"));
             });
         }
 
