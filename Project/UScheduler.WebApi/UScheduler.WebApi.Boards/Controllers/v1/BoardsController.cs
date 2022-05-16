@@ -105,9 +105,15 @@ namespace UScheduler.WebApi.Boards.Controllers.v1
         {
             _logger?.LogDebug($"Handling DELETE request on api/v1/Boards/{id}");
             var (isSuccess, error) = await _provider.DeleteBoardAsync(id);
-            return isSuccess
-                ? NoContent()
-                : BadRequest(new {Message = error});
+            if (isSuccess)
+            {
+                return NoContent();
+            }
+            if (error == ErrorMessage.BoardNotFound)
+            {
+                return NotFound();
+            }
+            return BadRequest(new { Message = error });
         }
     }
 }
