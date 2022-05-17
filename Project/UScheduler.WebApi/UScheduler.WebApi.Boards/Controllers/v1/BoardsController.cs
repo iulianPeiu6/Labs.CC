@@ -66,11 +66,11 @@ namespace UScheduler.WebApi.Boards.Controllers.v1
         }
 
         [HttpPut("{id}")]
-        public async Task<IActionResult> UpdateBoard(Guid id, [FromBody] UpdateBoardModel model, [FromHeader] string modifiedBy)
+        public async Task<IActionResult> UpdateBoard(Guid id, [FromBody] UpdateBoardModel model, [FromHeader] string updatedBy)
         {
             _logger?.LogDebug($"Handling PUT request on api/v1/Boards/{id}");
 
-            var (isSuccess, board, error) = await _provider.UpdateAsync(id, model, modifiedBy);
+            var (isSuccess, board, error) = await _provider.UpdateAsync(id, model, updatedBy);
             if (isSuccess)
             {
                 return Ok(board);
@@ -83,11 +83,11 @@ namespace UScheduler.WebApi.Boards.Controllers.v1
         }
 
         [HttpPatch("{id}")]
-        public async Task<IActionResult> UpdateBoard(Guid id, [FromBody] JsonPatchDocument<Board> model, [FromHeader] string modifiedBy)
+        public async Task<IActionResult> UpdateBoard(Guid id, [FromBody] JsonPatchDocument<Board> model, [FromHeader] string updatedBy)
         {
             _logger?.LogDebug($"Handling PATCH request on api/v1/Boards/{id}");
 
-            var (isSuccess, board, error) = await _provider.UpdateAsync(id, model, modifiedBy);
+            var (isSuccess, board, error) = await _provider.UpdateAsync(id, model, updatedBy);
             if (isSuccess)
             {
                 return Ok(board);
