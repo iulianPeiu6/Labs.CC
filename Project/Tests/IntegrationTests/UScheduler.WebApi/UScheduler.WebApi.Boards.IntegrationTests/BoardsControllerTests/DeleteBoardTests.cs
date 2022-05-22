@@ -20,7 +20,7 @@ namespace UScheduler.WebApi.Boards.IntegrationTests.BoardsControllerTests
         [Test]
         public async Task Given_ExistingBoardId_When_DeleteBoardIsCalled_Then_DeleteBoard()
         {
-            var response = await testClient.DeleteAsync($"api/v1/Boards/{existentBoardId}");
+            var response = await testClient.DeleteAsync("api/v1/Boards/5036f271-f9d7-438c-8014-2234be010fcc");
 
             response.StatusCode.Should().Be(HttpStatusCode.NoContent);
         }

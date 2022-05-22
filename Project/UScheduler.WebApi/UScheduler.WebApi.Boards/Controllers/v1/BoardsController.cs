@@ -55,22 +55,22 @@ namespace UScheduler.WebApi.Boards.Controllers.v1
         }
 
         [HttpPost]
-        public async Task<IActionResult> CreateBoard([FromBody] CreateBoardModel model, [FromHeader] string createdBy)
+        public async Task<IActionResult> CreateBoard([FromBody] CreateBoardModel model, [FromHeader] string requestedBy)
         {
             _logger?.LogDebug("Handling POST request on api/v1/Boards");
 
-            var (isSuccess, board, error) = await _provider.CreateBoardAsync(model, createdBy);
+            var (isSuccess, board, error) = await _provider.CreateBoardAsync(model, requestedBy);
             return isSuccess 
                 ? Created(Request.Host.Value + $"/api/v1/Boards/{board.Id}", board)
                 : BadRequest(new { Message = error });
         }
 
         [HttpPut("{id}")]
-        public async Task<IActionResult> UpdateBoard(Guid id, [FromBody] UpdateBoardModel model, [FromHeader] string updatedBy)
+        public async Task<IActionResult> UpdateBoard(Guid id, [FromBody] UpdateBoardModel model, [FromHeader] string requestedBy)
         {
             _logger?.LogDebug($"Handling PUT request on api/v1/Boards/{id}");
 
-            var (isSuccess, board, error) = await _provider.UpdateAsync(id, model, updatedBy);
+            var (isSuccess, board, error) = await _provider.UpdateAsync(id, model, requestedBy);
             if (isSuccess)
             {
                 return Ok(board);
@@ -83,11 +83,11 @@ namespace UScheduler.WebApi.Boards.Controllers.v1
         }
 
         [HttpPatch("{id}")]
-        public async Task<IActionResult> UpdateBoard(Guid id, [FromBody] JsonPatchDocument<Board> model, [FromHeader] string updatedBy)
+        public async Task<IActionResult> UpdateBoard(Guid id, [FromBody] JsonPatchDocument<Board> model, [FromHeader] string requestedBy)
         {
             _logger?.LogDebug($"Handling PATCH request on api/v1/Boards/{id}");
 
-            var (isSuccess, board, error) = await _provider.UpdateAsync(id, model, updatedBy);
+            var (isSuccess, board, error) = await _provider.UpdateAsync(id, model, requestedBy);
             if (isSuccess)
             {
                 return Ok(board);
