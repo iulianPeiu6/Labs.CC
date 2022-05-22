@@ -27,7 +27,7 @@
         "AllowedScopes": []
       },
       "AddHeadersToRequest": {
-        "CreatedBy": "Claims[https://localhost:5001/email] > value"
+        "RequestedBy": "Claims[https://localhost:5001/email] > value"
       },
       "SwaggerKey": "workspaces"
     },

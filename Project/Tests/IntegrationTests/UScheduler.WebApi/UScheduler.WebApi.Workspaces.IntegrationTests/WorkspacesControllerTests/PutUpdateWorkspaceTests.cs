@@ -28,7 +28,7 @@ namespace UScheduler.WebApi.Workspaces.IntegrationTests.WorkspacesControllerTest
             // Act
             var requestContent = new StringContent(JsonSerializer.Serialize(workspace), Encoding.UTF8, "application/json");
             var request = new HttpRequestMessage(HttpMethod.Put, $"api/v1/Workspaces/{id}");
-            request.Headers.Add("UpdatedBy", "owner-001@email.com");
+            request.Headers.Add("RequestedBy", "owner-001@email.com");
             request.Content = requestContent;
             var response = await testClient.SendAsync(request);
             await response.Content.ReadAsStringAsync();
@@ -52,7 +52,7 @@ namespace UScheduler.WebApi.Workspaces.IntegrationTests.WorkspacesControllerTest
             // Act
             var requestContent = new StringContent(JsonSerializer.Serialize(workspace), Encoding.UTF8, "application/json");
             var request = new HttpRequestMessage(HttpMethod.Put, $"api/v1/Workspaces/{id}");
-            request.Headers.Add("UpdatedBy", "owner-001@email.com");
+            request.Headers.Add("RequestedBy", "owner-001@email.com");
             request.Content = requestContent;
             var response = await testClient.SendAsync(request);
             var responseContent = await response.Content.ReadAsStringAsync();
@@ -71,6 +71,32 @@ namespace UScheduler.WebApi.Workspaces.IntegrationTests.WorkspacesControllerTest
             updatedWorkspace?.WorkspaceTemplate.Should().NotBeNullOrEmpty();
             updatedWorkspace?.UpdatedBy.Should().Be("owner-001@email.com");
             updatedWorkspace?.UpdatedAt.Should().BeCloseTo(DateTime.UtcNow, new TimeSpan(0, 0, 59));
+        }
+
+        [Test]
+        public async Task Given_ValidWorkspaceIdWithValidUpdateRequest_When_FullUpdatedWorkspaceIsCalledWithRequestedByHeaderMissing_Then_ReturnInternalErrorAsync()
+        {
+            // Arange
+            var id = Guid.Parse("367c9423-0d7a-49d5-8376-5619804271bf");
+            var workspace = new UpdateWorkspaceModel
+            {
+                Title = "Workspace - 002 - Updated",
+                Description = "Workspace - Update - 002 - Updated",
+                AccessLevel = "Public",
+            };
+
+            // Act
+            var requestContent = new StringContent(JsonSerializer.Serialize(workspace), Encoding.UTF8, "application/json");
+            var request = new HttpRequestMessage(HttpMethod.Put, $"api/v1/Workspaces/{id}");
+            request.Content = requestContent;
+            var response = await testClient.SendAsync(request);
+            var responseContent = await response.Content.ReadAsStringAsync();
+            var updatedWorkspace = JsonSerializer.Deserialize<WorkspaceDto>(
+                responseContent,
+                new JsonSerializerOptions { PropertyNameCaseInsensitive = true });
+
+            // Asert
+            response.StatusCode.Should().Be(HttpStatusCode.InternalServerError);
         }
     }
 }

@@ -26,7 +26,7 @@ namespace UScheduler.WebApi.Workspaces.IntegrationTests.WorkspacesControllerTest
             // Act
             var requestContent = new StringContent(JsonConvert.SerializeObject(patchDoc), Encoding.UTF8, "application/json-patch+json");
             var request = new HttpRequestMessage(HttpMethod.Patch, $"api/v1/Workspaces/{id}");
-            request.Headers.Add("UpdatedBy", "owner-new-003@email.com");
+            request.Headers.Add("RequestedBy", "owner-new-003@email.com");
             request.Content = requestContent;
             var response = await testClient.SendAsync(request);
             await response.Content.ReadAsStringAsync();
@@ -50,7 +50,7 @@ namespace UScheduler.WebApi.Workspaces.IntegrationTests.WorkspacesControllerTest
             // Act
             var requestContent = new StringContent(JsonConvert.SerializeObject(patchDoc), Encoding.UTF8, "application/json-patch+json");
             var request = new HttpRequestMessage(HttpMethod.Patch, $"api/v1/Workspaces/{id}");
-            request.Headers.Add("UpdatedBy", "owner-new-003@email.com");
+            request.Headers.Add("RequestedBy", "owner-new-003@email.com");
             request.Content = requestContent;
             var response = await testClient.SendAsync(request);
             var responseContent = await response.Content.ReadAsStringAsync();

@@ -62,16 +62,16 @@ namespace UScheduler.WebApi.Workspaces.Controllers.v1
         }
 
         [HttpPost]
-        public async Task<IActionResult> CreateWorkspaceAsync([FromBody] CreateWorkspaceModel workspace, [FromHeader] string createdBy)
+        public async Task<IActionResult> CreateWorkspaceAsync([FromBody] CreateWorkspaceModel workspace, [FromHeader] string requestedBy)
         {
             logger?.LogDebug("Handeling POST request on api/v1/Workspaces");
 
-            if (string.IsNullOrEmpty(createdBy))
+            if (string.IsNullOrEmpty(requestedBy))
             {
                 return StatusCode(StatusCodes.Status500InternalServerError, new { message = ErrorMessage.RequestedByHeaderValueIsMissing });
             }
 
-            workspace.CreatedBy = createdBy;
+            workspace.CreatedBy = requestedBy;
 
             var result = await provider.CreateWorkspaceAsync(workspace);
 

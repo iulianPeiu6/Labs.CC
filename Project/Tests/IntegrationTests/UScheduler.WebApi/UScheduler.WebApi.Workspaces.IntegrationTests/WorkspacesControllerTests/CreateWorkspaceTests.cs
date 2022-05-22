@@ -34,7 +34,7 @@ namespace UScheduler.WebApi.Workspaces.IntegrationTests.WorkspacesControllerTest
             // Act
             var requestContent = new StringContent(JsonSerializer.Serialize(workspace), Encoding.UTF8, "application/json");
             var request = new HttpRequestMessage(HttpMethod.Post, "api/v1/Workspaces");
-            request.Headers.Add("CreatedBy", "owner-001@email.com");
+            request.Headers.Add("RequestedBy", "owner-001@email.com");
             request.Content = requestContent;
             var response = await testClient.SendAsync(request);
             var responseContent = await response.Content.ReadAsStringAsync();
@@ -56,6 +56,37 @@ namespace UScheduler.WebApi.Workspaces.IntegrationTests.WorkspacesControllerTest
             createdWorkspace?.CreatedAt.Should().BeCloseTo(DateTime.UtcNow, new TimeSpan(0, 0, 59));
             createdWorkspace?.UpdatedBy.Should().Be("owner-001@email.com");
             createdWorkspace?.UpdatedAt.Should().BeCloseTo(DateTime.UtcNow, new TimeSpan(0, 0, 59));
+        }
+
+        [Test]
+        public async Task Given_ValidWorkspace_When_CreateWorkspaceIsCalledWithRequestedByHeaderMissing_Then_ReturnInternalErrorAsync()
+        {
+            // Arange
+            var workspace = new CreateWorkspaceModel
+            {
+                Owner = "owner-001@email.com",
+                Title = "Workspace - 005",
+                Description = "Workspace - 005",
+                AccessLevel = "Private",
+                Colabs = new List<string>()
+                {
+                    "owner-001@email.com"
+                },
+                WorkspaceTemplate = "Basic"
+            };
+
+            // Act
+            var requestContent = new StringContent(JsonSerializer.Serialize(workspace), Encoding.UTF8, "application/json");
+            var request = new HttpRequestMessage(HttpMethod.Post, "api/v1/Workspaces");
+            request.Content = requestContent;
+            var response = await testClient.SendAsync(request);
+            var responseContent = await response.Content.ReadAsStringAsync();
+            var createdWorkspace = JsonSerializer.Deserialize<WorkspaceDto>(
+                responseContent,
+                new JsonSerializerOptions { PropertyNameCaseInsensitive = true });
+
+            // Asert
+            response.StatusCode.Should().Be(HttpStatusCode.InternalServerError);
         }
     }
 }
