@@ -17,9 +17,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "UScheduler.WebApi.Workspace
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "UScheduler.WebApi.Gateway", "UScheduler.WebApi\UScheduler.WebApi.Gateway\UScheduler.WebApi.Gateway.csproj", "{D62A8975-237E-4F2F-9765-164B4E173A0E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UScheduler.WebApi.Boards", "UScheduler.WebApi\UScheduler.WebApi.Boards\UScheduler.WebApi.Boards.csproj", "{C370183D-FD96-41A4-81C2-83C20250A55F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "UScheduler.WebApi.Boards", "UScheduler.WebApi\UScheduler.WebApi.Boards\UScheduler.WebApi.Boards.csproj", "{C370183D-FD96-41A4-81C2-83C20250A55F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UScheduler.WebApi.Boards.IntegrationTests", "Tests\IntegrationTests\UScheduler.WebApi\UScheduler.WebApi.Boards.IntegrationTests\UScheduler.WebApi.Boards.IntegrationTests.csproj", "{C3B8C39B-7536-4C0B-A9D6-9B9436B0A3EF}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "UScheduler.WebApi.Boards.IntegrationTests", "Tests\IntegrationTests\UScheduler.WebApi\UScheduler.WebApi.Boards.IntegrationTests\UScheduler.WebApi.Boards.IntegrationTests.csproj", "{84D286BC-F8EB-48DC-A56D-81759FA7BEE0}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UScheduler.WebApi.Tasks", "UScheduler.WebApi\UScheduler.WebApi.Tasks\UScheduler.WebApi.Tasks.csproj", "{6DA5E872-8EAE-44DA-BF7D-50F31715A7B2}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -43,10 +45,14 @@ Global
 		{C370183D-FD96-41A4-81C2-83C20250A55F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C370183D-FD96-41A4-81C2-83C20250A55F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C370183D-FD96-41A4-81C2-83C20250A55F}.Release|Any CPU.Build.0 = Release|Any CPU
-		{C3B8C39B-7536-4C0B-A9D6-9B9436B0A3EF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{C3B8C39B-7536-4C0B-A9D6-9B9436B0A3EF}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{C3B8C39B-7536-4C0B-A9D6-9B9436B0A3EF}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{C3B8C39B-7536-4C0B-A9D6-9B9436B0A3EF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{84D286BC-F8EB-48DC-A56D-81759FA7BEE0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{84D286BC-F8EB-48DC-A56D-81759FA7BEE0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{84D286BC-F8EB-48DC-A56D-81759FA7BEE0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{84D286BC-F8EB-48DC-A56D-81759FA7BEE0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6DA5E872-8EAE-44DA-BF7D-50F31715A7B2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6DA5E872-8EAE-44DA-BF7D-50F31715A7B2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6DA5E872-8EAE-44DA-BF7D-50F31715A7B2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6DA5E872-8EAE-44DA-BF7D-50F31715A7B2}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -58,7 +64,8 @@ Global
 		{30CB737F-5CE6-4552-ACFE-A8358CE691E7} = {8C20A3DB-D732-4B19-81B5-EC5FA4E04422}
 		{D62A8975-237E-4F2F-9765-164B4E173A0E} = {3BA49910-88E0-447C-8E81-51F90584D790}
 		{C370183D-FD96-41A4-81C2-83C20250A55F} = {3BA49910-88E0-447C-8E81-51F90584D790}
-		{C3B8C39B-7536-4C0B-A9D6-9B9436B0A3EF} = {8C20A3DB-D732-4B19-81B5-EC5FA4E04422}
+		{84D286BC-F8EB-48DC-A56D-81759FA7BEE0} = {8C20A3DB-D732-4B19-81B5-EC5FA4E04422}
+		{6DA5E872-8EAE-44DA-BF7D-50F31715A7B2} = {3BA49910-88E0-447C-8E81-51F90584D790}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {CAACEDFC-8C3D-432D-A38B-CEE42129A0DD}
