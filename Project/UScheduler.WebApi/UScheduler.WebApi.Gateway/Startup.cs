@@ -19,28 +19,12 @@ namespace UScheduler.WebApi.Gateway
 
         public IConfiguration Configuration { get; }
 
-        private const string BaseCorsPolicy = "BaseCorsPolicy";
-
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers();
 
             services.AddEndpointsApiExplorer();
-
-            services.AddCors(options =>
-            {
-                options.AddPolicy(BaseCorsPolicy,
-                    builder => builder
-                        .SetIsOriginAllowedToAllowWildcardSubdomains()
-                        .WithOrigins("https://uscheduler-eu.azurewebsites.net", "http://localhost:4200")
-                        .AllowAnyMethod()
-                        .AllowCredentials()
-                        .AllowAnyHeader()
-                        .WithExposedHeaders("Content-Disposition")
-                        .Build()
-                );
-            });
 
             services.AddSwaggerGen(c =>
             {
@@ -79,7 +63,6 @@ namespace UScheduler.WebApi.Gateway
             app.UseHttpsRedirection();
 
             app.UseRouting();
-            app.UseCors(BaseCorsPolicy);
 
             app.UseAuthentication();
 
