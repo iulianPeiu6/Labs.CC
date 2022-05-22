@@ -1,30 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using UScheduler.WebApi.Workspaces.Data.Entities;
 
 namespace UScheduler.WebApi.Workspaces.Models
 {
-    public class WorkspaceDto
+    public class WorkspaceDto : Workspace
     {
-        public Guid Id { get; set; }
-
-        public string Title { get; set; }
-
-        public string Description { get; set; }
-
-        public string Owner { get; set; }
-
-        public string AccessLevel { get; set; }
-
-        public List<string> Colabs { get; set; }
-
-        public string WorkspaceTemplate { get; set; }
-
-        public DateTime CreatedAt { get; set; }
-
-        public string CreatedBy { get; set; }
-
-        public DateTime UpdatedAt { get; set; }
-
-        public string UpdatedBy { get; set; }
     }
 }
