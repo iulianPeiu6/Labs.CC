@@ -3,10 +3,11 @@ import { Routes, RouterModule } from '@angular/router';
 import { AuthGuardService } from './shared/services';
 import { HomeComponent } from './pages/home/home.component';
 import { ProfileComponent } from './pages/profile/profile.component';
-import { DxButtonModule, DxDataGridModule, DxFormModule, DxPopupModule, DxSelectBoxModule, DxTextAreaModule, DxToastModule } from 'devextreme-angular';
+import { DxButtonModule, DxDataGridModule, DxFormModule, DxPopupModule, DxResponsiveBoxModule, DxSelectBoxModule, DxTextAreaModule, DxTextBoxModule, DxToastModule } from 'devextreme-angular';
 import { CommonModule } from '@angular/common';
 import { CreateWorkspaceComponent } from './pages/create-workspace/create-workspace.component';
 import { DxiItemModule } from 'devextreme-angular/ui/nested';
+import { ViewWorkspaceComponent } from './pages/view-workspace/view-workspace.component';
 
 const routes: Routes = [
   {
@@ -22,6 +23,11 @@ const routes: Routes = [
   {
     path: 'workspaces/new',
     component: CreateWorkspaceComponent,
+    canActivate: [ AuthGuardService ]
+  },
+  {
+    path: 'workspaces/:id/boards',
+    component: ViewWorkspaceComponent,
     canActivate: [ AuthGuardService ]
   },
   {
@@ -42,13 +48,16 @@ const routes: Routes = [
     DxPopupModule,
     DxSelectBoxModule,
     DxButtonModule,
+    DxResponsiveBoxModule,
+    DxTextBoxModule
   ],
   providers: [AuthGuardService],
   exports: [RouterModule],
   declarations: [
     HomeComponent,
     ProfileComponent,
-    CreateWorkspaceComponent
+    CreateWorkspaceComponent,
+    ViewWorkspaceComponent
   ]
 })
 export class AppRoutingModule { }

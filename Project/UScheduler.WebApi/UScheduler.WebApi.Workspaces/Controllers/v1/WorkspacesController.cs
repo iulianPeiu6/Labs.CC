@@ -28,6 +28,25 @@ namespace UScheduler.WebApi.Workspaces.Controllers.v1
             this.logger = logger;
         }
 
+        [HttpGet("{id}")]
+        public async Task<IActionResult> GetByIdAsync(Guid id, [FromHeader] string requestedBy)
+        {
+            logger?.LogDebug($"Handeling GET request on api/v1/Workspaces/{id}");
+            var result = await provider.GetWorkspaceByIdAsync(id, requestedBy);
+
+            if (result.Error == ErrorMessage.WorkspaceNotFound)
+            {
+                return NotFound(new { message = result.Error });
+            }
+
+            if (result.IsSuccess)
+            {
+                return Ok(result.Workspace);
+            }
+
+            return StatusCode(StatusCodes.Status500InternalServerError, new { message = result.Error });
+        }
+
         [HttpGet]
         public async Task<IActionResult> GetWorkspacesByOwnerAsync([FromQuery] string owner)
         {
@@ -47,6 +66,11 @@ namespace UScheduler.WebApi.Workspaces.Controllers.v1
         {
             logger?.LogDebug("Handeling POST request on api/v1/Workspaces");
 
+            if (string.IsNullOrEmpty(createdBy))
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError, new { message = ErrorMessage.RequestedByHeaderValueIsMissing });
+            }
+
             workspace.CreatedBy = createdBy;
 
             var result = await provider.CreateWorkspaceAsync(workspace);
@@ -60,11 +84,16 @@ namespace UScheduler.WebApi.Workspaces.Controllers.v1
         }
 
         [HttpPut("{id}")]
-        public async Task<IActionResult> UpdateAsync(Guid id, [FromBody] UpdateWorkspaceModel workspace, [FromHeader] string updatedBy)
+        public async Task<IActionResult> UpdateAsync(Guid id, [FromBody] UpdateWorkspaceModel workspace, [FromHeader] string requestedBy)
         {
             logger?.LogDebug($"Handeling PUT request on api/v1/Workspaces/{id}");
 
-            workspace.UpdatedBy = updatedBy;
+            if (string.IsNullOrEmpty(requestedBy))
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError, new { message = ErrorMessage.RequestedByHeaderValueIsMissing });
+            }
+
+            workspace.UpdatedBy = requestedBy;
 
             var result = await provider.FullUpdateWorkspaceAsync(id, workspace);
 
@@ -82,18 +111,18 @@ namespace UScheduler.WebApi.Workspaces.Controllers.v1
         }
 
         [HttpPatch("{id}")]
-        public async Task<IActionResult> UpdateAsync(Guid id, [FromBody] JsonPatchDocument<Workspace> patchDoc)
+        public async Task<IActionResult> UpdateAsync(Guid id, [FromBody] JsonPatchDocument<Workspace> patchDoc, [FromHeader] string requestedBy)
         {
             logger?.LogDebug($"Handeling PATCH request on api/v1/Workspaces/{id}");
 
+            if (string.IsNullOrEmpty(requestedBy))
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError, new { message = ErrorMessage.RequestedByHeaderValueIsMissing });
+            }
+
             if (patchDoc != null)
             {
-                Request.Headers.TryGetValue("UpdatedBy", out var updatedBy);
-                if (string.IsNullOrEmpty(updatedBy))
-                {
-                    return StatusCode(StatusCodes.Status500InternalServerError, new { message = ErrorMessage.UpdatedByHeaderValueIsMissing });
-                }
-                var result = await provider.PartiallyUpdateWorkspaceAsync(id, patchDoc, updatedBy);
+                var result = await provider.PartiallyUpdateWorkspaceAsync(id, patchDoc, requestedBy);
 
                 if (result.IsSuccess)
                 {
@@ -112,9 +141,15 @@ namespace UScheduler.WebApi.Workspaces.Controllers.v1
         }
 
         [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteAsync(Guid id)
+        public async Task<IActionResult> DeleteAsync(Guid id, [FromHeader] string requestedBy)
         {
             logger?.LogDebug($"Handeling DELETE request on api/v1/Workspaces/{id}");
+
+            if (string.IsNullOrEmpty(requestedBy))
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError, new { message = ErrorMessage.RequestedByHeaderValueIsMissing });
+            }
+
             var result = await provider.DeleteWorkspaceAsync(id);
 
             if (result.IsSuccess)

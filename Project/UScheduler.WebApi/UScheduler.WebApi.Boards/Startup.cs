@@ -68,6 +68,19 @@ namespace UScheduler.WebApi.Boards
             {
                 endpoints.MapControllers();
             });
+
+            if (env.IsProduction())
+            {
+                InitializeDatabase(app);
+            }
+        }
+
+        private static void InitializeDatabase(IApplicationBuilder app)
+        {
+            using (var scope = app?.ApplicationServices?.GetService<IServiceScopeFactory>()?.CreateScope())
+            {
+                scope?.ServiceProvider.GetRequiredService<BoardsContext>().Database.Migrate();
+            }
         }
     }
 }

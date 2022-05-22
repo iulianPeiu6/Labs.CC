@@ -19,7 +19,9 @@ export class Workspace {
 
 @Injectable()
 export class WorkspacesService {
-  constructor(private http: HttpClient, private auth: AuthService) {}
+  constructor(private http: HttpClient, private auth: AuthService) {
+    
+  }
 
   async createWorkspace(workspace: Workspace):Promise<Workspace> {
     let token$ = this.auth.getAccessTokenSilently();
@@ -38,6 +40,38 @@ export class WorkspacesService {
     })
 
     let response$ = this.http.post<Workspace>('/api/v1/Workspaces', workspaceToCreate, { headers: headers});
+    let response = await lastValueFrom(response$);
+    console.log(response);
+
+    return response;
+  }
+
+  async getById(id: String): Promise<Workspace> {
+    let token$ = this.auth.getAccessTokenSilently();
+    let token = await lastValueFrom(token$);
+
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${token}`
+    })
+
+    let response$ = this.http.get<Workspace>(`/api/v1/Workspaces/${id}`, { headers: headers});
+    let response = await lastValueFrom(response$);
+    console.log(response);
+
+    return response;
+  }
+
+  async delete(id: String): Promise<Workspace> {
+    let token$ = this.auth.getAccessTokenSilently();
+    let token = await lastValueFrom(token$);
+
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${token}`
+    })
+
+    let response$ = this.http.delete<Workspace>(`/api/v1/Workspaces/${id}`, { headers: headers});
     let response = await lastValueFrom(response$);
     console.log(response);
 

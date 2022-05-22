@@ -6,5 +6,6 @@
         public const string UnsupportedWorkspaceType = "Unsupported workspace type!";
         public const string UnsupportedWorkspaceAccessType = "Unsupported workspace access type!";
         public const string UpdatedByHeaderValueIsMissing = "UpdatedBy header value is missing!";
+        public const string RequestedByHeaderValueIsMissing = "RequestedBy header value is missing!";
     }
 }

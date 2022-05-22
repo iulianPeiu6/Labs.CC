@@ -2,6 +2,7 @@ import { Component, NgModule, OnInit } from '@angular/core';
 import DataSource from 'devextreme/data/data_source';
 import { Workspace, WorkspacesService } from '../../shared/services/workspaces.service';
 import notify from "devextreme/ui/notify";
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-create-workspace',
@@ -13,7 +14,7 @@ export class CreateWorkspaceComponent{
   accessLevels: DataSource;
   workspaceTemplates: DataSource;
 
-  constructor(private workspacesService: WorkspacesService) { 
+  constructor(private workspacesService: WorkspacesService, private router: Router) { 
     this.workspace = new Workspace();
     this.accessLevels = new DataSource({
       store: {
@@ -37,6 +38,7 @@ export class CreateWorkspaceComponent{
       .createWorkspace(this.workspace)
       .then(createdWorkspace => {
         notify(`Workspace '${createdWorkspace.title}' was created.`, "success", 3000);
+        this.router.navigateByUrl(`workspaces/${createdWorkspace.id}/boards`);
       })
       .catch(error => {
         notify('Workspace could not be created.', "error", 3000);
