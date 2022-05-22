@@ -1,0 +1,55 @@
+<div>
+  <div class="content-block">
+    <h2 class="content-block">{{workspace.title}}</h2>
+    <dx-button
+      [type]="'danger'"
+      (onClick)="deleteWorkspace()"
+      icon="remove"
+      class="worspace-action-btn">
+    </dx-button>
+    <dx-button
+      icon="plus"
+      (onClick)="toggleCreateBoardPopup()"
+      class="worspace-action-btn">
+    </dx-button>
+    <dx-button
+      icon="edit"
+      class="worspace-action-btn">
+    </dx-button>
+    <p>{{workspace.description}}</p>
+  </div>
+  <div #boardsCards>
+
+  </div> 
+  <dx-popup
+    [(visible)]="createBoardPopupIsVisible"
+    [title]="createBoardPopupTitle"
+    [closeOnOutsideClick]="true">
+    <form (submit)="createBoard($event)">
+      <dx-form
+        [formData]="board"
+        labelLocation="left"
+        class="">
+  
+        <dxi-item 
+          dataField="title">
+          <dxi-validation-rule
+              type="required"
+              message="Title is required">
+          </dxi-validation-rule>
+        </dxi-item>
+        
+        <dxi-item 
+          dataField="description"
+          editorType="dxTextArea">
+        </dxi-item>
+  
+        <dxi-item 
+              itemType="button"
+              [buttonOptions]="{ text: 'Create Board', type: 'success', useSubmitBehavior: true}">
+        </dxi-item>
+  
+      </dx-form>
+    </form>
+</dx-popup>
+</div>

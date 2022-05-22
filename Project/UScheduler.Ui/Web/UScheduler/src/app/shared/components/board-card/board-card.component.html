@@ -1,0 +1,18 @@
+<div class="content-block dx-card responsive-paddings" *ngIf="board != null">
+  <dx-button
+    [type]="'danger'"
+    icon="remove"
+    (onClick)="deleteBoard()"
+    class="board-action-btn">
+  </dx-button>
+  <dx-button
+    icon="plus"
+    class="board-action-btn">
+  </dx-button>
+  <dx-button
+    icon="edit"
+    class="board-action-btn">
+  </dx-button>
+  <h3>{{board!.title}}</h3>
+  <p>{{board!.description}}</p>
+</div> 
