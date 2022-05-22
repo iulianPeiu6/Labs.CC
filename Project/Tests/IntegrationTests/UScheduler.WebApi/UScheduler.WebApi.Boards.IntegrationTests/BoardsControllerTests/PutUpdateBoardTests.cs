@@ -25,7 +25,7 @@ namespace UScheduler.WebApi.Boards.IntegrationTests.BoardsControllerTests
             // Act
             var requestContent = new StringContent(JsonSerializer.Serialize(board), Encoding.UTF8, "application/json");
             var request = new HttpRequestMessage(HttpMethod.Put, $"api/v1/Boards/{boardId}");
-            request.Headers.Add("UpdatedBy", "integration_test@email.com");
+            request.Headers.Add("RequestedBy", "integration_test@email.com");
             request.Content = requestContent;
             var response = await testClient.SendAsync(request);
 
