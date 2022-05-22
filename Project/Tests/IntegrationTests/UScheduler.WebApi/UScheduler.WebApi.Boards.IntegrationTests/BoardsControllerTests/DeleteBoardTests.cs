@@ -1,8 +1,8 @@
-﻿using System;
+﻿using FluentAssertions;
+using NUnit.Framework;
+using System;
 using System.Net;
 using System.Threading.Tasks;
-using FluentAssertions;
-using NUnit.Framework;
 
 namespace UScheduler.WebApi.Boards.IntegrationTests.BoardsControllerTests
 {

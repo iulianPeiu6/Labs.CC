@@ -1,9 +1,9 @@
-﻿using System;
+﻿using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Threading.Tasks;
-using Microsoft.EntityFrameworkCore;
 using UScheduler.WebApi.Boards.Data;
 using UScheduler.WebApi.Boards.Data.Entities;
 using UScheduler.WebApi.Boards.Interfaces;
@@ -19,12 +19,12 @@ namespace UScheduler.WebApi.Boards.Repositories
             _context = context;
         }
 
-        public async Task<Board> GetBoardAsync(Expression<Func<Board, bool>> func) 
+        public async Task<Board> GetBoardAsync(Expression<Func<Board, bool>> func)
             => await _context.Boards
                 .AsNoTracking()
                 .FirstOrDefaultAsync(func);
 
-        public async Task<IEnumerable<Board>> GetBoardsAsync(Expression<Func<Board, bool>> func) 
+        public async Task<IEnumerable<Board>> GetBoardsAsync(Expression<Func<Board, bool>> func)
             => await _context.Boards
                 .AsNoTracking()
                 .Where(func)

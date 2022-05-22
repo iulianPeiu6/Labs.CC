@@ -1,7 +1,7 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.JsonPatch;
+using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.JsonPatch;
 using UScheduler.WebApi.Boards.Data.Entities;
 using UScheduler.WebApi.Boards.Models;
 

@@ -1,9 +1,9 @@
-﻿using System;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.JsonPatch;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using System;
+using System.Threading.Tasks;
 using UScheduler.WebApi.Boards.Data.Entities;
 using UScheduler.WebApi.Boards.Interfaces;
 using UScheduler.WebApi.Boards.Models;
@@ -19,7 +19,7 @@ namespace UScheduler.WebApi.Boards.Controllers.v1
         private readonly ILogger<BoardsController> _logger;
 
         public BoardsController(
-            ILogger<BoardsController> logger, 
+            ILogger<BoardsController> logger,
             IBoardsService provider)
         {
             _logger = logger;
@@ -49,7 +49,7 @@ namespace UScheduler.WebApi.Boards.Controllers.v1
             _logger?.LogDebug($"Handling GET request on api/v1/Boards?workspaceId={workspaceId}");
 
             var (isSuccess, workspace, error) = await _provider.GetBoardsByWorkspaceIdAsync(workspaceId);
-            return isSuccess 
+            return isSuccess
                 ? Ok(workspace)
                 : StatusCode(StatusCodes.Status500InternalServerError, new { message = error });
         }
@@ -60,7 +60,7 @@ namespace UScheduler.WebApi.Boards.Controllers.v1
             _logger?.LogDebug("Handling POST request on api/v1/Boards");
 
             var (isSuccess, board, error) = await _provider.CreateBoardAsync(model, requestedBy);
-            return isSuccess 
+            return isSuccess
                 ? Created(Request.Host.Value + $"/api/v1/Boards/{board.Id}", board)
                 : BadRequest(new { Message = error });
         }
@@ -79,7 +79,7 @@ namespace UScheduler.WebApi.Boards.Controllers.v1
             {
                 return NotFound();
             }
-            return BadRequest(new {Message = error});
+            return BadRequest(new { Message = error });
         }
 
         [HttpPatch("{id}")]

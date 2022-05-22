@@ -1,9 +1,9 @@
-﻿using System;
+﻿using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Logging;
+using System;
 using System.Net;
 using System.Net.Http;
 using System.Threading.Tasks;
-using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.Logging;
 using UScheduler.WebApi.Boards.Interfaces;
 using UScheduler.WebApi.Boards.Statics;
 
@@ -16,8 +16,8 @@ namespace UScheduler.WebApi.Boards.Adapters
         private readonly IConfiguration _configuration;
 
         public WorkspacesAdapter(
-            HttpClient httpClient, 
-            ILogger<WorkspacesAdapter> logger, 
+            HttpClient httpClient,
+            ILogger<WorkspacesAdapter> logger,
             IConfiguration configuration)
         {
             _httpClient = httpClient;

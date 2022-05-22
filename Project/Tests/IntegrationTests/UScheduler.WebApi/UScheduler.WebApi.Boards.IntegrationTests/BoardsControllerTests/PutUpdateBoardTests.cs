@@ -1,11 +1,11 @@
-﻿using System;
+﻿using FluentAssertions;
+using NUnit.Framework;
+using System;
 using System.Net;
 using System.Net.Http;
 using System.Text;
 using System.Text.Json;
 using System.Threading.Tasks;
-using FluentAssertions;
-using NUnit.Framework;
 using UScheduler.WebApi.Boards.Models;
 
 namespace UScheduler.WebApi.Boards.IntegrationTests.BoardsControllerTests

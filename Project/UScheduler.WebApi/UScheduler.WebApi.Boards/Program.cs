@@ -3,7 +3,7 @@ using Microsoft.Extensions.Hosting;
 
 namespace UScheduler.WebApi.Boards
 {
-    public class Program
+    public static class Program
     {
         public static void Main(string[] args)
         {

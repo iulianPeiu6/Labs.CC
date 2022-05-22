@@ -1,9 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Threading.Tasks;
-using AutoMapper;
+﻿using AutoMapper;
 using Microsoft.AspNetCore.JsonPatch;
 using Microsoft.Extensions.Logging;
+using System;
+using System.Collections.Generic;
+using System.Threading.Tasks;
 using UScheduler.WebApi.Boards.Data.Entities;
 using UScheduler.WebApi.Boards.Interfaces;
 using UScheduler.WebApi.Boards.Models;
@@ -19,8 +19,8 @@ namespace UScheduler.WebApi.Boards.Services
         private readonly ILogger<BoardsService> _logger;
 
         public BoardsService(
-            IBoardsRepository repository, 
-            IMapper mapper, 
+            IBoardsRepository repository,
+            IMapper mapper,
             ILogger<BoardsService> logger,
             IWorkspacesAdapter workspacesAdapter)
         {
