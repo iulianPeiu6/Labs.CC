@@ -2,6 +2,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { AuthService } from '@auth0/auth0-angular';
 import { lastValueFrom } from 'rxjs';
+import { environment as env } from 'src/environments/environment';
 
 export class Workspace {
     id!: string;
@@ -39,7 +40,7 @@ export class WorkspacesService {
       'Authorization': `Bearer ${token}`
     })
 
-    let response$ = this.http.post<Workspace>('/api/v1/Workspaces', workspaceToCreate, { headers: headers});
+    let response$ = this.http.post<Workspace>(`${env.apiEndpoint}/api/v1/Workspaces`, workspaceToCreate, { headers: headers});
     let response = await lastValueFrom(response$);
     console.log(response);
 
@@ -55,7 +56,7 @@ export class WorkspacesService {
       'Authorization': `Bearer ${token}`
     })
 
-    let response$ = this.http.get<Workspace>(`/api/v1/Workspaces/${id}`, { headers: headers});
+    let response$ = this.http.get<Workspace>(`${env.apiEndpoint}/api/v1/Workspaces/${id}`, { headers: headers});
     let response = await lastValueFrom(response$);
     console.log(response);
 
@@ -71,7 +72,7 @@ export class WorkspacesService {
       'Authorization': `Bearer ${token}`
     })
 
-    let response$ = this.http.delete<Workspace>(`/api/v1/Workspaces/${id}`, { headers: headers});
+    let response$ = this.http.delete<Workspace>(`${env.apiEndpoint}/api/v1/Workspaces/${id}`, { headers: headers});
     let response = await lastValueFrom(response$);
     console.log(response);
 

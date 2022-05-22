@@ -1,6 +1,6 @@
 {
   "/api/*": {
-      "target": "https://uscheduler-api-gateway.azurewebsites.net:443",
+      "target": "https://uscheduler-api-gateway.azurewebsites.net",
       "secure": false,
       "changeOrigin": true,
       "logLevel": "debug"
