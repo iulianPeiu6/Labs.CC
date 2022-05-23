@@ -9,6 +9,11 @@ export const navigation = [
     icon: 'folder',
     items: [
       {
+        text: 'All',
+        icon: 'folder',
+        path: '/workspaces/all'
+      },
+      {
         text: 'Recent',
         icon: 'folder',
         path: '/workspaces/recent'

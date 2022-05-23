@@ -28,7 +28,7 @@
         "AllowedScopes": []
       },
       "AddHeadersToRequest": {
-        "CreatedBy": "Claims[https://uscheduler-api-gateway.azurewebsites.net/email] > value"
+        "RequestedBy": "Claims[https://uscheduler-api-gateway.azurewebsites.net/email] > value"
       },
       "SwaggerKey": "workspaces"
     },

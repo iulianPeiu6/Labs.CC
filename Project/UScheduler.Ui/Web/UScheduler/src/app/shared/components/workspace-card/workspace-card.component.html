@@ -1,0 +1,19 @@
+<div class="content-block dx-card responsive-paddings" *ngIf="workspace != null">
+  <dx-button
+    [type]="'danger'"
+    icon="remove"
+    (onClick)="deleteWorkspace()"
+    class="workspace-action-btn">
+  </dx-button>
+  <dx-button
+    icon="activefolder"
+    class="workspace-action-btn"
+    type="success">
+  </dx-button>
+  <dx-button
+    icon="edit"
+    class="workspace-action-btn">
+  </dx-button>
+  <h3>{{workspace!.title}}</h3>
+  <p>{{workspace!.description}}</p>
+</div> 

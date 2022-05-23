@@ -8,6 +8,7 @@ import { CommonModule } from '@angular/common';
 import { CreateWorkspaceComponent } from './pages/create-workspace/create-workspace.component';
 import { DxiItemModule } from 'devextreme-angular/ui/nested';
 import { ViewWorkspaceComponent } from './pages/view-workspace/view-workspace.component';
+import { ListWorkspacesComponent } from './pages/list-workspaces/list-workspaces.component';
 
 const routes: Routes = [
   {
@@ -31,6 +32,36 @@ const routes: Routes = [
     canActivate: [ AuthGuardService ]
   },
   {
+    path: 'workspaces/all',
+    component: ListWorkspacesComponent,
+    canActivate: [ AuthGuardService ],
+    
+  },
+  {
+    path: 'workspaces/private',
+    component: ListWorkspacesComponent,
+    canActivate: [ AuthGuardService ],
+    
+  },
+  {
+    path: 'workspaces/recent',
+    component: ListWorkspacesComponent,
+    canActivate: [ AuthGuardService ],
+    
+  },
+  {
+    path: 'workspaces/shared',
+    component: ListWorkspacesComponent,
+    canActivate: [ AuthGuardService ],
+    
+  },
+  {
+    path: 'workspaces/favorites',
+    component: ListWorkspacesComponent,
+    canActivate: [ AuthGuardService ],
+    
+  },
+  {
     path: '**',
     redirectTo: '/home'
   }
@@ -38,7 +69,10 @@ const routes: Routes = [
 
 @NgModule({
   imports: [
-    RouterModule.forRoot(routes, { useHash: true }), 
+    RouterModule.forRoot(routes, { 
+      useHash: true,
+      onSameUrlNavigation: 'reload'
+    }), 
     DxDataGridModule, 
     DxFormModule,
     DxToastModule,
@@ -57,7 +91,8 @@ const routes: Routes = [
     HomeComponent,
     ProfileComponent,
     CreateWorkspaceComponent,
-    ViewWorkspaceComponent
+    ViewWorkspaceComponent,
+    ListWorkspacesComponent
   ]
 })
 export class AppRoutingModule { }

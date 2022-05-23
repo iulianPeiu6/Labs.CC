@@ -1,0 +1,65 @@
+<div class="content-block">
+  <h2 class="content-block">{{this.filter}} workspaces</h2>
+  <dx-button
+    icon="plus"
+    (onClick)="toggleCreateWorkspacePopup()"
+    class="workspace-action-btn">
+  </dx-button>
+</div>
+
+
+<div #workspacesCards>
+
+</div>
+
+<dx-popup
+  [(visible)]="createWorkspacePopupIsVisible"
+  [title]="'Create workspace'"
+  [closeOnOutsideClick]="true">
+  <form (submit)="createWorkspace($event)">
+    <dx-form
+      [formData]="workspace"
+      labelLocation="left"
+      class="">
+
+      <dxi-item 
+        dataField="title">
+        <dxi-validation-rule
+            type="required"
+            message="Title is required">
+        </dxi-validation-rule>
+      </dxi-item>
+      
+      <dxi-item 
+        dataField="description"
+        editorType="dxTextArea">
+      </dxi-item>
+    
+      <dxi-item
+        dataField="accessLevel"
+        editorType="dxSelectBox"
+        [editorOptions]="{ dataSource: accessLevels }">
+        <dxi-validation-rule
+          type="required"
+          message="Access is required">
+        </dxi-validation-rule>
+      </dxi-item>
+
+      <dxi-item
+        dataField="workspaceTemplate"
+        editorType="dxSelectBox"
+        [editorOptions]="{ dataSource: workspaceTemplates }">
+        <dxi-validation-rule
+          type="required"
+          message="Template is required">
+        </dxi-validation-rule>
+      </dxi-item>
+
+      <dxi-item 
+            itemType="button"
+            [buttonOptions]="{ text: 'Create Workspace', type: 'success', useSubmitBehavior: true}">
+      </dxi-item>
+
+    </dx-form>
+  </form>
+</dx-popup>

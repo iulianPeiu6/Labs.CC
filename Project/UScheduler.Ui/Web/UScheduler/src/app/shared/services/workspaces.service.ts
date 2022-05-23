@@ -63,6 +63,35 @@ export class WorkspacesService {
     return response;
   }
 
+  async filter(by: string): Promise<Array<Workspace>> {
+    let token$ = this.auth.getAccessTokenSilently();
+    let token = await lastValueFrom(token$);
+    let user = await lastValueFrom(this.auth.getUser());
+
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${token}`
+    })
+
+    let response$ = this.http.get<Array<Workspace>>(`${env.apiEndpoint}/api/v1/Workspaces?owner=${user?.email}`, { headers: headers});
+    let response = await lastValueFrom(response$);
+
+    console.log(by);
+    
+    if (by.toLowerCase() == "private") {
+      response = response.filter(workspace => workspace.accessLevel == "Private");
+    } 
+    else if (by.toLowerCase() == "shared") {
+      response = response.filter(workspace => workspace.colabs.length > 1);
+    }
+    else if (by.toLowerCase() == "recent") {
+      response = response.sort((w1, w2) => w1.updatedAt > w2.updatedAt ? -1 : 1);
+    }
+    console.log(response);
+
+    return response;
+  }
+
   async delete(id: String): Promise<Workspace> {
     let token$ = this.auth.getAccessTokenSilently();
     let token = await lastValueFrom(token$);
