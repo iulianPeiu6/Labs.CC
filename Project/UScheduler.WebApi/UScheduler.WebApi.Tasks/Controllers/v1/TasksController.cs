@@ -94,9 +94,13 @@ namespace UScheduler.WebApi.Tasks.Controllers.v1
             _logger?.LogDebug($"Handling DELETE request on api/v1/Tasks/{id}");
 
             var (isSuccess, error) = await _tasksService.DeleteTask(id);
-            return isSuccess
-                ? NoContent()
-                : BadRequest(new {Message = error});
+            if (isSuccess)
+                return NoContent();
+            if (error == ErrorMessage.TaskNotFound)
+            {
+                return NotFound();
+            }
+            return BadRequest(new {Message = error});
         }
 
         [HttpPut("{id}")]

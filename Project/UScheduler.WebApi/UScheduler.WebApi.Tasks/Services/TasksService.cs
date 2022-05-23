@@ -108,7 +108,7 @@ namespace UScheduler.WebApi.Tasks.Services
                 var task = await _repository.GetTaskAsync(task => task.Id == id);
                 if (task == null)
                 {
-                    return (false, null, ErrorMessage.BoardNotFound);
+                    return (false, null, ErrorMessage.TaskNotFound);
                 }
 
                 task.UpdatedBy = modifiedBy;
@@ -120,39 +120,6 @@ namespace UScheduler.WebApi.Tasks.Services
                 await _repository.UpdateAsync(task);
                 var taskDto = _mapper.Map<TaskDto>(task);
                 return (true, taskDto, null);
-            }
-            catch (Exception ex)
-            {
-                _logger.LogError($"{ex}");
-                return (false, null, ex.Message);
-            }
-        }
-
-        public async Task<(bool IsSuccess, ToDoDto toDoDto, string error)> UpdateTaskAsync(Guid id, CreateToDoModel model, string updatedBy)
-        {
-            try
-            {
-                var task = await _repository.GetTaskAsync(task => task.Id == id);
-                if (task == null)
-                {
-                    return (false, null, ErrorMessage.TaskNotFound);
-                }
-
-                var toDo = _mapper.Map<ToDo>(model);
-                var currentTime = DateTime.UtcNow;
-                toDo.Id = Guid.NewGuid();
-                toDo.CreatedAt = currentTime;
-                toDo.UpdatedAt = currentTime;
-                toDo.CreatedBy = updatedBy;
-                toDo.UpdatedBy = updatedBy;
-                toDo.Task = task;
-                toDo.Completed = false;
-
-                task.ToDoChecks.Add(toDo);
-                await _repository.UpdateAsync(task);
-
-                var tdoDto = _mapper.Map<ToDoDto>(toDo);
-                return (true, tdoDto, null);
             }
             catch (Exception ex)
             {
