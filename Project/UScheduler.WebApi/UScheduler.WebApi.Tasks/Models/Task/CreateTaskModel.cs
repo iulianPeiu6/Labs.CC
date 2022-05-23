@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace UScheduler.WebApi.Tasks.Models;
+namespace UScheduler.WebApi.Tasks.Models.Task;
 
 public class CreateTaskModel
 {

@@ -4,8 +4,12 @@ using System.Threading.Tasks;
 using AutoMapper;
 using Microsoft.AspNetCore.JsonPatch;
 using Microsoft.Extensions.Logging;
+using UScheduler.WebApi.Tasks.Data.Entities;
 using UScheduler.WebApi.Tasks.Interfaces;
+using UScheduler.WebApi.Tasks.Interfaces.Task;
 using UScheduler.WebApi.Tasks.Models;
+using UScheduler.WebApi.Tasks.Models.Task;
+using UScheduler.WebApi.Tasks.Models.ToDo;
 using UScheduler.WebApi.Tasks.Statics;
 using Task = UScheduler.WebApi.Tasks.Data.Entities.Task;
 
@@ -67,7 +71,7 @@ namespace UScheduler.WebApi.Tasks.Services
             }
         }
 
-        public async Task<(bool IsSucess, TaskDto Task, string error)> CreateTaskAsync(CreateTaskModel model, string createdBy)
+        public async Task<(bool IsSuccess, TaskDto Task, string error)> CreateTaskAsync(CreateTaskModel model, string createdBy)
         {
             try
             {
@@ -116,6 +120,39 @@ namespace UScheduler.WebApi.Tasks.Services
                 await _repository.UpdateAsync(task);
                 var taskDto = _mapper.Map<TaskDto>(task);
                 return (true, taskDto, null);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError($"{ex}");
+                return (false, null, ex.Message);
+            }
+        }
+
+        public async Task<(bool IsSuccess, ToDoDto toDoDto, string error)> UpdateTaskAsync(Guid id, CreateToDoModel model, string updatedBy)
+        {
+            try
+            {
+                var task = await _repository.GetTaskAsync(task => task.Id == id);
+                if (task == null)
+                {
+                    return (false, null, ErrorMessage.TaskNotFound);
+                }
+
+                var toDo = _mapper.Map<ToDo>(model);
+                var currentTime = DateTime.UtcNow;
+                toDo.Id = Guid.NewGuid();
+                toDo.CreatedAt = currentTime;
+                toDo.UpdatedAt = currentTime;
+                toDo.CreatedBy = updatedBy;
+                toDo.UpdatedBy = updatedBy;
+                toDo.Task = task;
+                toDo.Completed = false;
+
+                task.ToDoChecks.Add(toDo);
+                await _repository.UpdateAsync(task);
+
+                var tdoDto = _mapper.Map<ToDoDto>(toDo);
+                return (true, tdoDto, null);
             }
             catch (Exception ex)
             {

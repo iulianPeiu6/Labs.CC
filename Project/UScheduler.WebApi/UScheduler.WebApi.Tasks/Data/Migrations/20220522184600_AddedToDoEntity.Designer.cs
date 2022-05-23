@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using UScheduler.WebApi.Tasks.Data;
 
@@ -11,9 +12,10 @@ using UScheduler.WebApi.Tasks.Data;
 namespace UScheduler.WebApi.Tasks.Data.Migrations
 {
     [DbContext(typeof(TasksContext))]
-    partial class TasksContextModelSnapshot : ModelSnapshot
+    [Migration("20220522184600_AddedToDoEntity")]
+    partial class AddedToDoEntity
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -66,23 +68,11 @@ namespace UScheduler.WebApi.Tasks.Data.Migrations
                     b.Property<bool>("Completed")
                         .HasColumnType("bit");
 
-                    b.Property<DateTime>("CreatedAt")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("CreatedBy")
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<string>("Description")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<Guid?>("TaskId")
                         .HasColumnType("uniqueidentifier");
-
-                    b.Property<DateTime>("UpdatedAt")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("UpdatedBy")
-                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 
@@ -93,11 +83,9 @@ namespace UScheduler.WebApi.Tasks.Data.Migrations
 
             modelBuilder.Entity("UScheduler.WebApi.Tasks.Data.Entities.ToDo", b =>
                 {
-                    b.HasOne("UScheduler.WebApi.Tasks.Data.Entities.Task", "Task")
+                    b.HasOne("UScheduler.WebApi.Tasks.Data.Entities.Task", null)
                         .WithMany("ToDoChecks")
                         .HasForeignKey("TaskId");
-
-                    b.Navigation("Task");
                 });
 
             modelBuilder.Entity("UScheduler.WebApi.Tasks.Data.Entities.Task", b =>

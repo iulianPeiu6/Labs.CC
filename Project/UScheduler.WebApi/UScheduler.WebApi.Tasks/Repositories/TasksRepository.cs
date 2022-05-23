@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using UScheduler.WebApi.Tasks.Data;
 using UScheduler.WebApi.Tasks.Interfaces;
+using UScheduler.WebApi.Tasks.Interfaces.Task;
 using TaskEntity = UScheduler.WebApi.Tasks.Data.Entities.Task;
 
 namespace UScheduler.WebApi.Tasks.Repositories
@@ -21,12 +22,13 @@ namespace UScheduler.WebApi.Tasks.Repositories
 
         public async Task<TaskEntity> GetTaskAsync(Expression<Func<TaskEntity, bool>> func) 
             => await _context.Tasks
-                .AsNoTracking()
+                .Include(task => task.ToDoChecks)
                 .FirstOrDefaultAsync(func);
 
         public async Task<IEnumerable<TaskEntity>> GetTasksAsync(Expression<Func<TaskEntity, bool>> func) 
             => await _context.Tasks
                 .AsNoTracking()
+                .Include(task => task.ToDoChecks)
                 .Where(func)
                 .ToListAsync();
 

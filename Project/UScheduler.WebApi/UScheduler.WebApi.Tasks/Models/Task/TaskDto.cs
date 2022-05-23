@@ -1,9 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using UScheduler.WebApi.Tasks.Models.ToDo;
 
-namespace UScheduler.WebApi.Tasks.Data.Entities
+namespace UScheduler.WebApi.Tasks.Models.Task
 {
-    public class Task
+    public class TaskDto
     {
         public Guid Id { get; set; }
 
@@ -13,7 +14,7 @@ namespace UScheduler.WebApi.Tasks.Data.Entities
 
         public DateTime DueDateTime { get; set; }
 
-        public ICollection<ToDo> ToDoChecks { get; set; } = new List<ToDo>();
+        public ICollection<ToDoDto> ToDoChecks { get; set; }
 
         public Guid BoardId { get; set; }
 

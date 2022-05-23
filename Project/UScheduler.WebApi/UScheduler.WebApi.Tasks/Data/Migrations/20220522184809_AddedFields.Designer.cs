@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using UScheduler.WebApi.Tasks.Data;
 
@@ -11,9 +12,10 @@ using UScheduler.WebApi.Tasks.Data;
 namespace UScheduler.WebApi.Tasks.Data.Migrations
 {
     [DbContext(typeof(TasksContext))]
-    partial class TasksContextModelSnapshot : ModelSnapshot
+    [Migration("20220522184809_AddedFields")]
+    partial class AddedFields
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

@@ -9,6 +9,8 @@ using Microsoft.OpenApi.Models;
 using UScheduler.WebApi.Tasks.Adapters;
 using UScheduler.WebApi.Tasks.Data;
 using UScheduler.WebApi.Tasks.Interfaces;
+using UScheduler.WebApi.Tasks.Interfaces.Task;
+using UScheduler.WebApi.Tasks.Interfaces.ToDo;
 using UScheduler.WebApi.Tasks.Repositories;
 using UScheduler.WebApi.Tasks.Services;
 
@@ -37,6 +39,8 @@ namespace UScheduler.WebApi.Tasks
             services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
             services.AddScoped<ITasksRepository, TasksRepository>();
             services.AddScoped<ITasksService, TasksService>();
+            services.AddScoped<IToDoRepository, ToDoRepository>();
+            services.AddScoped<IToDoService, ToDoService>();
             services.AddHttpClient<IBoardsAdapter, BoardsAdapter>();
 
             services.AddDbContext<TasksContext>(options =>

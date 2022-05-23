@@ -1,18 +1,16 @@
 ﻿using System;
 
-namespace UScheduler.WebApi.Tasks.Models
+namespace UScheduler.WebApi.Tasks.Data.Entities
 {
-    public class TaskDto
+    public class ToDo
     {
         public Guid Id { get; set; }
 
-        public string Title { get; set; }
-
         public string Description { get; set; }
 
-        public DateTime DueDateTime { get; set; }
+        public bool Completed { get; set; }
 
-        public Guid BoardId { get; set; }
+        public Task Task { get; set; }
 
         public DateTime CreatedAt { get; set; }
 
@@ -21,5 +19,6 @@ namespace UScheduler.WebApi.Tasks.Models
         public DateTime UpdatedAt { get; set; }
 
         public string UpdatedBy { get; set; }
+
     }
 }
