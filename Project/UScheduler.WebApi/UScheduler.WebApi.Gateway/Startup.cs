@@ -28,18 +28,6 @@ namespace UScheduler.WebApi.Gateway
 
             services.AddEndpointsApiExplorer();
 
-            services.AddCors(options =>
-            {
-                options.AddPolicy(BaseCorsPolicy,
-                    builder => builder
-                        .AllowAnyOrigin()
-                        .AllowAnyMethod()
-                        .AllowAnyHeader()
-                        .WithExposedHeaders("Content-Disposition")
-                        .Build()
-                );
-            });
-
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "UScheduler.WebApi.Gateway", Version = "v1" });
@@ -77,7 +65,6 @@ namespace UScheduler.WebApi.Gateway
             app.UseHttpsRedirection();
 
             app.UseRouting();
-            app.UseCors(BaseCorsPolicy);
 
             app.UseAuthentication();
 
