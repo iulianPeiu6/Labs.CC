@@ -2,6 +2,7 @@
   "/api/*": {
       "target": "https://uscheduler-api-gateway.azurewebsites.net",
       "secure": false,
+      "changeOrigin": true,
       "logLevel": "debug"
   }
 }
