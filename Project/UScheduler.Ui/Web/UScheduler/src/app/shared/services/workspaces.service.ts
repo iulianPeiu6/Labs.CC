@@ -40,7 +40,7 @@ export class WorkspacesService {
       'Authorization': `Bearer ${token}`
     })
 
-    let response$ = this.http.post<Workspace>(`${env.apiEndpoint}/api/v1/Workspaces`, workspaceToCreate, { headers: headers});
+    let response$ = this.http.post<Workspace>(`/api/v1/Workspaces`, workspaceToCreate, { headers: headers});
     let response = await lastValueFrom(response$);
     console.log(response);
 
