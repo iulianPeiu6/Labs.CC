@@ -32,12 +32,9 @@ namespace UScheduler.WebApi.Gateway
             {
                 options.AddPolicy(BaseCorsPolicy,
                     builder => builder
-                        .SetIsOriginAllowedToAllowWildcardSubdomains()
                         .AllowAnyOrigin()
                         .AllowAnyMethod()
-                        .AllowCredentials()
                         .AllowAnyHeader()
-                        .WithExposedHeaders("Content-Disposition")
                         .Build()
                 );
             });
