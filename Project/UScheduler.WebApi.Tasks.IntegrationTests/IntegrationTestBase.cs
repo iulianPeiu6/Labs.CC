@@ -73,6 +73,7 @@ namespace UScheduler.WebApi.Tasks.IntegrationTests
                 UpdatedAt = currentDateTime,
                 UpdatedBy = "owner-001@email.com"
             });
+            
             context.Tasks.Add(new Task
             {
                 Id = Guid.Parse("96bf092b-c806-4531-8579-d976d024e701"),
@@ -85,6 +86,7 @@ namespace UScheduler.WebApi.Tasks.IntegrationTests
                 UpdatedAt = currentDateTime,
                 UpdatedBy = "owner-002@email.com"
             });
+
             context.Tasks.Add(new Task
             {
                 Id = Guid.Parse("ce361462-cdb4-43c2-be2e-52003d5a4aae"),
@@ -96,6 +98,67 @@ namespace UScheduler.WebApi.Tasks.IntegrationTests
                 CreatedBy = "owner-001@email.com",
                 UpdatedAt = currentDateTime,
                 UpdatedBy = "owner-001@email.com"
+            });
+
+            var task = new Task
+            {
+                Id = Guid.Parse("5939ca2e-e9de-4d13-ab6a-81461422cd1b"),
+                BoardId = Guid.Parse("c3fa7ab7-f8e7-450d-94e6-86510512b546"),
+                Description = "Task description - 003",
+                Title = "Task title - 003",
+                DueDateTime = dueDateTime,
+                CreatedAt = currentDateTime,
+                CreatedBy = "owner-001@email.com",
+                UpdatedAt = currentDateTime,
+                UpdatedBy = "owner-001@email.com"
+            };
+
+            context.ToDos.Add(new ToDo
+            {
+                Id = Guid.Parse("58caaac9-84f4-4bd4-9c91-9c22bfb47a1a"),
+                Task = task,
+                Description = "ToDo description - 001",
+                CreatedAt = currentDateTime,
+                CreatedBy = "owner-001@email.com",
+                UpdatedAt = currentDateTime,
+                UpdatedBy = "owner-001@email.com"
+
+            });
+
+            context.ToDos.Add(new ToDo
+            {
+                Id = Guid.Parse("c073dc23-8fe1-4751-9dd7-5dadcc76f8c8"),
+                Task = task,
+                Description = "ToDo description - 002",
+                CreatedAt = currentDateTime,
+                CreatedBy = "owner-001@email.com",
+                UpdatedAt = currentDateTime,
+                UpdatedBy = "owner-001@email.com"
+
+            });
+
+            context.ToDos.Add(new ToDo
+            {
+                Id = Guid.Parse("33103fa3-87ba-475c-987d-92edbfcae3aa"),
+                Task = task,
+                Description = "ToDo description - 003",
+                CreatedAt = currentDateTime,
+                CreatedBy = "owner-001@email.com",
+                UpdatedAt = currentDateTime,
+                UpdatedBy = "owner-001@email.com"
+
+            });
+
+            context.ToDos.Add(new ToDo
+            {
+                Id = Guid.Parse("c24563c5-7b21-4f04-b807-fb368673dc33"),
+                Task = task,
+                Description = "ToDo description - 004",
+                CreatedAt = currentDateTime,
+                CreatedBy = "owner-002@email.com",
+                UpdatedAt = currentDateTime,
+                UpdatedBy = "owner-002@email.com"
+
             });
 
             context.SaveChanges();
