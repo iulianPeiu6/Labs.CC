@@ -37,7 +37,9 @@ export class WorkspacesService {
 
     const headers = new HttpHeaders({
       'Content-Type': 'application/json',
-      'Access-Control-Allow-Origin': env.apiEndpoint,
+      'Access-Control-Allow-Origin': '*',
+      'Access-Control-Allow-Methods': 'GET, POST, PATCH, PUT, DELETE, OPTIONS',
+      'Access-Control-Allow-Headers': 'Origin, Content-Type, Bearer-Token',
       'Authorization': `Bearer ${token}`
     })
 
