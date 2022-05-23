@@ -21,11 +21,27 @@ namespace UScheduler.WebApi.Workspaces
 
         public IConfiguration Configuration { get; }
 
+        private const string BaseCorsPolicy = "BaseCorsPolicy";
+
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers()
                 .AddNewtonsoftJson();
+
+            services.AddCors(options =>
+            {
+                options.AddPolicy(BaseCorsPolicy,
+                    builder => builder
+                        .SetIsOriginAllowedToAllowWildcardSubdomains()
+                        .WithOrigins("https://*.azurewebsites.net")
+                        .AllowAnyMethod()
+                        .AllowAnyHeader()
+                        .AllowCredentials()
+                        .WithExposedHeaders("Content-Disposition")
+                        .Build()
+                );
+            });
 
             services.AddEndpointsApiExplorer();
 
@@ -55,6 +71,7 @@ namespace UScheduler.WebApi.Workspaces
             app.UseHttpsRedirection();
 
             app.UseRouting();
+            app.UseCors(BaseCorsPolicy);
 
             app.UseAuthorization();
 
