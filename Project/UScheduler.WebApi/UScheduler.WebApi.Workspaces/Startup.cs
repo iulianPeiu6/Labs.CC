@@ -33,11 +33,9 @@ namespace UScheduler.WebApi.Workspaces
             {
                 options.AddPolicy(BaseCorsPolicy,
                     builder => builder
-                        .SetIsOriginAllowedToAllowWildcardSubdomains()
-                        .WithOrigins("https://*.azurewebsites.net")
+                        .AllowAnyOrigin()
                         .AllowAnyMethod()
                         .AllowAnyHeader()
-                        .AllowCredentials()
                         .WithExposedHeaders("Content-Disposition")
                         .Build()
                 );

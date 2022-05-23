@@ -32,11 +32,9 @@ namespace UScheduler.WebApi.Gateway
             {
                 options.AddPolicy(BaseCorsPolicy,
                     builder => builder
-                        .SetIsOriginAllowedToAllowWildcardSubdomains()
-                        .WithOrigins("https://uscheduler-eu.azurewebsites.net", "http://localhost:4200")
+                        .AllowAnyOrigin()
                         .AllowAnyMethod()
                         .AllowAnyHeader()
-                        .AllowCredentials()
                         .WithExposedHeaders("Content-Disposition")
                         .Build()
                 );

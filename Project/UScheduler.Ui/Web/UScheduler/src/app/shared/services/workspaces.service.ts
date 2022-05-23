@@ -37,6 +37,7 @@ export class WorkspacesService {
 
     const headers = new HttpHeaders({
       'Content-Type': 'application/json',
+      'Access-Control-Allow-Origin': '*',
       'Authorization': `Bearer ${token}`
     })
 
