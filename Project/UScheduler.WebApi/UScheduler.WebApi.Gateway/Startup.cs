@@ -32,9 +32,10 @@ namespace UScheduler.WebApi.Gateway
             {
                 options.AddPolicy(BaseCorsPolicy,
                     builder => builder
-                        .AllowAnyOrigin()
+                        .SetIsOriginAllowed(_ => true)
                         .AllowAnyMethod()
                         .AllowAnyHeader()
+                        .AllowCredentials()
                         .Build()
                 );
             });
