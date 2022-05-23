@@ -20,7 +20,8 @@
       },
       "UpstreamPathTemplate": "/api/v1/Workspaces",
       "UpstreamHttpMethod": [
-        "POST"
+        "POST",
+        "OPTIONS"
       ],
       "DangerousAcceptAnyServerCertificateValidator": true,
       "AuthenticationOptions": {
@@ -115,6 +116,7 @@
       "UpstreamHttpMethod": [
         "GET"
       ],
+      "DangerousAcceptAnyServerCertificateValidator": true,
       "AuthenticationOptions": {
         "AuthenticationProviderKey": "BaseAuthProvider",
         "AllowedScopes": []
@@ -147,6 +149,7 @@
       "UpstreamHttpMethod": [
         "POST"
       ],
+      "DangerousAcceptAnyServerCertificateValidator": true,
       "AuthenticationOptions": {
         "AuthenticationProviderKey": "BaseAuthProvider",
         "AllowedScopes": []
@@ -179,6 +182,7 @@
       "UpstreamHttpMethod": [
         "DELETE"
       ],
+      "DangerousAcceptAnyServerCertificateValidator": true,
       "AuthenticationOptions": {
         "AuthenticationProviderKey": "BaseAuthProvider",
         "AllowedScopes": []
