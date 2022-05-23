@@ -20,7 +20,8 @@
       },
       "UpstreamPathTemplate": "/api/v1/Workspaces",
       "UpstreamHttpMethod": [
-        "POST"
+        "POST",
+        "OPTIONS"
       ],
       "DangerousAcceptAnyServerCertificateValidator": true,
       "AuthenticationOptions": {
