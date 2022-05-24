@@ -1,11 +1,15 @@
 ﻿using System;
+using System.Net;
 using System.Net.Http;
 using Microsoft.AspNetCore.Mvc.Testing;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
+using RichardSzalay.MockHttp;
+using UScheduler.WebApi.Tasks.Adapters;
 using UScheduler.WebApi.Tasks.Data;
 using UScheduler.WebApi.Tasks.Data.Entities;
+using UScheduler.WebApi.Tasks.Interfaces;
 
 namespace UScheduler.WebApi.Tasks.IntegrationTests
 {
@@ -28,8 +32,17 @@ namespace UScheduler.WebApi.Tasks.IntegrationTests
                             services.RemoveAll(typeof(DbContextOptions<TasksContext>));
                             services.AddDbContext<TasksContext>(options =>
                             {
-                                options.UseInMemoryDatabase("BoardsTestDb");
+                                options.UseInMemoryDatabase("TasksTestDb");
                             });
+
+                            services.RemoveAll(typeof(HttpClient));
+                            var mockHttp = new MockHttpMessageHandler();
+
+                            mockHttp.When("https://localhost:7115/api/v1/Boards/0b7b68dc-a4c4-437f-abf7-6e00ad61ebd3")
+                                .Respond(HttpStatusCode.BadRequest);
+
+                            var client = new HttpClient(mockHttp);
+                            services.AddHttpClient<IBoardsAdapter, BoardsAdapter>();
                         });
                     });
 
