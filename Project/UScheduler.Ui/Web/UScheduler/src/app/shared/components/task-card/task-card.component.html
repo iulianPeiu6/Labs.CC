@@ -2,10 +2,12 @@
   <dx-button
     [type]="'danger'"
     icon="remove"
+    (onclick)="deleteTask()"
     class="task-action-btn">
   </dx-button>
   <dx-button
     icon="plus"
+    (onclick)="toggleCreateToDoPopup()"
     class="task-action-btn">
   </dx-button>
   <dx-button
@@ -14,4 +16,38 @@
   </dx-button>
   <h3>{{task!.title}}</h3>
   <p>{{task!.description}}</p>
+  <div #todoCards>
+    
+  </div>
 </div>
+
+<dx-popup
+  [(visible)]="createToDoPopupIsVisible"
+  [maxWidth]="300"
+  [maxHeight]="300"
+  [resizeEnabled]="true"
+  [title]="'Create TODO'"
+  [closeOnOutsideClick]="true">
+  <form (submit)="createToDo($event)">
+    <dx-form
+      [formData]="todo"
+      labelLocation="left"
+      class="">
+
+      <dxi-item 
+        dataField="description"
+        editorType="dxTextArea">
+        <dxi-validation-rule
+            type="required"
+            message="Description is required">
+        </dxi-validation-rule>
+      </dxi-item>
+
+      <dxi-item 
+            itemType="button"
+            [buttonOptions]="{ text: 'Create TODO', type: 'success', useSubmitBehavior: true}">
+      </dxi-item>
+
+    </dx-form>
+  </form>
+</dx-popup>

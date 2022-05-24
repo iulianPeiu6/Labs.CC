@@ -294,6 +294,70 @@
       },
       "SwaggerKey": "tasks",
       "Priority": 1
+    },
+    {
+      "DownstreamPathTemplate": "/api/v1/ToDos?taskId={taskId}",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": "44364"
+        }
+      ],
+      "RateLimitOptions": {
+        "ClientWhitelist": [
+
+        ],
+        "EnableRateLimiting": false,
+        "Period": "5s",
+        "PeriodTimespan": 1,
+        "Limit": 1
+      },
+      "UpstreamPathTemplate": "/api/v1/Workspaces/{workspaceId}/Boards/{boardId}/Tasks/{taskId}/ToDos",
+      "UpstreamHttpMethod": [
+        "GET"
+      ],
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "BaseAuthProvider",
+        "AllowedScopes": []
+      },
+      "AddHeadersToRequest": {
+        "RequestedBy": "Claims[https://localhost:5001/email] > value"
+      },
+      "SwaggerKey": "tasks",
+      "Priority": 1
+    },
+    {
+      "DownstreamPathTemplate": "/api/v1/ToDos",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": "44364"
+        }
+      ],
+      "RateLimitOptions": {
+        "ClientWhitelist": [
+
+        ],
+        "EnableRateLimiting": false,
+        "Period": "5s",
+        "PeriodTimespan": 1,
+        "Limit": 1
+      },
+      "UpstreamPathTemplate": "/api/v1/Workspaces/{workspaceId}/Boards/{boardId}/Tasks/{taskId}/ToDos",
+      "UpstreamHttpMethod": [
+        "POST"
+      ],
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "BaseAuthProvider",
+        "AllowedScopes": []
+      },
+      "AddHeadersToRequest": {
+        "RequestedBy": "Claims[https://localhost:5001/email] > value"
+      },
+      "SwaggerKey": "tasks",
+      "Priority": 1
     }
   ],
   "SwaggerEndPoints": [

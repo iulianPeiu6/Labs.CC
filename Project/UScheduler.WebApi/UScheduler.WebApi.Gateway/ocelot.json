@@ -207,7 +207,7 @@
       "DownstreamScheme": "https",
       "DownstreamHostAndPorts": [
         {
-          "Host": "uscheduler-api-tasks.azurewebsites.net",
+          "Host": "uschduler-api-tasks.azurewebsites.net",
           "Port": "443"
         }
       ],
@@ -240,7 +240,7 @@
       "DownstreamScheme": "https",
       "DownstreamHostAndPorts": [
         {
-          "Host": "uscheduler-api-tasks.azurewebsites.net",
+          "Host": "uschduler-api-tasks.azurewebsites.net",
           "Port": "443"
         }
       ],
@@ -273,7 +273,7 @@
       "DownstreamScheme": "https",
       "DownstreamHostAndPorts": [
         {
-          "Host": "uscheduler-api-tasks.azurewebsites.net",
+          "Host": "uschduler-api-tasks.azurewebsites.net",
           "Port": "443"
         }
       ],
@@ -300,6 +300,72 @@
       },
       "AddHeadersToRequest": {
         "RequestedBy": "Claims[https://uscheduler-api-gateway.azurewebsites.net/email] > value"
+      },
+      "SwaggerKey": "tasks",
+      "Priority": 1
+    },
+    {
+      "DownstreamPathTemplate": "/api/v1/ToDos?taskId={taskId}",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "uschduler-api-tasks.azurewebsites.net",
+          "Port": "443"
+        }
+      ],
+      "RateLimitOptions": {
+        "ClientWhitelist": [
+
+        ],
+        "EnableRateLimiting": false,
+        "Period": "5s",
+        "PeriodTimespan": 1,
+        "Limit": 1
+      },
+      "UpstreamPathTemplate": "/api/v1/Workspaces/{workspaceId}/Boards/{boardId}/Tasks/{taskId}/ToDos",
+      "UpstreamHttpMethod": [
+        "GET"
+      ],
+      "DangerousAcceptAnyServerCertificateValidator": true,
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "BaseAuthProvider",
+        "AllowedScopes": []
+      },
+      "AddHeadersToRequest": {
+        "RequestedBy": "Claims[https://localhost:5001/email] > value"
+      },
+      "SwaggerKey": "tasks",
+      "Priority": 1
+    },
+    {
+      "DownstreamPathTemplate": "/api/v1/ToDos",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "uschduler-api-tasks.azurewebsites.net",
+          "Port": "443"
+        }
+      ],
+      "RateLimitOptions": {
+        "ClientWhitelist": [
+
+        ],
+        "EnableRateLimiting": false,
+        "Period": "5s",
+        "PeriodTimespan": 1,
+        "Limit": 1
+      },
+      "UpstreamPathTemplate": "/api/v1/Workspaces/{workspaceId}/Boards/{boardId}/Tasks/{taskId}/ToDos",
+      "UpstreamHttpMethod": [
+        "POST"
+      ],
+      "DangerousAcceptAnyServerCertificateValidator": true,
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "BaseAuthProvider",
+        "AllowedScopes": []
+      },
+      "AddHeadersToRequest": {
+        "RequestedBy": "Claims[https://localhost:5001/email] > value"
       },
       "SwaggerKey": "tasks",
       "Priority": 1

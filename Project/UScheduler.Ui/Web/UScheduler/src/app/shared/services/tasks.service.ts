@@ -64,4 +64,40 @@ export class TasksService {
 
     return response;
   }
+
+  async getToDos(task: Task, workspaceId: String): Promise<Array<ToDo>> {
+    let token$ = this.auth.getAccessTokenSilently();
+    let token = await lastValueFrom(token$);
+
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${token}`
+    })
+
+    let response$ = this.http.get<Array<ToDo>>(`${env.apiEndpoint}/api/v1/Workspaces/${workspaceId}/Boards/${task.boardId}/Tasks/${task.id}/ToDos`, { headers: headers});
+    let response = await lastValueFrom(response$);
+    console.log(response);
+
+    return response;
+  }
+
+  async createToDos(task: Task, workspaceId: String, todo: ToDo): Promise<ToDo> {
+    let token$ = this.auth.getAccessTokenSilently();
+    let token = await lastValueFrom(token$);
+
+    const todoToCreate = {
+      description: todo.description
+    }
+
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${token}`
+    })
+
+    let response$ = this.http.post<ToDo>(`${env.apiEndpoint}/api/v1/Workspaces/${workspaceId}/Boards/${task.boardId}/Tasks/${task.id}/ToDos`, todoToCreate,  { headers: headers});
+    let response = await lastValueFrom(response$);
+    console.log(response);
+
+    return response;
+  }
 }

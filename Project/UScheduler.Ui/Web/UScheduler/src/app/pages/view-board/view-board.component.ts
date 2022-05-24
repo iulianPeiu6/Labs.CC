@@ -49,6 +49,7 @@ export class ViewBoardComponent implements OnInit {
       this.tasks.forEach(task => {
         var component = this.tasksCards.createComponent(TaskCardComponent);
         component.instance.task = task;
+        component.instance.workspaceId = this.workspaceId;
       });
     }
   }
