@@ -49,7 +49,7 @@ namespace UScheduler.WebApi.Workspaces.Services
             }
             catch (Exception ex)
             {
-                logger?.LogError(ex.ToString());
+                logger?.LogError("{ex}", ex);
                 return (false, null, ex.Message);
             }
         }
@@ -79,7 +79,7 @@ namespace UScheduler.WebApi.Workspaces.Services
             }
             catch (Exception ex)
             {
-                logger?.LogError(ex.ToString());
+                logger?.LogError("{ex}", ex);
                 return (false, null, ex.Message);
             }
         }
@@ -97,7 +97,7 @@ namespace UScheduler.WebApi.Workspaces.Services
             }
             catch (Exception ex)
             {
-                logger?.LogError(ex.ToString());
+                logger?.LogError("{ex}", ex);
                 return (false, null, ex.Message);
             }
         }
@@ -128,7 +128,7 @@ namespace UScheduler.WebApi.Workspaces.Services
             }
             catch (Exception ex)
             {
-                logger?.LogError(ex.ToString());
+                logger?.LogError("{ex}", ex);
                 return (false, null, ex.Message);
             }
         }
@@ -157,7 +157,7 @@ namespace UScheduler.WebApi.Workspaces.Services
             }
             catch (Exception ex)
             {
-                logger?.LogError(ex.ToString());
+                logger?.LogError("{ex}", ex);
                 return (false, null, ex.Message);
             }
         }
@@ -181,7 +181,7 @@ namespace UScheduler.WebApi.Workspaces.Services
             }
             catch (Exception ex)
             {
-                logger?.LogError(ex.ToString());
+                logger?.LogError("{ex}", ex);
                 return (false, ex.Message);
             }
         }

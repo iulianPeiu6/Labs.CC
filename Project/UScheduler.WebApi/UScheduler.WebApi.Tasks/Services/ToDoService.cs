@@ -46,7 +46,7 @@ namespace UScheduler.WebApi.Tasks.Services
             }
             catch (Exception ex)
             {
-                _logger.LogError($"{ex}");
+                _logger.LogError("{ex}", ex);
                 return (false, null, ex.Message);
             }
         }
@@ -62,7 +62,7 @@ namespace UScheduler.WebApi.Tasks.Services
             }
             catch (Exception ex)
             {
-                _logger.LogError($"{ex}");
+                _logger.LogError("{ex}", ex);
                 return (false, null, ex.Message);
             }
         }
@@ -92,7 +92,7 @@ namespace UScheduler.WebApi.Tasks.Services
             }
             catch (Exception ex)
             {
-                _logger.LogError($"{ex}");
+                _logger.LogError("{ex}", ex);
                 return (false, null, ex.Message);
             }
         }
@@ -118,7 +118,7 @@ namespace UScheduler.WebApi.Tasks.Services
             }
             catch (Exception ex)
             {
-                _logger.LogError($"{ex}");
+                _logger.LogError("{ex}", ex);
                 return (false, null, ex.Message);
             }
         }
@@ -143,7 +143,7 @@ namespace UScheduler.WebApi.Tasks.Services
             }
             catch (Exception ex)
             {
-                _logger.LogError($"{ex}");
+                _logger.LogError("{ex}", ex);
                 return (false, null, ex.Message);
             }
         }
@@ -162,7 +162,7 @@ namespace UScheduler.WebApi.Tasks.Services
             }
             catch (Exception ex)
             {
-                _logger.LogError($"{ex}");
+                _logger.LogError("{ex}", ex);
                 return (false, ex.Message);
             }
         }

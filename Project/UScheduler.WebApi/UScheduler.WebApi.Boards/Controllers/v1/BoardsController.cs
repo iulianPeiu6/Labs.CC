@@ -29,7 +29,7 @@ namespace UScheduler.WebApi.Boards.Controllers.v1
         [HttpGet("{id}")]
         public async Task<IActionResult> GetBoardById(Guid id)
         {
-            _logger?.LogDebug($"Handling GET request on api/v1/Boards/{id}");
+            _logger?.LogDebug("Handling GET request on api/v1/Boards/{id}", id);
 
             var (isSuccess, board, error) = await _provider.GetBoardAsync(id);
             if (isSuccess)
@@ -46,7 +46,7 @@ namespace UScheduler.WebApi.Boards.Controllers.v1
         [HttpGet]
         public async Task<IActionResult> GetBoardsFromWorkspace([FromQuery] Guid workspaceId)
         {
-            _logger?.LogDebug($"Handling GET request on api/v1/Boards?workspaceId={workspaceId}");
+            _logger?.LogDebug("Handling GET request on api/v1/Boards?workspaceId={workspaceId}", workspaceId);
 
             var (isSuccess, workspace, error) = await _provider.GetBoardsByWorkspaceIdAsync(workspaceId);
             return isSuccess
@@ -68,7 +68,7 @@ namespace UScheduler.WebApi.Boards.Controllers.v1
         [HttpPut("{id}")]
         public async Task<IActionResult> UpdateBoard(Guid id, [FromBody] UpdateBoardModel model, [FromHeader] string requestedBy)
         {
-            _logger?.LogDebug($"Handling PUT request on api/v1/Boards/{id}");
+            _logger?.LogDebug("Handling PUT request on api/v1/Boards/{id}", id);
 
             var (isSuccess, board, error) = await _provider.UpdateAsync(id, model, requestedBy);
             if (isSuccess)
@@ -85,7 +85,7 @@ namespace UScheduler.WebApi.Boards.Controllers.v1
         [HttpPatch("{id}")]
         public async Task<IActionResult> UpdateBoard(Guid id, [FromBody] JsonPatchDocument<Board> model, [FromHeader] string requestedBy)
         {
-            _logger?.LogDebug($"Handling PATCH request on api/v1/Boards/{id}");
+            _logger?.LogDebug("Handling PATCH request on api/v1/Boards/{id}", id);
 
             var (isSuccess, board, error) = await _provider.UpdateAsync(id, model, requestedBy);
             if (isSuccess)
@@ -103,7 +103,7 @@ namespace UScheduler.WebApi.Boards.Controllers.v1
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteBoard([FromRoute] Guid id)
         {
-            _logger?.LogDebug($"Handling DELETE request on api/v1/Boards/{id}");
+            _logger?.LogDebug("Handling DELETE request on api/v1/Boards/{id}", id);
             var (isSuccess, error) = await _provider.DeleteBoardAsync(id);
             if (isSuccess)
             {

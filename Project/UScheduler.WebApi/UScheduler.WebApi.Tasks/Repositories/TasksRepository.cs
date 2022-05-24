@@ -5,7 +5,6 @@ using System.Linq.Expressions;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using UScheduler.WebApi.Tasks.Data;
-using UScheduler.WebApi.Tasks.Interfaces;
 using UScheduler.WebApi.Tasks.Interfaces.Task;
 using TaskEntity = UScheduler.WebApi.Tasks.Data.Entities.Task;
 

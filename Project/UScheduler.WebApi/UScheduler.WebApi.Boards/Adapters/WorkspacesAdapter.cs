@@ -44,7 +44,7 @@ namespace UScheduler.WebApi.Boards.Adapters
             }
             catch (Exception ex)
             {
-                _logger.LogError($"{ex}");
+                _logger.LogError("{ex}", ex);
                 return (false, ex.Message);
             }
         }
