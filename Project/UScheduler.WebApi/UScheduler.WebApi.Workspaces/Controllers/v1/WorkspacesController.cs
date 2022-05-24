@@ -31,7 +31,7 @@ namespace UScheduler.WebApi.Workspaces.Controllers.v1
         [HttpGet("{id}")]
         public async Task<IActionResult> GetByIdAsync(Guid id, [FromHeader] string requestedBy)
         {
-            logger?.LogDebug($"Handeling GET request on api/v1/Workspaces/{id}");
+            logger?.LogDebug("Handling GET request on api/v1/Workspaces/{id}", id);
             var result = await provider.GetWorkspaceByIdAsync(id, requestedBy);
 
             if (result.Error == ErrorMessage.WorkspaceNotFound)
@@ -50,7 +50,7 @@ namespace UScheduler.WebApi.Workspaces.Controllers.v1
         [HttpGet]
         public async Task<IActionResult> GetWorkspacesByOwnerAsync([FromQuery] string owner)
         {
-            logger?.LogDebug($"Handeling GET request on api/v1/Workspaces?owner={owner}");
+            logger?.LogDebug("Handling GET request on api/v1/Workspaces?owner={owner}", owner);
             var result = await provider.GetOwnerWorkspacesAsync(owner);
 
             if (result.IsSuccess)
@@ -64,7 +64,7 @@ namespace UScheduler.WebApi.Workspaces.Controllers.v1
         [HttpPost]
         public async Task<IActionResult> CreateWorkspaceAsync([FromBody] CreateWorkspaceModel workspace, [FromHeader] string requestedBy)
         {
-            logger?.LogDebug("Handeling POST request on api/v1/Workspaces");
+            logger?.LogDebug("Handling POST request on api/v1/Workspaces");
 
             if (string.IsNullOrEmpty(requestedBy))
             {
@@ -86,7 +86,7 @@ namespace UScheduler.WebApi.Workspaces.Controllers.v1
         [HttpPut("{id}")]
         public async Task<IActionResult> UpdateAsync(Guid id, [FromBody] UpdateWorkspaceModel workspace, [FromHeader] string requestedBy)
         {
-            logger?.LogDebug($"Handeling PUT request on api/v1/Workspaces/{id}");
+            logger?.LogDebug("Handling PUT request on api/v1/Workspaces/{id}", id);
 
             if (string.IsNullOrEmpty(requestedBy))
             {
@@ -113,7 +113,7 @@ namespace UScheduler.WebApi.Workspaces.Controllers.v1
         [HttpPatch("{id}")]
         public async Task<IActionResult> UpdateAsync(Guid id, [FromBody] JsonPatchDocument<Workspace> patchDoc, [FromHeader] string requestedBy)
         {
-            logger?.LogDebug($"Handeling PATCH request on api/v1/Workspaces/{id}");
+            logger?.LogDebug("Handling PATCH request on api/v1/Workspaces/{id}", id);
 
             if (string.IsNullOrEmpty(requestedBy))
             {
@@ -143,7 +143,7 @@ namespace UScheduler.WebApi.Workspaces.Controllers.v1
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteAsync(Guid id, [FromHeader] string requestedBy)
         {
-            logger?.LogDebug($"Handeling DELETE request on api/v1/Workspaces/{id}");
+            logger?.LogDebug("Handling DELETE request on api/v1/Workspaces/{id}", id);
 
             if (string.IsNullOrEmpty(requestedBy))
             {

@@ -4,12 +4,9 @@ using System.Threading.Tasks;
 using AutoMapper;
 using Microsoft.AspNetCore.JsonPatch;
 using Microsoft.Extensions.Logging;
-using UScheduler.WebApi.Tasks.Data.Entities;
 using UScheduler.WebApi.Tasks.Interfaces;
 using UScheduler.WebApi.Tasks.Interfaces.Task;
-using UScheduler.WebApi.Tasks.Models;
 using UScheduler.WebApi.Tasks.Models.Task;
-using UScheduler.WebApi.Tasks.Models.ToDo;
 using UScheduler.WebApi.Tasks.Statics;
 using Task = UScheduler.WebApi.Tasks.Data.Entities.Task;
 
@@ -50,7 +47,7 @@ namespace UScheduler.WebApi.Tasks.Services
             }
             catch (Exception ex)
             {
-                _logger.LogError($"{ex}");
+                _logger.LogError("{ex}", ex);
                 return (false, null, ex.Message);
             }
         }
@@ -66,7 +63,7 @@ namespace UScheduler.WebApi.Tasks.Services
             }
             catch (Exception ex)
             {
-                _logger.LogError($"{ex}");
+                _logger.LogError("{ex}", ex);
                 return (false, null, ex.Message);
             }
         }
@@ -96,7 +93,7 @@ namespace UScheduler.WebApi.Tasks.Services
             }
             catch (Exception ex)
             {
-                _logger.LogError($"{ex}");
+                _logger.LogError("{ex}", ex);
                 return (false, null, ex.Message);
             }
         }
@@ -123,7 +120,7 @@ namespace UScheduler.WebApi.Tasks.Services
             }
             catch (Exception ex)
             {
-                _logger.LogError($"{ex}");
+                _logger.LogError("{ex}", ex);
                 return (false, null, ex.Message);
             }
         }
@@ -135,7 +132,7 @@ namespace UScheduler.WebApi.Tasks.Services
                 var task = await _repository.GetTaskAsync(task => task.Id == id);
                 if (task == null)
                 {
-                    return (false, null, ErrorMessage.BoardNotFound);
+                    return (false, null, ErrorMessage.TaskNotFound);
                 }
 
                 model.ApplyTo(task);
@@ -149,7 +146,7 @@ namespace UScheduler.WebApi.Tasks.Services
             }
             catch (Exception ex)
             {
-                _logger.LogError($"{ex}");
+                _logger.LogError("{ex}", ex);
                 return (false, null, ex.Message);
             }
         }
@@ -169,7 +166,7 @@ namespace UScheduler.WebApi.Tasks.Services
             }
             catch (Exception ex)
             {
-                _logger.LogError($"{ex}");
+                _logger.LogError("{ex}", ex);
                 return (false, ex.Message);
             }
         }

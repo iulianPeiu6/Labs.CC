@@ -19,8 +19,8 @@ namespace UScheduler.WebApi.Tasks.IntegrationTests.TasksControllerTests
             var newDueDate = DateTime.UtcNow.AddDays(7);
             var task = new UpdateTaskModel
             {
-                Title = "Task title - 001 - Updated",
-                Description = "Task description - 001 - Updated",
+                Title = "Task title - 001 - Updated PUT",
+                Description = "Task description - 001 - Updated PUT",
                 DueDateTime = newDueDate
             };
 
@@ -39,8 +39,8 @@ namespace UScheduler.WebApi.Tasks.IntegrationTests.TasksControllerTests
                 new JsonSerializerOptions { PropertyNameCaseInsensitive = true });
 
             updatedTask.Should().NotBeNull();
-            updatedTask.Title.Should().Be("Task title - 001 - Updated");
-            updatedTask.Description.Should().Be("Task description - 001 - Updated");
+            updatedTask.Title.Should().Be("Task title - 001 - Updated PUT");
+            updatedTask.Description.Should().Be("Task description - 001 - Updated PUT");
             updatedTask.UpdatedBy.Should().Be("integration_test@email.com");
             updatedTask.DueDateTime = newDueDate;
         }

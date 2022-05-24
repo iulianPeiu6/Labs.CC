@@ -1,11 +1,15 @@
 ﻿using System;
+using System.Net;
 using System.Net.Http;
 using Microsoft.AspNetCore.Mvc.Testing;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
+using RichardSzalay.MockHttp;
+using UScheduler.WebApi.Tasks.Adapters;
 using UScheduler.WebApi.Tasks.Data;
 using UScheduler.WebApi.Tasks.Data.Entities;
+using UScheduler.WebApi.Tasks.Interfaces;
 
 namespace UScheduler.WebApi.Tasks.IntegrationTests
 {
@@ -14,8 +18,8 @@ namespace UScheduler.WebApi.Tasks.IntegrationTests
         private static IntegrationTestBase instance = new();
         protected readonly HttpClient testClient;
         protected readonly Guid existentTaskId = Guid.Parse("7c139c88-48d6-4233-8584-4db3389cf3e1");
-        protected static DateTime dueDateTime = DateTime.UtcNow.AddDays(5);
-        protected static DateTime currentDateTime = DateTime.UtcNow;
+        protected static readonly DateTime dueDateTime = DateTime.UtcNow.AddDays(5);
+        protected static readonly DateTime currentDateTime = DateTime.UtcNow;
         protected IntegrationTestBase()
         {
             if (instance is null)
@@ -28,8 +32,17 @@ namespace UScheduler.WebApi.Tasks.IntegrationTests
                             services.RemoveAll(typeof(DbContextOptions<TasksContext>));
                             services.AddDbContext<TasksContext>(options =>
                             {
-                                options.UseInMemoryDatabase("BoardsTestDb");
+                                options.UseInMemoryDatabase("TasksTestDb");
                             });
+
+                            services.RemoveAll(typeof(HttpClient));
+                            var mockHttp = new MockHttpMessageHandler();
+
+                            mockHttp.When("https://localhost:7115/api/v1/Boards/0b7b68dc-a4c4-437f-abf7-6e00ad61ebd3")
+                                .Respond(HttpStatusCode.BadRequest);
+
+                            var client = new HttpClient(mockHttp);
+                            services.AddHttpClient<IBoardsAdapter, BoardsAdapter>();
                         });
                     });
 
@@ -112,6 +125,7 @@ namespace UScheduler.WebApi.Tasks.IntegrationTests
                 UpdatedAt = currentDateTime,
                 UpdatedBy = "owner-001@email.com"
             };
+            context.Tasks.Add(task);
 
             context.ToDos.Add(new ToDo
             {
