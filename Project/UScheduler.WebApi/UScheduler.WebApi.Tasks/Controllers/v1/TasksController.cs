@@ -34,7 +34,7 @@ namespace UScheduler.WebApi.Tasks.Controllers.v1
         [HttpGet("{id}")]
         public async Task<IActionResult> GetTaskAsync([FromRoute] Guid id)
         {
-            _logger?.LogDebug($"Handling GET request on api/v1/Tasks/{id}");
+            _logger?.LogDebug("Handling GET request on api/v1/Tasks/{id}", id);
 
             var (isSuccess, task, error) = await _tasksService.GetTaskAsync(id);
             if (isSuccess)
@@ -52,7 +52,7 @@ namespace UScheduler.WebApi.Tasks.Controllers.v1
         [HttpGet]
         public async Task<IActionResult> GetTasksFromBoard([FromQuery] Guid boardId)
         {
-            _logger?.LogDebug($"Handling GET request on api/v1/Tasks?boardId={boardId}");
+            _logger?.LogDebug("Handling GET request on api/v1/Tasks?boardId={boardId}", boardId);
 
             var (isSuccess, task, error) = await _tasksService.GetTasksByBoardIdAsync(boardId);
             return isSuccess 
@@ -91,7 +91,7 @@ namespace UScheduler.WebApi.Tasks.Controllers.v1
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteTask([FromRoute] Guid id)
         {
-            _logger?.LogDebug($"Handling DELETE request on api/v1/Tasks/{id}");
+            _logger?.LogDebug("Handling DELETE request on api/v1/Tasks/{id}", id);
 
             var (isSuccess, error) = await _tasksService.DeleteTask(id);
             if (isSuccess)
@@ -109,7 +109,7 @@ namespace UScheduler.WebApi.Tasks.Controllers.v1
             [FromBody] UpdateTaskModel model,
             [FromHeader] string requestedBy)
         {
-            _logger?.LogDebug($"Handling PUT request on api/v1/Tasks/{id}");
+            _logger?.LogDebug("Handling PUT request on api/v1/Tasks/{id}", id);
 
             var (isSuccess, taskDto, error) = await _tasksService.UpdateTaskAsync(id, model, requestedBy);
             if (isSuccess)
@@ -130,7 +130,7 @@ namespace UScheduler.WebApi.Tasks.Controllers.v1
             [FromBody] JsonPatchDocument<Task> model,
             [FromHeader] string requestedBy)
         {
-            _logger?.LogDebug($"Handling PATCH request on api/v1/Tasks/{id}");
+            _logger?.LogDebug("Handling PATCH request on api/v1/Tasks/{id}", id);
 
             var (isSuccess, taskDto, error) = await _tasksService.UpdateTaskAsync(id, model, requestedBy);
             if (isSuccess)
