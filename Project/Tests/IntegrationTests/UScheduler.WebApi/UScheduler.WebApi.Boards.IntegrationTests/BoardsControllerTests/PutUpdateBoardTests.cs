@@ -15,7 +15,7 @@ namespace UScheduler.WebApi.Boards.IntegrationTests.BoardsControllerTests
         [Test]
         public async Task Given_ValidBoard_When_PutUpdateBoardIsCalled_Then_ReturnOkWithUpdatedBoard()
         {
-            var boardId = Guid.Parse("5c675d5d-9c94-48cd-8c35-bfaaae334691");
+            var boardId = Guid.Parse("63c56e16-6a65-411b-9899-647c40b7bf0e");
             var board = new UpdateBoardModel()
             {
                 Title = "Workspace - 001 - Updated",
