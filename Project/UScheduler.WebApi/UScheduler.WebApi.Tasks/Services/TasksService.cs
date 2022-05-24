@@ -135,7 +135,7 @@ namespace UScheduler.WebApi.Tasks.Services
                 var task = await _repository.GetTaskAsync(task => task.Id == id);
                 if (task == null)
                 {
-                    return (false, null, ErrorMessage.BoardNotFound);
+                    return (false, null, ErrorMessage.TaskNotFound);
                 }
 
                 model.ApplyTo(task);

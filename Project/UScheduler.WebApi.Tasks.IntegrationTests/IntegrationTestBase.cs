@@ -112,6 +112,7 @@ namespace UScheduler.WebApi.Tasks.IntegrationTests
                 UpdatedAt = currentDateTime,
                 UpdatedBy = "owner-001@email.com"
             };
+            context.Tasks.Add(task);
 
             context.ToDos.Add(new ToDo
             {
