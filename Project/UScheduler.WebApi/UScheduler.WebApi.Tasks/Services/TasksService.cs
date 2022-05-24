@@ -98,7 +98,7 @@ namespace UScheduler.WebApi.Tasks.Services
             }
         }
 
-        public async Task<(bool IsSuccess, TaskDto taskDto, string error)> UpdateTaskAsync(Guid id, UpdateTaskModel model, string modifiedBy)
+        public async Task<(bool IsSuccess, TaskDto taskDto, string error)> UpdateTaskAsync(Guid id, UpdateTaskModel model, string updatedBy)
         {
             try
             {
@@ -108,7 +108,7 @@ namespace UScheduler.WebApi.Tasks.Services
                     return (false, null, ErrorMessage.TaskNotFound);
                 }
 
-                task.UpdatedBy = modifiedBy;
+                task.UpdatedBy = updatedBy;
                 task.UpdatedAt = DateTime.UtcNow;
                 task.Title = model.Title;
                 task.Description = model.Description;
@@ -125,7 +125,7 @@ namespace UScheduler.WebApi.Tasks.Services
             }
         }
 
-        public async Task<(bool IsSuccess, TaskDto taskDto, string error)> UpdateTaskAsync(Guid id, JsonPatchDocument<Task> model, string modifiedBy)
+        public async Task<(bool IsSuccess, TaskDto taskDto, string error)> UpdateTaskAsync(Guid id, JsonPatchDocument<Task> model, string updatedBy)
         {
             try
             {
@@ -137,7 +137,7 @@ namespace UScheduler.WebApi.Tasks.Services
 
                 model.ApplyTo(task);
 
-                task.UpdatedBy = modifiedBy;
+                task.UpdatedBy = updatedBy;
                 task.UpdatedAt = DateTime.UtcNow;
 
                 await _repository.UpdateAsync(task);
