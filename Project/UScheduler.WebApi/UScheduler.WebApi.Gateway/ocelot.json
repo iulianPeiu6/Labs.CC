@@ -201,6 +201,108 @@
       },
       "SwaggerKey": "boards",
       "Priority": 1
+    },
+    {
+      "DownstreamPathTemplate": "/api/v1/Tasks",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "uscheduler-api-tasks.azurewebsites.net",
+          "Port": "443"
+        }
+      ],
+      "RateLimitOptions": {
+        "ClientWhitelist": [
+
+        ],
+        "EnableRateLimiting": false,
+        "Period": "5s",
+        "PeriodTimespan": 1,
+        "Limit": 1
+      },
+      "UpstreamPathTemplate": "/api/v1/Workspaces/{workspaceId}/Boards/{boardId}/Tasks",
+      "UpstreamHttpMethod": [
+        "POST"
+      ],
+      "DangerousAcceptAnyServerCertificateValidator": true,
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "BaseAuthProvider",
+        "AllowedScopes": []
+      },
+      "AddHeadersToRequest": {
+        "RequestedBy": "Claims[https://uscheduler-api-gateway.azurewebsites.net/email] > value"
+      },
+      "SwaggerKey": "tasks",
+      "Priority": 1
+    },
+    {
+      "DownstreamPathTemplate": "/api/v1/Tasks?boardId={boardId}",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "uscheduler-api-tasks.azurewebsites.net",
+          "Port": "443"
+        }
+      ],
+      "RateLimitOptions": {
+        "ClientWhitelist": [
+
+        ],
+        "EnableRateLimiting": false,
+        "Period": "5s",
+        "PeriodTimespan": 1,
+        "Limit": 1
+      },
+      "UpstreamPathTemplate": "/api/v1/Workspaces/{workspaceId}/Boards/{boardId}/Tasks",
+      "UpstreamHttpMethod": [
+        "GET"
+      ],
+      "DangerousAcceptAnyServerCertificateValidator": true,
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "BaseAuthProvider",
+        "AllowedScopes": []
+      },
+      "AddHeadersToRequest": {
+        "RequestedBy": "Claims[https://uscheduler-api-gateway.azurewebsites.net/email] > value"
+      },
+      "SwaggerKey": "tasks",
+      "Priority": 2
+    },
+    {
+      "DownstreamPathTemplate": "/api/v1/Tasks/{taskId}",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "uscheduler-api-tasks.azurewebsites.net",
+          "Port": "443"
+        }
+      ],
+      "RateLimitOptions": {
+        "ClientWhitelist": [
+
+        ],
+        "EnableRateLimiting": false,
+        "Period": "5s",
+        "PeriodTimespan": 1,
+        "Limit": 1
+      },
+      "UpstreamPathTemplate": "/api/v1/Workspaces/{workspaceId}/Boards/{boardId}/Tasks/{taskId}",
+      "UpstreamHttpMethod": [
+        "GET",
+        "DELETE",
+        "PUT",
+        "PATCH"
+      ],
+      "DangerousAcceptAnyServerCertificateValidator": true,
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "BaseAuthProvider",
+        "AllowedScopes": []
+      },
+      "AddHeadersToRequest": {
+        "RequestedBy": "Claims[https://uscheduler-api-gateway.azurewebsites.net/email] > value"
+      },
+      "SwaggerKey": "tasks",
+      "Priority": 1
     }
   ],
   "SwaggerEndPoints": [
@@ -221,6 +323,16 @@
           "Name": "UScheduler.WebApi.Boards",
           "Version": "v1",
           "Url": "https://uscheduler-api-boards.azurewebsites.net/swagger/v1/swagger.json"
+        }
+      ]
+    },
+    {
+      "Key": "tasks",
+      "Config": [
+        {
+          "Name": "UScheduler.WebApi.Tasks",
+          "Version": "v1",
+          "Url": "https://uscheduler-api-tasks.azurewebsites.net/swagger/v1/swagger.json"
         }
       ]
     }
