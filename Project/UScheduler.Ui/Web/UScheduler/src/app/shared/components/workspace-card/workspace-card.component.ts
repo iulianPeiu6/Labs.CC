@@ -1,6 +1,8 @@
 import { CommonModule } from '@angular/common';
 import { Component, NgModule, OnInit } from '@angular/core';
-import { DxButtonModule } from 'devextreme-angular';
+import { Router } from '@angular/router';
+import { DxButtonModule, DxFormModule, DxPopupModule } from 'devextreme-angular';
+import DataSource from 'devextreme/data/data_source';
 import notify from 'devextreme/ui/notify';
 import { Workspace, WorkspacesService } from '../../services/workspaces.service';
 
@@ -11,12 +13,25 @@ import { Workspace, WorkspacesService } from '../../services/workspaces.service'
 })
 export class WorkspaceCardComponent implements OnInit {
   workspace: Workspace | null;
+  accessLevels: DataSource;
+  updateWorkspacePopupIsVisible: boolean;
 
-  constructor(private workspaceService: WorkspacesService) { 
+  constructor(private workspaceService: WorkspacesService, private router: Router) { 
     this.workspace = new Workspace();
+    this.updateWorkspacePopupIsVisible = false;
+    this.accessLevels = new DataSource({
+      store: {
+          type: "array",
+          data: [ 'Private', 'Public' ]
+      }
+    });
   }
 
   ngOnInit(): void {
+  }
+
+  async toggleEditWorkspace() {
+    this.updateWorkspacePopupIsVisible = true;
   }
 
   async deleteWorkspace() {
@@ -31,12 +46,31 @@ export class WorkspaceCardComponent implements OnInit {
     }
   }
 
+  async updateWorkspace(e: any) {
+    e.preventDefault();
+    try {
+      this.workspace = await this.workspaceService.update(this.workspace!);
+      notify('Workspace updated successuflly', 'success');
+      this.updateWorkspacePopupIsVisible = false;
+    }
+    catch (e){
+      console.log(e);
+      notify('Error when updating workspaces. Check the console for details', 'error');
+    }
+  }
+
+  openWorkspace() {
+    this.router.navigateByUrl(`/workspaces/${this.workspace?.id}/boards`);
+  }
 }
 
 @NgModule({
   imports: [
     DxButtonModule,
-    CommonModule
+    CommonModule,
+    DxPopupModule,
+    DxFormModule,
+    DxButtonModule
   ],
   declarations: [ WorkspaceCardComponent ],
   exports: [ WorkspaceCardComponent ]

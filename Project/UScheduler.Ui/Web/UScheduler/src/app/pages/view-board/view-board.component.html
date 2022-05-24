@@ -1,0 +1,101 @@
+<div>
+  <div class="content-block ">
+    <h2 class="content-block">{{board!.title}}</h2>
+    <dx-button
+      [type]="'danger'"
+      icon="remove"
+      (onClick)="deleteBoard()"
+      class="board-action-btn">
+    </dx-button>
+    <dx-button
+      icon="plus"
+      (onClick)="togleCreateTaskPopup()"
+      class="board-action-btn">
+    </dx-button>
+    <dx-button
+      icon="edit"
+      (onClick)="togleEditBoardPopup()"
+      class="board-action-btn">
+    </dx-button>
+    <p>{{board!.description}}</p>
+  </div>
+
+  <div #tasksCards>
+
+  </div>
+</div>
+
+<dx-popup
+  [(visible)]="editBoardPopupIsVisible"
+  [maxWidth]="300"
+  [maxHeight]="300"
+  [resizeEnabled]="true"
+  [title]="'Edit board'"
+  [closeOnOutsideClick]="true">
+  <form (submit)="editBoard($event)">
+    <dx-form
+      [formData]="board"
+      labelLocation="left"
+      class="">
+
+      <dxi-item 
+        dataField="title">
+        <dxi-validation-rule
+            type="required"
+            message="Title is required">
+        </dxi-validation-rule>
+      </dxi-item>
+      
+      <dxi-item 
+        dataField="description"
+        editorType="dxTextArea">
+      </dxi-item>
+
+      <dxi-item 
+            itemType="button"
+            [buttonOptions]="{ text: 'Update Board', type: 'success', useSubmitBehavior: true}">
+      </dxi-item>
+
+    </dx-form>
+  </form>
+</dx-popup>
+
+<dx-popup
+  [(visible)]="createTaskPopupIsVisible"
+  [maxWidth]="500"
+  [maxHeight]="600"
+  [resizeEnabled]="true"
+  [title]="'Create task'"
+  [closeOnOutsideClick]="true">
+  <form (submit)="createTask($event)">
+    <dx-form
+      [formData]="task"
+      labelLocation="left"
+      class="">
+
+      <dxi-item 
+        dataField="title">
+        <dxi-validation-rule
+            type="required"
+            message="Title is required">
+        </dxi-validation-rule>
+      </dxi-item>
+      
+      <dxi-item 
+        dataField="description"
+        editorType="dxTextArea">
+      </dxi-item>
+
+      <dxi-item 
+        dataField="dueDateTime"
+        editorType="dxCalendar">
+      </dxi-item>
+
+      <dxi-item 
+            itemType="button"
+            [buttonOptions]="{ text: 'Create task', type: 'success', useSubmitBehavior: true}">
+      </dxi-item>
+
+    </dx-form>
+  </form>
+</dx-popup>

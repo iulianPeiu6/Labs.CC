@@ -14,6 +14,9 @@
 
 <dx-popup
   [(visible)]="createWorkspacePopupIsVisible"
+  [maxWidth]="500"
+  [maxHeight]="500"
+  [resizeEnabled]="true"
   [title]="'Create workspace'"
   [closeOnOutsideClick]="true">
   <form (submit)="createWorkspace($event)">

@@ -186,6 +186,9 @@
       },
       "UpstreamPathTemplate": "/api/v1/Workspaces/{workspaceId}/Boards/{boardId}",
       "UpstreamHttpMethod": [
+        "GET",
+        "PUT",
+        "PATCH",
         "DELETE"
       ],
       "DangerousAcceptAnyServerCertificateValidator": true,

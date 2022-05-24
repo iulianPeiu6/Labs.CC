@@ -8,12 +8,59 @@
   <dx-button
     icon="activefolder"
     class="workspace-action-btn"
+    (onClick)="openWorkspace()"
     type="success">
   </dx-button>
   <dx-button
     icon="edit"
-    class="workspace-action-btn">
+    class="workspace-action-btn"
+    (onClick)="toggleEditWorkspace()">
   </dx-button>
-  <h3>{{workspace!.title}}</h3>
+  <h3>{{workspace!.title}}<span class="dx-badge">{{workspace!.accessLevel}}</span></h3>
   <p>{{workspace!.description}}</p>
 </div> 
+
+<dx-popup
+  [(visible)]="updateWorkspacePopupIsVisible"
+  [maxWidth]="500"
+  [maxHeight]="400"
+  [resizeEnabled]="true"
+  [title]="'Update workspace'"
+  [closeOnOutsideClick]="true">
+  <form (submit)="updateWorkspace($event)">
+    <dx-form
+      [formData]="workspace"
+      labelLocation="left"
+      class="">
+
+      <dxi-item 
+        dataField="title">
+        <dxi-validation-rule
+            type="required"
+            message="Title is required">
+        </dxi-validation-rule>
+      </dxi-item>
+      
+      <dxi-item 
+        dataField="description"
+        editorType="dxTextArea">
+      </dxi-item>
+    
+      <dxi-item
+        dataField="accessLevel"
+        editorType="dxSelectBox"
+        [editorOptions]="{ dataSource: accessLevels }">
+        <dxi-validation-rule
+          type="required"
+          message="Access is required">
+        </dxi-validation-rule>
+      </dxi-item>
+
+      <dxi-item 
+            itemType="button"
+            [buttonOptions]="{ text: 'Update Workspace', type: 'success', useSubmitBehavior: true}">
+      </dxi-item>
+
+    </dx-form>
+  </form>
+</dx-popup>
