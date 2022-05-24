@@ -14,8 +14,8 @@ namespace UScheduler.WebApi.Tasks.IntegrationTests
         private static IntegrationTestBase instance = new();
         protected readonly HttpClient testClient;
         protected readonly Guid existentTaskId = Guid.Parse("7c139c88-48d6-4233-8584-4db3389cf3e1");
-        protected static DateTime dueDateTime = DateTime.UtcNow.AddDays(5);
-        protected static DateTime currentDateTime = DateTime.UtcNow;
+        protected static readonly DateTime dueDateTime = DateTime.UtcNow.AddDays(5);
+        protected static readonly DateTime currentDateTime = DateTime.UtcNow;
         protected IntegrationTestBase()
         {
             if (instance is null)
