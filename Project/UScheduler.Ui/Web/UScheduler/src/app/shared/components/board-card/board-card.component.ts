@@ -1,6 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { Component, NgModule, OnInit } from '@angular/core';
-import { DxButtonModule } from 'devextreme-angular';
+import { Router } from '@angular/router';
+import { DxButtonModule, DxFormModule, DxPopupModule } from 'devextreme-angular';
 import notify from 'devextreme/ui/notify';
 import { Board, BoardsService } from '../../services/boards.service';
 
@@ -11,9 +12,11 @@ import { Board, BoardsService } from '../../services/boards.service';
 })
 export class BoardCardComponent implements OnInit {
   board: Board | null;
+  editBoardPopupIsVisible: boolean;
 
-  constructor(private boardService: BoardsService) { 
+  constructor(private boardService: BoardsService, private router: Router) { 
     this.board = new Board();
+    this.editBoardPopupIsVisible = false;
   }
 
   deleteBoard() {
@@ -26,7 +29,29 @@ export class BoardCardComponent implements OnInit {
       console.log(e);
       notify('Error when deleting board. Check the console for details', 'error');
     }
-    
+  }
+
+  openBoard() {
+    this.router.navigateByUrl(`/workspaces/${this.board?.workspaceId}/boards/${this.board?.id}`);
+  }
+
+  togleEditBoardPopup() {
+    this.editBoardPopupIsVisible = true;
+  }
+
+  async editBoard(e: any) {
+    e.preventDefault();
+    console.log(`Updating board '${this.board!.title}'`);
+    console.log(this.board);
+    try {
+      this.board = await this.boardService.update(this.board!, this.board?.id!);
+      notify(`Board '${this.board.title}' is updated.`, 'success');
+      this.editBoardPopupIsVisible = false;
+    }
+    catch (e){
+      console.log(e);
+      notify('Error when deleting board. Check the console for details', 'error');
+    }
   }
 
   ngOnInit(): void {
@@ -36,7 +61,9 @@ export class BoardCardComponent implements OnInit {
 @NgModule({
   imports: [
     DxButtonModule,
-    CommonModule
+    CommonModule,
+    DxPopupModule,
+    DxFormModule
   ],
   declarations: [ BoardCardComponent ],
   exports: [ BoardCardComponent ]

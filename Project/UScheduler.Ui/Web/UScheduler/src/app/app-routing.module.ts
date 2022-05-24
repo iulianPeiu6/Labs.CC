@@ -9,6 +9,7 @@ import { CreateWorkspaceComponent } from './pages/create-workspace/create-worksp
 import { DxiItemModule } from 'devextreme-angular/ui/nested';
 import { ViewWorkspaceComponent } from './pages/view-workspace/view-workspace.component';
 import { ListWorkspacesComponent } from './pages/list-workspaces/list-workspaces.component';
+import { ViewBoardComponent } from './pages/view-board/view-board.component';
 
 const routes: Routes = [
   {
@@ -29,6 +30,11 @@ const routes: Routes = [
   {
     path: 'workspaces/:id/boards',
     component: ViewWorkspaceComponent,
+    canActivate: [ AuthGuardService ]
+  },
+  {
+    path: 'workspaces/:workspaceId/boards/:boardId',
+    component: ViewBoardComponent,
     canActivate: [ AuthGuardService ]
   },
   {
@@ -92,7 +98,8 @@ const routes: Routes = [
     ProfileComponent,
     CreateWorkspaceComponent,
     ViewWorkspaceComponent,
-    ListWorkspacesComponent
+    ListWorkspacesComponent,
+    ViewBoardComponent
   ]
 })
 export class AppRoutingModule { }

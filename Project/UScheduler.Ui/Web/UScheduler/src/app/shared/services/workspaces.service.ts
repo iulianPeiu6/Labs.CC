@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { AuthService } from '@auth0/auth0-angular';
 import { lastValueFrom } from 'rxjs';
 import { environment as env } from 'src/environments/environment';
+import { Board } from './boards.service';
 
 export class Workspace {
     id!: string;
@@ -24,7 +25,7 @@ export class WorkspacesService {
     
   }
 
-  async createWorkspace(workspace: Workspace):Promise<Workspace> {
+  async create(workspace: Workspace):Promise<Workspace> {
     let token$ = this.auth.getAccessTokenSilently();
     let token = await lastValueFrom(token$);
     
@@ -41,6 +42,28 @@ export class WorkspacesService {
     })
 
     let response$ = this.http.post<Workspace>(`${env.apiEndpoint}/api/v1/Workspaces`, workspaceToCreate, { headers: headers});
+    let response = await lastValueFrom(response$);
+    console.log(response);
+
+    return response;
+  }
+
+  async update(workspace: Workspace):Promise<Workspace> {
+    let token$ = this.auth.getAccessTokenSilently();
+    let token = await lastValueFrom(token$);
+    
+    const workspaceToUpdate = {
+      title: workspace.title,
+      description: workspace.description,
+      accessLevel: workspace.accessLevel
+    }
+
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${token}`
+    })
+
+    let response$ = this.http.put<Workspace>(`${env.apiEndpoint}/api/v1/Workspaces/${workspace.id}`, workspaceToUpdate, { headers: headers});
     let response = await lastValueFrom(response$);
     console.log(response);
 
@@ -76,8 +99,6 @@ export class WorkspacesService {
     let response$ = this.http.get<Array<Workspace>>(`${env.apiEndpoint}/api/v1/Workspaces?owner=${user?.email}`, { headers: headers});
     let response = await lastValueFrom(response$);
 
-    console.log(by);
-    
     if (by.toLowerCase() == "private") {
       response = response.filter(workspace => workspace.accessLevel == "Private");
     } 

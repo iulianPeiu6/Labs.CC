@@ -43,7 +43,6 @@ export class ListWorkspacesComponent implements OnInit {
 
   async ngOnInit(): Promise<void> {
     let workspaces = await this.workspacesService.filter(this.filter);
-    console.log(workspaces);
     workspaces.forEach(workspace => {
       var component = this.workspacesCards.createComponent(WorkspaceCardComponent);
       component.instance.workspace = workspace;
@@ -58,7 +57,7 @@ export class ListWorkspacesComponent implements OnInit {
     e.preventDefault();
     console.log(`Creating workspace:\'${this.workspace.title}\'`);
     this.workspacesService
-      .createWorkspace(this.workspace)
+      .create(this.workspace)
       .then(createdWorkspace => {
         notify(`Workspace '${createdWorkspace.title}' was created.`, "success", 3000);
         var component = this.workspacesCards.createComponent(WorkspaceCardComponent);

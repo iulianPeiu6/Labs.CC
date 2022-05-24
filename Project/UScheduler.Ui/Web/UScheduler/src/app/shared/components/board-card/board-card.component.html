@@ -6,13 +6,51 @@
     class="board-action-btn">
   </dx-button>
   <dx-button
-    icon="plus"
-    class="board-action-btn">
+    icon="info"
+    class="board-action-btn"
+    (onClick)="openBoard()"
+    type="success">
   </dx-button>
   <dx-button
     icon="edit"
+    (onClick)="togleEditBoardPopup()"
     class="board-action-btn">
   </dx-button>
   <h3>{{board!.title}}</h3>
   <p>{{board!.description}}</p>
-</div> 
+</div>
+
+<dx-popup
+  [(visible)]="editBoardPopupIsVisible"
+  [maxWidth]="300"
+  [maxHeight]="300"
+  [resizeEnabled]="true"
+  [title]="'Edit board'"
+  [closeOnOutsideClick]="true">
+  <form (submit)="editBoard($event)">
+    <dx-form
+      [formData]="board"
+      labelLocation="left"
+      class="">
+
+      <dxi-item 
+        dataField="title">
+        <dxi-validation-rule
+            type="required"
+            message="Title is required">
+        </dxi-validation-rule>
+      </dxi-item>
+      
+      <dxi-item 
+        dataField="description"
+        editorType="dxTextArea">
+      </dxi-item>
+
+      <dxi-item 
+            itemType="button"
+            [buttonOptions]="{ text: 'Update Board', type: 'success', useSubmitBehavior: true}">
+      </dxi-item>
+
+    </dx-form>
+  </form>
+</dx-popup>

@@ -1,5 +1,5 @@
 {
-    "domain": "",
-    "clientId": "",
-    "audience": ""
+    "domain": "dev-bldlcq28.us.auth0.com",
+    "clientId": "qJHviVv20RpqUMSa897m5McOonbU2nGL",
+    "audience": "https://localhost:5001"
 }

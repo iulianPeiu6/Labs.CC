@@ -36,6 +36,43 @@ export class BoardsService {
     return response;
   }
 
+  async getById(workspaceId: String, boardId: String): Promise<Board> {
+    let token$ = this.auth.getAccessTokenSilently();
+    let token = await lastValueFrom(token$);
+
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${token}`
+    })
+
+    let response$ = this.http.get<Board>(`${env.apiEndpoint}/api/v1/Workspaces/${workspaceId}/Boards/${boardId}`, { headers: headers});
+    let response = await lastValueFrom(response$);
+    console.log(response);
+
+    return response;
+  }
+
+  async update(board: Board, workspaceId: String) {
+    let token$ = this.auth.getAccessTokenSilently();
+    let token = await lastValueFrom(token$);
+
+    const boardToUpdate = {
+      title: board.title,
+      description: board.description,
+    }
+
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${token}`
+    })
+
+    let response$ = this.http.put<Board>(`${env.apiEndpoint}/api/v1/Workspaces/${workspaceId}/Boards/${board.id}`, boardToUpdate, { headers: headers});
+    let response = await lastValueFrom(response$);
+    console.log(response);
+
+    return response;
+  }
+
   async create(board: Board, workspaceId: String): Promise<Board> {
     let token$ = this.auth.getAccessTokenSilently();
     let token = await lastValueFrom(token$);

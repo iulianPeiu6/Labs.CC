@@ -35,7 +35,7 @@ export class CreateWorkspaceComponent{
     e.preventDefault();
     console.log(`Creating workspace:\'${this.workspace.title}\'`);
     this.workspacesService
-      .createWorkspace(this.workspace)
+      .create(this.workspace)
       .then(createdWorkspace => {
         notify(`Workspace '${createdWorkspace.title}' was created.`, "success", 3000);
         this.router.navigateByUrl(`workspaces/${createdWorkspace.id}/boards`);

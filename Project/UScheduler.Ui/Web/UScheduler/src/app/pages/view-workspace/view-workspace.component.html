@@ -23,6 +23,9 @@
   </div> 
   <dx-popup
     [(visible)]="createBoardPopupIsVisible"
+    [width]="300"
+    [height]="300"
+    [resizeEnabled]="true"
     [title]="createBoardPopupTitle"
     [closeOnOutsideClick]="true">
     <form (submit)="createBoard($event)">
